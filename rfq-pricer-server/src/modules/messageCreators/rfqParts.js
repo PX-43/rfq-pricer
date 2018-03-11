@@ -19,7 +19,7 @@ export const getLegType = (excluded = []) => _.sample(_.difference([PRODUCT_FWD,
 export const getSide = () => _.sample([SIDE_BUY, SIDE_SELL]);
 export const getCcyPair = (excluded = []) => _.sample(_.difference(CCY_PAIRS, excluded));
 export const getDealCcy = ccyPair => _.sample(ccyPair.split(' '));
-export const getAmount = () => _.random(10, 800) * 10000;
+export const getAmount = () => _.random(1, 100) * 1000000;
 export const getStamm = () => _.sample(STAMM);
 export const getFund = stemm => FUND_PREFIX + stemm;
 export const getTenor = (excluded = []) => _.sample(_.difference(TENORS, excluded));

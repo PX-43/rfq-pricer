@@ -16,7 +16,6 @@ class RfqPricerContainer extends PureComponent {
     return (
       <div>
         HELLO!
-
       </div>
     );
   }
