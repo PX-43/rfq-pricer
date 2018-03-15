@@ -14,9 +14,9 @@ wss.on('connection', (ws, req) => {
 
     ws.on('message', incomingMsg => {
         console.log('received: %s', incomingMsg);
-        handleRequest(JSON.parse(incomingMsg), outgoingMsg => {
+        handleRequest(JSON.parse(incomingMsg), (topic, outgoingMsg) => {
             try{
-                const data = JSON.stringify({ data: outgoingMsg });
+                const data = JSON.stringify({ topic, payload: outgoingMsg });
                 ws.send(data);
             } catch (err){
                 console.log('ERROR while sending response to client : ' + err);
