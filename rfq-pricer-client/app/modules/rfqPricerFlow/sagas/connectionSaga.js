@@ -29,6 +29,15 @@ function* initializeWebSocketsChannel(connectionDetails) {
   }
 }
 
+//todo: https://medium.com/@ebakhtarov/bidirectional-websockets-with-redux-saga-bfd5b677c7e7
+
+function* internalListener(socket) {
+  while (true) {
+    const data = yield take('EXE_TASK');
+    socket.send(JSON.stringify({ type: 'setTask', status: 'open' }))
+  }
+}
+
 export function* connectSaga() {
   yield [
     takeEvery(actions.ESTABLISH_CONNECTION, initializeWebSocketsChannel)
