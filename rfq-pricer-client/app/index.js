@@ -4,8 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import store from './store';
-
 import RfqPricerContainer from './components/RfqPricerContainer';
+import { establishConnection } from './modules/rfqPricerFlow/actions'
 
 ReactDOM.render(
   <Provider store={store}>
@@ -13,6 +13,8 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('main')
 );
+
+store.dispatch(establishConnection({server:'127.0.0.1', port:1337}));
 
 
 

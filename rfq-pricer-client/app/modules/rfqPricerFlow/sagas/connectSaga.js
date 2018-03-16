@@ -22,8 +22,6 @@ function* initializeWebSocketsChannel(connectionDetails) {
   }
 }
 
-//todo: https://medium.com/@ebakhtarov/bidirectional-websockets-with-redux-saga-bfd5b677c7e7
-
 function* externalListener(channel) {
   while (true) {
     try{
@@ -42,7 +40,7 @@ function* internalListener(socket) {
   }
 }
 
-export function* connectSaga() {
+export default function* connectSaga() {
   yield [
     takeEvery(actions.ESTABLISH_CONNECTION, initializeWebSocketsChannel)
   ];
