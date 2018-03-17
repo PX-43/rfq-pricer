@@ -1,5 +1,8 @@
-import * as rfqPricerSagas from './rfqPricerFlow/sagas';
+import { all, call } from 'redux-saga/effects';
+import connectSaga from './rfqPricerFlow/sagas/connectSaga';
 
-export default {
-  rfqPricerSagas
+export default function* saga() {
+  yield all([
+    call( connectSaga ),
+    ])
 }

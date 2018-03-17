@@ -1,12 +1,15 @@
-import  types  from '../actions';
+import  { types } from '../actions';
 
-export default rfqListReducer = (state = {}, action) => {
+const rfqListReducer = (state = {}, action) => {
   switch (action.type) {
-    case types.CONNECTED_SUCCESSFULLY:
+    case types.ON_MESSAGE_RECEIVED:
       return {
-        message: '',
+        rfq: '',
       };
     default:
       return state;
   }
 };
+
+
+export default rfqListReducer;

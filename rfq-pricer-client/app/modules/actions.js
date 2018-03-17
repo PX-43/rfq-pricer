@@ -1,6 +1,6 @@
-import * as rfqPricerActions from './rfqPricerFlow/actions';
+import * as rfqPricerFlowActions from './rfqPricerFlow/actions';
 
 export default {
-  rfqPricerActions
+  rfqPricerFlowActions
 }
 

@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import rfqPricerFlowReducers from './rfqPricerFlow/reducers';
+import rfqListReducer from './rfqPricerFlow/reducers/rfqListReducer';
+import connectionReducer from './rfqPricerFlow/reducers/connectionReducer';
 
 export default combineReducers({
-  rfqPricerFlowReducers
+  connectionReducer,
+  rfqListReducer
 });

@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import style from './index.less';
 
 import React from 'react';

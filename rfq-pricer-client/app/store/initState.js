@@ -1,1 +1,1 @@
-export const initState = {rfqList : []};
+export const initState = {/*urlList: []*/};
