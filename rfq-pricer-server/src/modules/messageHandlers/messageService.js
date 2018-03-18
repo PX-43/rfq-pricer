@@ -1,9 +1,5 @@
 import {publishRfq} from './rfqPublisher'
-
-const SUBSCRIBE_RFQ = 'subscribe_to_rfq';
-const SUBSCRIBE_PRICE = 'subscribe_to_prices';
-const GET_PRICE = 'get_price';
-
+import topics from './../common/topics';
 
 export const handleRequest = (msg, send) => {
     //TODO: ADD LOGIC FOR SPECIFIC SUBSCRIPTION REQUESTS FROM CLIENT
@@ -15,12 +11,12 @@ export const handleRequest = (msg, send) => {
 
     switch (msg.topic){
 
-        case SUBSCRIBE_RFQ :
+        case topics.SUBSCRIBE_RFQ :
             publishRfq(msg.data, send);
             break;
-        case GET_PRICE :
+        case topics.GET_PRICE :
             break;
-        case SUBSCRIBE_PRICE:
+        case topics.SUBSCRIBE_PRICE:
             break;
         default:
             break;

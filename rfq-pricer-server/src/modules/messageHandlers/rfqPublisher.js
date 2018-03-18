@@ -1,10 +1,11 @@
 import _ from 'lodash';
 import {createRfq} from "../messageCreators/rfqBuilder";
+import topics from './../common/topics';
 
 const publish = send => {
     try {
         const rfq = createRfq();
-        send(rfq);
+        send(topics.NEW_RFQ, rfq);
         console.log('New RFQ was sent to client. RFQ Id: ' + rfq.rfqId);
     } catch (err){
         console.log('An error has occurred. RFQ could not be sent to client. ' + err);

@@ -27,12 +27,12 @@ function* initializeWebSocketsChannel(action) {
       call(internalListener, socket)
     ]);
   } catch (err){
-    yield put(actions.onConnectionError(err));
+    yield put(actions.onConnectionError('WebSocket initialisation error. Error: ' + err));
   }
 }
 
 function* externalListener(channel) {
-  console.log('external listener is starting');
+  console.info('external listener is starting');
   while (true) {
     try{
       const msg = yield take(channel);
@@ -41,19 +41,20 @@ function* externalListener(channel) {
       } else if(msg === CONN_OPEN){
         yield put(actions.connectedSuccessfully());
       } else if(msg != null){
-        yield put(actions.onMessageReceived(JSON.parse(msg)));
+        console.info(msg.data);
+        yield put(actions.onMessageReceived(JSON.parse(msg.data)));
       }
     } catch (webSocketError){
-      yield put(actions.onConnectionError(webSocketError));
+      yield put(actions.onConnectionError('Error in external listener: ' + webSocketError));
     }
   }
 }
 
 function* internalListener(socket) {
-  console.log('internal listener is starting');
+  console.info('internal listener is starting');
   while (true) {
     const message = yield take(actions.types.SEND_REQUEST);
-    socket.send(JSON.stringify(message));
+    socket.send(JSON.stringify(message.data));
   }
 }
 
