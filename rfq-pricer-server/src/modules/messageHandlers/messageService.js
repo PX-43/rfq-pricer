@@ -12,7 +12,7 @@ export const handleRequest = (msg, send) => {
     switch (msg.topic){
 
         case topics.SUBSCRIBE_RFQ :
-            publishRfq(msg.data, send);
+            publishRfq(msg.payload, send);
             break;
         case topics.GET_PRICE :
             break;

@@ -1,10 +1,6 @@
-import  {types}  from '../actions';
+import { types }  from '../actions';
+import { connectionStatus } from "../../../constants";
 
-const connectionStatus = {
-  CONNECTED: 'connected',
-  CONNECTING: 'connecting',
-  CONNECTION_FAILURE: 'failed',
-};
 
 const connectionReducer = (state = {}, action) => {
   switch (action.type) {
@@ -21,7 +17,7 @@ const connectionReducer = (state = {}, action) => {
     case types.ON_CONNECTION_ERROR:
       return {
         ...state,
-        connectionStatus: connectionStatus.CONNECTION_FAILURE,
+        connectionStatus: connectionStatus.DISCONNECTED,
         connectionError: action.err
       };
     default:

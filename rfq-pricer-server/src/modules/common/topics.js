@@ -2,7 +2,7 @@ const topics = {
     SUBSCRIBE_RFQ : 'subscribe_to_rfq',
     SUBSCRIBE_PRICE : 'subscribe_to_prices',
     GET_PRICE : 'get_price',
-    NEW_RFQ: 'new_rfq',
+    RFQ: 'rfq',
 };
 
 export default topics;

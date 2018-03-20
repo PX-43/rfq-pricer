@@ -51,10 +51,15 @@ export const createLegs = () => {
                     side: parts.getSide(),
                     amount: parts.getAmount(),
                     fund: parts.getFund(stamm),
-                    price: {
-                        spot, fwdPoint:null, fwdPrice:null, midPrice:null
-                    },
-                    ccyPair, dealCcy, stamm, legType, ...valueDate,
+                    spot,
+                    fwdPoint:null,
+                    fwdPrice:null,
+                    midPrice:null,
+                    ccyPair,
+                    dealCcy,
+                    stamm,
+                    legType,
+                    ...valueDate,
                 });
             });
         });

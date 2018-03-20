@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
-import { bool, string } from 'prop-types';
+import { bool, string } from 'prop-types'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import './RfqPricerContainer.less';
+import './HeaderPaneContainer.less';
 
 
-class RfqPricerContainer extends PureComponent {
+class HeaderPaneContainer extends PureComponent {
 
   constructor(props) {
     super(props);
@@ -15,15 +15,15 @@ class RfqPricerContainer extends PureComponent {
   render(){
     return (
       <div>
-        HELLO!
+        HeaderPaneContainer things...
       </div>
     );
   }
 
 }
 
-RfqPricerContainer.propTypes = {};
-RfqPricerContainer.defaultProps = {};
+HeaderPaneContainer.propTypes = {};
+HeaderPaneContainer.defaultProps = {};
 
 const mapDispatchToProps = dispatch => bindActionCreators({
 //add actions
@@ -33,4 +33,4 @@ const mapStateToProps = state => ({
 
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(RfqPricerContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderPaneContainer);
