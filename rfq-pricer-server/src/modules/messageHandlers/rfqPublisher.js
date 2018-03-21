@@ -5,7 +5,7 @@ import topics from './../common/topics';
 const publish = send => {
     try {
         const rfq = createRfq();
-        send(topics.NEW_RFQ, rfq);
+        send(topics.RFQ, rfq);
         console.log('New RFQ was sent to client. RFQ Id: ' + rfq.rfqId);
     } catch (err){
         console.log('An error has occurred. RFQ could not be sent to client. ' + err);

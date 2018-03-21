@@ -1,12 +1,15 @@
 import  { types } from '../actions';
 import { topics } from './../../../constants';
 
-const rfqListReducer = (state = [], action) => {
+const rfqListReducer = (state = {}, action) => {
   switch (action.type) {
     case types.ON_MESSAGE_RECEIVED:
-
       if(action.message.topic === topics.RFQ){
-        return handleIncomingRfq(state, action.message.payload);
+        //return handleIncomingRfq(state, action.message.payload);
+        return {
+          ...state,
+          ...action.message.payload.rfq
+        }
       }
       return state;
 

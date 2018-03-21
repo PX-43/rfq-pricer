@@ -9,8 +9,7 @@ export const createRfq = () =>  {
     return {
         rfq:{
             [id]:{
-                messageId: id,
-                rfqId: id,
+                rfqId:id,
                 productType : parts.getRfqType(),
                 client: parts.getClient(),
                 legIds: _.keys(legs)

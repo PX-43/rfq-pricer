@@ -41,7 +41,7 @@ function* externalListener(channel) {
       } else if(msg === CONN_OPEN){
         yield put(actions.connectedSuccessfully());
       } else if(msg != null){
-        console.info('sending message to server: ' + msg.data);
+        console.info('receiving message from server: ' + msg.data);
         yield put(actions.onMessageReceived(JSON.parse(msg.data)));
       }
     } catch (webSocketError){
