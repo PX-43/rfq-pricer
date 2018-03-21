@@ -31,12 +31,12 @@ const getExcludedLegTypes = (legs, ccyPair) => {
 };
 
 export const createLegs = () => {
-    let legs = [];
+    let legs = {};
 
     _.times(_.random(1, MAX_STRATEGIES), strategyIndex => {
         const ccyPair = parts.getCcyPair(getExcludedCcyPairs(legs));
         const dealCcy = parts.getDealCcy(ccyPair);
-        const spot = pricing.getSpotPrice(ccyPair);
+        //const spot = pricing.getSpotPrice(ccyPair);
 
         _.times(_.random(1, MAX_LEG_GROUPS), groupIndex => {
             const legType = parts.getLegType(getExcludedLegTypes(legs, ccyPair));
@@ -44,14 +44,16 @@ export const createLegs = () => {
 
             _.times(_.random(1, MAX_LEGS), legIndex => {
                 const stamm = parts.getStamm();
-                legs.push({
-                    strategyId: strategyIndex,
-                    groupId: groupIndex,
-                    legId:legIndex,
+                const legId = parts.getUniqueId();
+                legs[legId] = {
+                    legId,
+                    strategyIndex,
+                    groupIndex,
+                    legIndex,
                     side: parts.getSide(),
                     amount: parts.getAmount(),
                     fund: parts.getFund(stamm),
-                    spot,
+                    spot: null,
                     fwdPoint:null,
                     fwdPrice:null,
                     midPrice:null,
@@ -60,7 +62,7 @@ export const createLegs = () => {
                     stamm,
                     legType,
                     ...valueDate,
-                });
+                };
             });
         });
     });
