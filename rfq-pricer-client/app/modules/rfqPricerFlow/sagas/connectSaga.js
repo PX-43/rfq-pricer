@@ -1,6 +1,7 @@
 import { eventChannel } from 'redux-saga';
 import { takeEvery, put, call, take, all } from 'redux-saga/effects';
 import * as actions from '../actions';
+import handleRfqMessage from './../services/rfqResponseService';
 
 const CONN_ERR = 'connection_error';
 const CONN_OPEN = 'connection_open';
@@ -18,12 +19,12 @@ function createEventChannel(socket) {
   });
 }
 
-function* initializeWebSocketsChannel(action) {
+function* initializeWebSocketsChannel(dispatch, action) {
   try{
     const socket = new WebSocket(`ws://${action.connectionDetails.server}:${action.connectionDetails.port}`);
     const channel = yield call(createEventChannel, socket);
     yield all([
-      call(externalListener, channel),
+      call(externalListener, channel, dispatch),
       call(internalListener, socket)
     ]);
   } catch (err){
@@ -31,7 +32,7 @@ function* initializeWebSocketsChannel(action) {
   }
 }
 
-function* externalListener(channel) {
+function* externalListener(channel, dispatch) {
   console.info('external listener is starting');
   while (true) {
     try{
@@ -44,7 +45,8 @@ function* externalListener(channel) {
         console.info('receiving message from server: ' + msg.data);
         //TODO: create a service, which sends actions for each leg and the rfq one by one with ID saved in the action
         // should we use yield call(...)?
-        yield put(actions.onMessageReceived(JSON.parse(msg.data)));
+        yield call(handleRfqMessage, msg, dispatch);
+        //yield put(actions.onMessageReceived(JSON.parse(msg.data)));
       }
     } catch (webSocketError){
       yield put(actions.onConnectionError('Error in external listener: ' + webSocketError));
@@ -60,8 +62,8 @@ function* internalListener(socket) {
   }
 }
 
-export default function* connectSaga() {
-  yield takeEvery(actions.types.ESTABLISH_CONNECTION, initializeWebSocketsChannel);
+export default function* connectSaga(dispatch) {
+  yield takeEvery(actions.types.ESTABLISH_CONNECTION, initializeWebSocketsChannel, dispatch);
 }
 
 

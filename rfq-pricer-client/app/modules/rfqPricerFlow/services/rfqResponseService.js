@@ -3,13 +3,15 @@
 import  { types } from '../actions';
 import { topics } from './../../../constants';
 
-const onMessage = (incomingMessage) => {
-  switch (incomingMessage.topic) {
+const handleRfqMessage = (incomingMsg, dispatch) => {
+  const data = JSON.parse(incomingMsg.data);
+  switch (data.topic) {
     case topics.RFQ:
-
-      const rfq = incomingMessage.payload.rfq;
-      const legs = incomingMessage.payload.legs;
-
-
+      const rfq = data.payload.rfq;
+      const legs = data.payload.legs;
+      console.log(rfq);
+      console.log(dispatch);
   }
 };
+
+export default handleRfqMessage;

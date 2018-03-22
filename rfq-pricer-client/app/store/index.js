@@ -18,6 +18,6 @@ const store  = createStore(
   composeEnhancers(applyMiddleware(sagaMiddleware))
 );
 
-sagaMiddleware.run(saga);
+sagaMiddleware.run(saga, store.dispatch);
 
 export default store;
