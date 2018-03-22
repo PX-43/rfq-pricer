@@ -7,6 +7,11 @@ const legsReducer = (state = {}, action) => {
 
       if(action.message.topic === topics.RFQ){
         //return handleIncomingLegs(state, action.message.payload);
+
+        console.log('CURRENT LEGS STATE:');
+        console.dir(state);
+        console.log('NEW LEGS: ');
+        console.dir(action.message.payload.legs);
         return {
           ...state,
           ...action.message.payload.legs

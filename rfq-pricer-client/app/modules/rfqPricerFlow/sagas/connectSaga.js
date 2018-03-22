@@ -42,6 +42,8 @@ function* externalListener(channel) {
         yield put(actions.connectedSuccessfully());
       } else if(msg != null){
         console.info('receiving message from server: ' + msg.data);
+        //TODO: create a service, which sends actions for each leg and the rfq one by one with ID saved in the action
+        // should we use yield call(...)?
         yield put(actions.onMessageReceived(JSON.parse(msg.data)));
       }
     } catch (webSocketError){

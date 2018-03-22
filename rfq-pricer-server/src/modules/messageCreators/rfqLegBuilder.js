@@ -3,9 +3,9 @@ import * as pricing from '../pricing/pricingService';
 import {CCY_PAIRS} from "../common/ccys";
 import _ from 'lodash';
 
-const MAX_STRATEGIES = CCY_PAIRS.length; //strategies are defined by ccy pairs
-const MAX_LEG_GROUPS = 4;
-const MAX_LEGS = 4;
+const MAX_STRATEGIES = 2;// CCY_PAIRS.length; //strategies are defined by ccy pairs
+const MAX_LEG_GROUPS = 2;
+const MAX_LEGS = 2;
 
 const getValueDate = (productType, excludedTenors) => {
     let result = {tenor:'', valueDate:''};

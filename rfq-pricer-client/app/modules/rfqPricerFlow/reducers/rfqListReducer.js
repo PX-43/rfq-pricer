@@ -6,6 +6,11 @@ const rfqListReducer = (state = {}, action) => {
     case types.ON_MESSAGE_RECEIVED:
       if(action.message.topic === topics.RFQ){
         //return handleIncomingRfq(state, action.message.payload);
+        console.log('CURRENT RFQ STATE: ');
+        console.dir(state);
+        console.log('NEW RFQ: ');
+        console.dir(action.message.payload.rfq);
+
         return {
           ...state,
           ...action.message.payload.rfq
