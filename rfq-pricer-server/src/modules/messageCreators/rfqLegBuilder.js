@@ -44,9 +44,9 @@ export const createLegs = () => {
 
             _.times(_.random(1, MAX_LEGS), legIndex => {
                 const stamm = parts.getStamm();
-                const legId = parts.getUniqueId();
-                legs[legId] = {
-                    legId,
+                const id = parts.getUniqueId();
+                legs[id] = {
+                    id,
                     strategyIndex,
                     groupIndex,
                     legIndex,

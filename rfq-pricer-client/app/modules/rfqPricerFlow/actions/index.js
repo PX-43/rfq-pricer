@@ -26,19 +26,9 @@ export const onRfqReceived = (rfqId, rfq) => ({
 });
 
 export const onRfqLegReceived = (legId, leg) => ({
-  type: types.ON_RFQ_RECEIVED,
+  type: types.ON_LEG_RECEIVED,
   legId,
   leg,
 });
-
-/*export const sendRequest = message => ({
-  type: types.SEND_REQUEST,
-  message
-});
-
-export const onMessageReceived = message => ({
-  type: types.ON_MESSAGE_RECEIVED,
-  message
-});*/
 
 export const connectedSuccessfully = () => ({ type: types.CONNECTED_SUCCESSFULLY });
