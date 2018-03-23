@@ -4,7 +4,8 @@ export const types = {
   ON_CONNECTION_ERROR : 'ON_CONNECTION_ERROR',
   SEND_REQUEST : 'SEND_REQUEST',
   ON_MESSAGE_RECEIVED : 'ON_MESSAGE_RECEIVED',
-  ADD_RFQ : 'ADD_RFQ',
+  ON_RFQ_RECEIVED : 'ON_RFQ_RECEIVED',
+  ON_LEG_RECEIVED : 'ON_LEG_RECEIVED',
 
 };
 
@@ -18,7 +19,19 @@ export const onConnectionError = err => ({
   err
 });
 
-export const sendRequest = message => ({
+export const onRfqReceived = (rfqId, rfq) => ({
+  type: types.ON_RFQ_RECEIVED,
+  rfqId,
+  rfq,
+});
+
+export const onRfqLegReceived = (legId, leg) => ({
+  type: types.ON_RFQ_RECEIVED,
+  legId,
+  leg,
+});
+
+/*export const sendRequest = message => ({
   type: types.SEND_REQUEST,
   message
 });
@@ -26,6 +39,6 @@ export const sendRequest = message => ({
 export const onMessageReceived = message => ({
   type: types.ON_MESSAGE_RECEIVED,
   message
-});
+});*/
 
 export const connectedSuccessfully = () => ({ type: types.CONNECTED_SUCCESSFULLY });
