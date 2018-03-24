@@ -37,9 +37,9 @@ export const requestNewRfq = rfqCount => ({
   rfqCount,
 });
 
-export const sendRequest = (topic, ...params) => ({
+export const sendRequest = (topic, payload) => ({
   type: types.SEND_REQUEST,
-  data: {topic, payload: {...params}}
+  data: {topic, payload}
 });
 
 export const connectedSuccessfully = () => ({ type: types.CONNECTED_SUCCESSFULLY });

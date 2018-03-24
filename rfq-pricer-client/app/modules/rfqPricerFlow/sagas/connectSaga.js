@@ -2,7 +2,6 @@ import { eventChannel } from 'redux-saga';
 import { takeEvery, put, call, take, all } from 'redux-saga/effects';
 import * as actions from '../actions';
 import handleResponse from '../services/response/responseService';
-import createRequest from '../services/request/requestMessageFactory';
 
 const CONN_ERR = 'connection_error';
 const CONN_OPEN = 'connection_open';
