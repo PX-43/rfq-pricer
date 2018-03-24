@@ -3,6 +3,7 @@ export const types = {
   CONNECTED_SUCCESSFULLY : 'CONNECTED_SUCCESSFULLY',
   ON_CONNECTION_ERROR : 'ON_CONNECTION_ERROR',
   SEND_REQUEST : 'SEND_REQUEST',
+  SEND_NEW_RFQ_REQUEST : 'SEND_NEW_RFQ_REQUEST',
   ON_MESSAGE_RECEIVED : 'ON_MESSAGE_RECEIVED',
   ON_RFQ_RECEIVED : 'ON_RFQ_RECEIVED',
   ON_LEG_RECEIVED : 'ON_LEG_RECEIVED',
@@ -29,6 +30,16 @@ export const onRfqLegReceived = (legId, leg) => ({
   type: types.ON_LEG_RECEIVED,
   legId,
   leg,
+});
+
+export const requestNewRfq = rfqCount => ({
+  type: types.SEND_NEW_RFQ_REQUEST,
+  rfqCount,
+});
+
+export const sendRequest = (topic, ...params) => ({
+  type: types.SEND_REQUEST,
+  data: {topic, payload: {...params}}
 });
 
 export const connectedSuccessfully = () => ({ type: types.CONNECTED_SUCCESSFULLY });

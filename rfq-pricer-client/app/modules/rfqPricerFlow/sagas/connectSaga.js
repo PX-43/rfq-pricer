@@ -2,6 +2,7 @@ import { eventChannel } from 'redux-saga';
 import { takeEvery, put, call, take, all } from 'redux-saga/effects';
 import * as actions from '../actions';
 import handleResponse from '../services/response/responseService';
+import createRequest from '../services/request/requestMessageFactory';
 
 const CONN_ERR = 'connection_error';
 const CONN_OPEN = 'connection_open';
@@ -24,15 +25,15 @@ function* initializeWebSocketsChannel(dispatch, action) {
     const socket = new WebSocket(`ws://${action.connectionDetails.server}:${action.connectionDetails.port}`);
     const channel = yield call(createEventChannel, socket);
     yield all([
-      call(externalListener, channel, dispatch),
-      call(internalListener, socket)
+      call(listenForServerResponse, channel, dispatch),
+      call(listenForActions, socket)
     ]);
   } catch (err){
     yield put(actions.onConnectionError('WebSocket initialisation error. Error: ' + err));
   }
 }
 
-function* externalListener(channel, dispatch) {
+function* listenForServerResponse(channel, dispatch) {
   console.info('external listener is starting');
   while (true) {
     try{
@@ -50,7 +51,7 @@ function* externalListener(channel, dispatch) {
   }
 }
 
-function* internalListener(socket) {
+function* listenForActions(socket) {
   console.info('internal listener is starting');
   while (true) {
     const message = yield take(actions.types.SEND_REQUEST);

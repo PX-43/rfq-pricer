@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
-import { bool, string } from 'prop-types'
+import { func } from 'prop-types';
+import noop from 'lodash/noop';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
+import RfqRequestButton from './RfqRequestButton';
+import { rfqPricerFlowActions } from './../../modules/actions'
 import './HeaderPaneContainer.less';
-
 
 class HeaderPaneContainer extends PureComponent {
 
@@ -15,20 +16,26 @@ class HeaderPaneContainer extends PureComponent {
   render(){
     return (
       <div>
-        HeaderPaneContainer things...
+        <RfqRequestButton requestNewRfq={this.props.requestNewRfq} />
       </div>
     );
   }
 
 }
 
-HeaderPaneContainer.propTypes = {};
-HeaderPaneContainer.defaultProps = {};
+HeaderPaneContainer.propTypes = {
+  requestNewRfq: func
+};
+HeaderPaneContainer.defaultProps = {
+  requestNewRfq: noop
+};
 
+// whatever is returned shows up in props of this container
 const mapDispatchToProps = dispatch => bindActionCreators({
-//add actions
+  requestNewRfq: rfqPricerFlowActions.requestNewRfq
 }, dispatch);
 
+// whatever is returned shows up in props of this container
 const mapStateToProps = state => ({
 
 });

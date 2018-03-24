@@ -1,4 +1,4 @@
-import  { onRfqReceived, onRfqLegReceived } from '../../actions/index';
+import  { onRfqReceived, onRfqLegReceived } from '../../actions';
 import keys from 'lodash/keys';
 
 const handleRfqMessage = (payload, dispatch) => {
