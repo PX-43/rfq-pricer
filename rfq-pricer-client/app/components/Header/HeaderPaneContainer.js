@@ -3,7 +3,7 @@ import { func } from 'prop-types';
 import noop from 'lodash/noop';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import RfqRequestButton from './RfqRequestButton';
+import RfqRequest from './RfqRequest';
 import { rfqPricerFlowActions } from './../../modules/actions'
 import './HeaderPaneContainer.less';
 
@@ -16,7 +16,7 @@ class HeaderPaneContainer extends PureComponent {
   render(){
     return (
       <div>
-        <RfqRequestButton requestNewRfq={this.props.requestNewRfq} />
+        <RfqRequest requestNewRfq={this.props.requestNewRfq} />
       </div>
     );
   }
