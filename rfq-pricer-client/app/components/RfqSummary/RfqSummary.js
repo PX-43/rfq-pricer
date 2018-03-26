@@ -2,8 +2,6 @@ import React from 'react';
 
 const RfqSummary = props => {
 
-  console.dir(props);
-
   return (
     <li>
       <div className='rfqSummary'>

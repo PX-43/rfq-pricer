@@ -11,7 +11,7 @@ export const getRfqSummaryList = createSelector(
     rfqIds.forEach(id => {
       result.push(rfqs[id]);
     });
-    console.dir(result);
+
     return result;
   }
 );

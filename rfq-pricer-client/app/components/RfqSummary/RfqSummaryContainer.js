@@ -12,8 +12,6 @@ class RfqSummaryContainer extends PureComponent {
   }
 
 
-
-
   render(){
 
     const items = this.props.rfqs.map(rfq => <RfqSummary key={rfq.id} rfq={rfq}/>);
@@ -26,8 +24,6 @@ class RfqSummaryContainer extends PureComponent {
       </div>
     );
   }
-
-
 
 }
 

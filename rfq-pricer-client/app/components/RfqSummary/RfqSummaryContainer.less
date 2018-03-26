@@ -1,21 +1,41 @@
+@corner: 10px;
+@containerWidth: 380px;
+
 .rfqSummaryContainer {
   margin-top:30px;
-}
+  width: @containerWidth;
 
-.rfqSummaryContainer li {
-  list-style-type: none;
+  & li {
+    list-style-type: none;
+
+    &:first-child div {
+      border-radius: @corner @corner 0 0;
+    }
+    &:last-child div {
+      border-radius: 0 0 @corner @corner;
+    }
+    &:only-child div {
+      border-radius: @corner;
+    }
+  }
 }
 
 .rfqSummary {
-  border:1px #243b3b solid;
-  padding:10px;
+  border:1px #162d2d solid;
+  padding:8px;
   margin-bottom: 2px;
   background-color: #353947;
   color: #b9c3c6;
   font-size: .8em;
+
+  &:hover {
+    background-color: #0e131f;
+    cursor: pointer;
+  }
 }
 
 .clientName {
   font-weight: bold;
   color: #d0dcdf;
+  margin-bottom: 7px;
 }
