@@ -1,5 +1,4 @@
 import * as parts from './rfqParts';
-import * as pricing from '../pricing/pricingService';
 import {CCY_PAIRS} from "../common/ccys";
 import _ from 'lodash';
 

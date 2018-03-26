@@ -3,6 +3,7 @@ import { bool, string } from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import HeaderPaneContainer from "./Header/HeaderPaneContainer";
+import RfqSummaryContainer from "./RfqSummary/RfqSummaryContainer";
 import './RfqPricerContainer.less';
 
 class RfqPricerContainer extends PureComponent {
@@ -15,6 +16,7 @@ class RfqPricerContainer extends PureComponent {
     return (
       <div>
        <HeaderPaneContainer />
+       <RfqSummaryContainer />
       </div>
     );
   }

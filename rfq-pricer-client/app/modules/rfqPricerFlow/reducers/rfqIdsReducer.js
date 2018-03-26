@@ -1,6 +1,6 @@
 import  { types } from '../actions';
 
-const rfqOrderReducer = (state = {}, action) => {
+const rfqIdsReducer = (state = {}, action) => {
   switch (action.type) {
     case types.ON_RFQ_RECEIVED:
       return [
@@ -14,4 +14,4 @@ const rfqOrderReducer = (state = {}, action) => {
 };
 
 
-export default rfqOrderReducer;
+export default rfqIdsReducer;

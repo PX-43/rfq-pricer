@@ -6,6 +6,6 @@ export const initState = {
     connectionError:'',
   },
   rfqs: {},
-  rfqOrder: [],
+  rfqIds: [], //stores rfq IDs in the correct order
   legs: {}
 };
