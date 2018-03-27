@@ -12,6 +12,7 @@ export const createRfq = () =>  {
                 id,
                 productType : parts.getRfqType(),
                 client: parts.getClient(),
+                status:'New',
                 legIds: _.keys(legs)
             }
         },
