@@ -1,5 +1,5 @@
 @corner: 10px;
-@containerWidth: 380px;
+@containerWidth: 400px;
 
 .rfqSummaryContainer {
   margin-top:30px;
@@ -8,29 +8,33 @@
   & li {
     list-style-type: none;
 
-    &:first-child div {
+    &:first-child div.rfqSummary {
       border-radius: @corner @corner 0 0;
     }
-    &:last-child div {
+    &:last-child div.rfqSummary {
       border-radius: 0 0 @corner @corner;
     }
-    &:only-child div {
+    &:only-child div.rfqSummary {
       border-radius: @corner;
     }
   }
 }
 
 .rfqSummary {
-  border:1px #162d2d solid;
+  border:1px #22242b solid;
   padding:8px;
   margin-bottom: 2px;
-  background-color: #353947;
+  background-color: #2e3037;
   color: #b9c3c6;
   font-size: .8em;
 
   &:hover {
-    background-color: #0e131f;
+    background-color: #1b1c20;
     cursor: pointer;
+
+    .currency {
+      background: #2e3037;
+    }
   }
 }
 
@@ -44,3 +48,19 @@
   display:flex;
   justify-content: space-between;
 }
+
+.currencyList {
+  display:flex;
+
+  .currency {
+    font-size: 0.65em;
+    align-self: flex-end;
+    margin-left: 3px;
+    padding:2px;
+    background: #1b1c20;
+    border-radius: 5px;
+    color: #d8e4e7;
+  }
+}
+
+

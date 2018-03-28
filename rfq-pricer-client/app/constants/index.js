@@ -11,3 +11,8 @@ export const topics = {
   GET_PRICE : 'get_price',
   RFQ: 'rfq',
 };
+
+export const viewConstants = {
+  MAX_CCYS_ON_RFQ_SUMMARY : 3,
+};
+

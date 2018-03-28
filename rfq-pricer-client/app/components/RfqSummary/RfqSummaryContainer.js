@@ -36,7 +36,7 @@ class RfqSummaryContainer extends PureComponent {
 const mapStateToProps = state => {
   return {
     rfqs : rfqSummaryListSelector.getRfqSummaryList(state),
-    currencies : rfqSummaryListSelector.getCurrencies(state)
+    currencies : rfqSummaryListSelector.getUniqueCurrencies(state)
   }
 };
 

@@ -1,11 +1,7 @@
 import React from 'react';
+import CcyList from './CcyList';
 
 const RfqSummary = props => {
-
-  const currencies = props.currencies.map(ccyPair => {
-    return <div className='currency'>{ccyPair} </div>;
-  });
-
   return (
     <li>
       <div className='rfqSummary'>
@@ -15,12 +11,11 @@ const RfqSummary = props => {
         </div>
         <div className='summaryBottomBox'>
           <div>{props.rfq.productType}</div>
-          <div>{currencies}</div>
+          <CcyList currencies={props.currencies} />
         </div>
       </div>
     </li>
   );
-
 };
 
 export default RfqSummary;
