@@ -30,7 +30,7 @@ const getExcludedLegTypes = (legs, ccyPair) => {
 };
 
 export const createLegs = () => {
-    let legs = {};
+    let legs = [];
 
     _.times(_.random(1, MAX_STRATEGIES), strategyIndex => {
         const ccyPair = parts.getCcyPair(getExcludedCcyPairs(legs));
@@ -44,7 +44,7 @@ export const createLegs = () => {
             _.times(_.random(1, MAX_LEGS), legIndex => {
                 const stamm = parts.getStamm();
                 const id = parts.getUniqueId();
-                legs[id] = {
+                legs.push({
                     id,
                     strategyIndex,
                     groupIndex,
@@ -61,7 +61,7 @@ export const createLegs = () => {
                     stamm,
                     legType,
                     ...valueDate,
-                };
+                });
             });
         });
     });

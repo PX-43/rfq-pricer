@@ -4,7 +4,7 @@ const rfqIdsReducer = (state = {}, action) => {
   switch (action.type) {
     case types.ON_RFQ_RECEIVED:
       return [
-        action.rfqId,
+        action.rfq.id,
         ...state,
       ];
 

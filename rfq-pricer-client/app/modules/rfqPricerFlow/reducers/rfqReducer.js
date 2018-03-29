@@ -1,13 +1,26 @@
 import  { types } from '../actions';
+import orderBy from "lodash/orderBy";
+import uniq from "lodash/uniq";
 
 const rfqReducer = (state = {}, action) => {
   switch (action.type) {
     case types.ON_RFQ_RECEIVED:
+
+      //this destructuring removes legs from rfq
+      //(this is not a spread operator here, but rest, as it is an assignment context)
+      const {legs, ...rfq} = action.rfq;
+
+      //This is done here for efficiency reasons. Otherwise it would need to be done in the selectors,
+      //which would be more complicated and inefficient, as we would need to extract the legs for each rfq.
+      const ccyPairs = orderBy( uniq( legs.map(leg => leg.ccyPair) ) );
+
+      //normalising rfq state
       return {
         ...state,
-        [action.rfqId]: {
-          ...action.rfq,
-          legIds: [...action.rfq.legIds]
+        [rfq.id]: {
+          ...rfq,
+          legIds: [...legs.map(leg => leg.id)],
+          ccyPairs: [...ccyPairs],
         }
       };
     default:

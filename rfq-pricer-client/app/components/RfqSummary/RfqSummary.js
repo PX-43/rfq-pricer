@@ -11,7 +11,7 @@ const RfqSummary = props => {
         </div>
         <div className='summaryBottomBox'>
           <div>{props.rfq.productType}</div>
-          <CcyList currencies={props.currencies} />
+          <CcyList ccyPairs={props.rfq.ccyPairs} />
         </div>
       </div>
     </li>

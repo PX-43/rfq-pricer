@@ -17,8 +17,7 @@ class RfqSummaryContainer extends PureComponent {
     const items = this.props.rfqs.map(rfq =>
       <RfqSummary
         key={rfq.id}
-        rfq={rfq}
-        currencies={this.props.currencies[rfq.id]} />
+        rfq={rfq}/>
     );
 
     return(
@@ -29,14 +28,11 @@ class RfqSummaryContainer extends PureComponent {
       </div>
     );
   }
-
 }
-
 
 const mapStateToProps = state => {
   return {
     rfqs : rfqSummaryListSelector.getRfqSummaryList(state),
-    currencies : rfqSummaryListSelector.getUniqueCurrencies(state)
   }
 };
 

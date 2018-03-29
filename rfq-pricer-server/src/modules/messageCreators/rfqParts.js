@@ -5,7 +5,15 @@ import {CCY_PAIRS} from "../common/ccys";
 
 const TENORS = ['1M', '3M', '6M', '9M', '12Y'];
 const STAMM = ['0201-TA253145', '0202-TM549855', '0204-UA746546', '0205-MT187644', '0401-GA653444', '0501-TC5455445'];
-const CLIENTS = ['International Fund AG', 'Green Pension Fund', 'Perpetual Equity LTD'];
+const CLIENTS = ['International Fund AG',
+                 'Green Pension Fund',
+                 'Perpetual Equity LTD',
+                 'Merton Group',
+                 'Sharp Capital Management',
+                 'Greenwich Fund LTD',
+                 'Sigma International AG',
+                 'Pimlico Savers LTD',
+                 'RedRock Stock Management LTD'];
 const DEFAULT_DATE_FORMAT = 'DD-MMM-YYYY';
 const FUND_PREFIX = 'BA-';
 const RFQ_TYPES = ['Allocation', 'Portfolio'];

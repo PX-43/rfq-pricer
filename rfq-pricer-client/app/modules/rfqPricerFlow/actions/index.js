@@ -20,16 +20,14 @@ export const onConnectionError = err => ({
   err
 });
 
-export const onRfqReceived = (rfqId, rfq) => ({
+export const onRfqReceived = (rfq) => ({
   type: types.ON_RFQ_RECEIVED,
-  rfqId,
-  rfq,
+  rfq
 });
 
-export const onRfqLegReceived = (legId, leg) => ({
+export const onRfqLegsReceived = (legs) => ({
   type: types.ON_LEG_RECEIVED,
-  legId,
-  leg,
+  legs,
 });
 
 export const requestNewRfq = rfqCount => ({
