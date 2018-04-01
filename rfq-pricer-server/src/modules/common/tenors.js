@@ -8,5 +8,5 @@ const tenorsMap = new Map([
     ['1Y', { spread:112 }],
 ]);
 
-export const tenors = () => Array.from(tenorsMap.keys());
+export const getTenors = () => Array.from(tenorsMap.keys());
 export const getSpread = tenor => tenorsMap.has(tenor) ? tenorsMap.get(tenor).spread : 1.0;

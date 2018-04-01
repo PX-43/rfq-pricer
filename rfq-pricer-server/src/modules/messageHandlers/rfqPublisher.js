@@ -3,12 +3,12 @@ import {createRfq} from "../messageCreators/rfqBuilder";
 import topics from './../common/topics';
 
 const publish = send => {
-    try {
+    //try {
         const rfq = createRfq();
         send(topics.RFQ, rfq);
-    } catch (err){
-        console.log('An error has occurred. RFQ could not be sent to client. ' + err);
-    }
+    //} catch (err){
+     //   console.log('An error has occurred. RFQ could not be sent to client. ' + err);
+   // }
 };
 
 

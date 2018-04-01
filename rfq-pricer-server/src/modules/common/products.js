@@ -1,5 +1,7 @@
 
-export default products = {
-    PRODUCT_FWD: 'Fwd',
-    PRODUCT_SPOT : 'Spot',
-}
+const products = {
+    FWD:'Fwd',
+    SPOT:'Spot'
+};
+
+export default products;

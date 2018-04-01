@@ -1,5 +1,5 @@
 import * as parts from './rfqParts';
-import getPrice from '../pricing/pricingService';
+import * as prices from '../pricing/pricingService';
 import {CCY_PAIRS} from "../common/ccys";
 import products from "../common/products";
 import _ from 'lodash';
@@ -10,9 +10,9 @@ const MAX_LEGS = 6;
 
 const getValueDate = (productType, excludedTenors) => {
     let result = {tenor:'', valueDate:''};
-    if(productType === products.PRODUCT_SPOT){
+    if(productType === products.SPOT){
         result.valueDate = parts.getSpotValueDate();
-    } else if(productType === products.PRODUCT_FWD){
+    } else if(productType === products.FWD){
         const tenor = parts.getTenor(excludedTenors);
         result.tenor = tenor;
         result.valueDate = parts.getFwdValueDate(tenor);
@@ -27,9 +27,11 @@ const getExcludedTenors = (legs, ccyPair) => _.uniq(_.map(_.filter(legs, {'ccyPa
 
 const getExcludedProductTypes = (legs, ccyPair) => {
     //allow only one spot group per ccy pair
-    const hasSpot = _.find(_.filter(legs, {'ccyPair':ccyPair}), leg => leg.legType === products.PRODUCT_SPOT);
-    return hasSpot ? [products.PRODUCT_SPOT] : [];
+    const hasSpot = _.find(_.filter(legs, {'ccyPair':ccyPair}), leg => leg.legType === products.SPOT);
+    return hasSpot ? [products.SPOT] : [];
 };
+
+const isFwd = product => product === products.FWD;
 
 export const createLegs = () => {
     let legs = [];
@@ -37,10 +39,13 @@ export const createLegs = () => {
     _.times(_.random(1, MAX_STRATEGIES), strategyIndex => {
         const ccyPair = parts.getCcyPair(getExcludedCcyPairs(legs));
         const dealCcy = parts.getDealCcy(ccyPair);
+        const spot = prices.getSpot(ccyPair);
 
         _.times(_.random(1, MAX_LEG_GROUPS), groupIndex => {
             const product = parts.getProductType(getExcludedProductTypes(legs, ccyPair));
-            const {valueDate, tenor} = getValueDate(product, getExcludedTenors(legs, ccyPair));
+            const { valueDate, tenor } = getValueDate(product, getExcludedTenors(legs, ccyPair));
+            const { fwdPoints = 0, fwdPrice = 0 } = isFwd(product) ? prices.getFwdPrice(ccyPair, spot, tenor) : {};
+            const midPrice = prices.getMidPrice(ccyPair, isFwd(product) ? fwdPrice : spot);
 
             _.times(_.random(1, MAX_LEGS), legIndex => {
                 const stamm = parts.getStamm();
@@ -59,7 +64,10 @@ export const createLegs = () => {
                     legType: product,
                     valueDate,
                     tenor,
-                    ...getPrice(ccyPair, product, tenor)
+                    spot,
+                    fwdPoints,
+                    fwdPrice,
+                    midPrice,
                 });
             });
         });
