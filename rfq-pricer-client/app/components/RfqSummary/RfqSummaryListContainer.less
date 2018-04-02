@@ -1,26 +1,26 @@
 @corner: 10px;
 @containerWidth: 400px;
+@selectedRfqColour: #1b1c20;
 
-.rfqSummaryContainer {
-  margin-top:30px;
+.rfq-summary-list-container {
   width: @containerWidth;
 
   & li {
     list-style-type: none;
 
-    &:first-child div.rfqSummary {
+    &:first-child div {
       border-radius: @corner @corner 0 0;
     }
-    &:last-child div.rfqSummary {
+    &:last-child div {
       border-radius: 0 0 @corner @corner;
     }
-    &:only-child div.rfqSummary {
+    &:only-child div {
       border-radius: @corner;
     }
   }
 }
 
-.rfqSummary {
+.rfq-summary {
   border:1px #22242b solid;
   padding:8px;
   margin-bottom: 2px;
@@ -29,28 +29,30 @@
   font-size: .8em;
 
   &:hover {
-    background-color: #1b1c20;
+    background-color: @selectedRfqColour;
     cursor: pointer;
+  }
 
-    /*.currency {
-      background: #2e3037;
-    }*/
+  &__name {
+    font-weight: bold;
+    color: #d0dcdf;
+    margin-bottom: 7px;
+  }
+
+  &__top, &__bottom {
+    display:flex;
+    justify-content: space-between;
   }
 }
 
-.clientName {
-  font-weight: bold;
-  color: #d0dcdf;
-  margin-bottom: 7px;
+.rfq-summary--selected {
+  .rfq-summary;
+  background-color: @selectedRfqColour;
 }
 
-.summaryTopBox, .summaryBottomBox {
+.currency-list {
   display:flex;
-  justify-content: space-between;
-}
-
-.currencyList {
-  display:flex;
+  flex-wrap: nowrap;
 
   .currency {
     font-size: 0.7em;
@@ -60,6 +62,7 @@
     background: #242529;
     border-radius: 8px;
     color: #d8e4e7;
+    white-space: nowrap;
   }
 }
 

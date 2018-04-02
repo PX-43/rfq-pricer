@@ -2,8 +2,9 @@ import React, { PureComponent } from 'react';
 import { bool, string } from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import HeaderPaneContainer from "./Header/HeaderPaneContainer";
-import RfqSummaryContainer from "./RfqSummary/RfqSummaryContainer";
+import HeaderPaneContainer from './Header/HeaderPaneContainer';
+import RfqSummaryListContainer from './RfqSummary/RfqSummaryListContainer';
+import RfqGridContainer from './RfqGrid/RfqGridContainer';
 import './RfqPricerContainer.less';
 
 class RfqPricerContainer extends PureComponent {
@@ -16,7 +17,11 @@ class RfqPricerContainer extends PureComponent {
     return (
       <div>
        <HeaderPaneContainer />
-       <RfqSummaryContainer />
+        <div className='rfq-container'>
+          <RfqSummaryListContainer />
+          <RfqGridContainer />
+        </div>
+
       </div>
     );
   }

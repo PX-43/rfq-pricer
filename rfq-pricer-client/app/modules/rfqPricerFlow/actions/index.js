@@ -7,6 +7,7 @@ export const types = {
   ON_MESSAGE_RECEIVED : 'ON_MESSAGE_RECEIVED',
   ON_RFQ_RECEIVED : 'ON_RFQ_RECEIVED',
   ON_LEG_RECEIVED : 'ON_LEG_RECEIVED',
+  ON_SELECTED_RFQ_CHANGED : 'ON_SELECTED_RFQ_CHANGED',
 
 };
 
@@ -33,6 +34,12 @@ export const onRfqLegsReceived = (legs) => ({
 export const requestNewRfq = rfqCount => ({
   type: types.SEND_NEW_RFQ_REQUEST,
   rfqCount,
+});
+
+export const onSelectedRfqChanged = (newRfqId, oldRfqId) => ({
+  type: types.ON_SELECTED_RFQ_CHANGED,
+  newRfqId,
+  oldRfqId,
 });
 
 export const sendRequest = (topic, payload) => ({

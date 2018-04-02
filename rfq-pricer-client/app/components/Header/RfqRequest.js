@@ -26,7 +26,7 @@ class RfqRequest extends PureComponent {
 
   render(){
     return (
-      <div className='rfqRequest'>
+      <div className='rfq-request'>
         <button onClick={() => this.props.requestNewRfq(this.state.rfqCounter)}>
           Request
         </button>

@@ -22,7 +22,7 @@ const getCcyPairs = props => {
 
 const CcyList = props => {
   return (
-      <div className='currencyList'>{getCcyPairs(props)}</div>
+      <div className='currency-list'>{getCcyPairs(props)}</div>
   );
 };
 
