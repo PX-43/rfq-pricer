@@ -6,6 +6,8 @@ export const types = {
   SEND_NEW_RFQ_REQUEST : 'SEND_NEW_RFQ_REQUEST',
   ON_MESSAGE_RECEIVED : 'ON_MESSAGE_RECEIVED',
   ON_RFQ_RECEIVED : 'ON_RFQ_RECEIVED',
+  ON_CCY_NODES_RECEIVED : 'ON_CCY_NODES_RECEIVED',
+  ON_VALUE_DATE_NODES_RECEIVED : 'ON_VALUE_DATE_NODES_RECEIVED',
   ON_LEG_RECEIVED : 'ON_LEG_RECEIVED',
   ON_SELECTED_RFQ_CHANGED : 'ON_SELECTED_RFQ_CHANGED',
 
@@ -24,6 +26,16 @@ export const onConnectionError = err => ({
 export const onRfqReceived = (rfq) => ({
   type: types.ON_RFQ_RECEIVED,
   rfq
+});
+
+export const onCcyNodesReceived = (ccyNodes) => ({
+  type: types.ON_CCY_NODES_RECEIVED,
+  ccyNodes,
+});
+
+export const onValueDateNodesReceived = (valueDateNodes) => ({
+  type: types.ON_VALUE_DATE_NODES_RECEIVED,
+  valueDateNodes,
 });
 
 export const onRfqLegsReceived = (legs) => ({

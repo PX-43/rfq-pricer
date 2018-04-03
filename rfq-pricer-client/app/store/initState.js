@@ -6,7 +6,9 @@ export const initState = {
     connectionError:'',
   },
   selectedRfq:'',
-  rfqs: {},
   rfqIds: [], //stores rfq IDs in the correct order
+  rfqs: {},
+  ccyNodes: {}, //first level group
+  valueDateNodes: {}, //second level group
   legs: {}
 };

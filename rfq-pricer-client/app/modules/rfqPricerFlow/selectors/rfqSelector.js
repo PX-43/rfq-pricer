@@ -17,7 +17,7 @@ export const getRfqData = createSelector(
          side: "BUY",
          amount: "5m EUR",
          spot: "1.10232",
-         details:[
+         valueDateNodes:[
            {
              ccyPair:'EUR USD',
              product: "FWD",
@@ -75,7 +75,7 @@ export const getRfqData = createSelector(
          side: "SELL",
          amount: "10m GBP",
          spot: "1.45232",
-         details:[
+         valueDateNodes:[
            {
              ccyPair:'GBP USD',
              product: "Spot",

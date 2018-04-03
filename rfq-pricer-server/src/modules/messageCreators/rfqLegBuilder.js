@@ -23,55 +23,92 @@ const getValueDate = (productType, excludedTenors) => {
 
 const getExcludedCcyPairs = legs => _.uniq(_.map(legs, 'ccyPair'));
 
-const getExcludedTenors = (legs, ccyPair) => _.uniq(_.map(_.filter(legs, {'ccyPair':ccyPair}), 'tenor'));
+const getExcludedTenors = legs => _.uniq(_.map(legs, 'tenor'));
 
-const getExcludedProductTypes = (legs, ccyPair) => {
-    //allow only one spot group per ccy pair
-    const hasSpot = _.find(_.filter(legs, {'ccyPair':ccyPair}), leg => leg.legType === products.SPOT);
+const getExcludedProductTypes = legs => {
+    //exclude spot if it has one already: allow only one spot group per ccy pair
+    const hasSpot = _.find(legs, leg => leg.legType === products.SPOT);
     return hasSpot ? [products.SPOT] : [];
 };
 
 const isFwd = product => product === products.FWD;
+const isBuy = side => side === parts.SIDE_BUY;
 
-export const createLegs = () => {
-    let legs = [];
+const getAmount = children => {
+    if(!children || children.length === 0){
+        return 0;
+    }
+    if(children.length === 1){
+        return children[0].amount;
+    } else {
+        return children.reduce((total, child) => {
+            if(isBuy(child.side)){
+                return total + child.amount;
+            }
+            return total - child.amount;
+        }, 0);
+    }
+};
 
-    _.times(_.random(1, MAX_STRATEGIES), strategyIndex => {
-        const ccyPair = parts.getCcyPair(getExcludedCcyPairs(legs));
-        const dealCcy = parts.getDealCcy(ccyPair);
+const getSide = amount => amount < 0 ? parts.SIDE_SELL : parts.SIDE_BUY;
+
+export const createGroupedLegs = () => {
+    let ccyNodes = [];
+
+    _.times(_.random(1, MAX_STRATEGIES), () => {
+        const ccyPair = parts.getCcyPair(getExcludedCcyPairs(ccyNodes));
         const spot = prices.getSpot(ccyPair);
+        const ccyNode = {
+            id:parts.getUniqueId(),
+            dealCcy: parts.getDealCcy(ccyPair),
+            ccyPair,
+            spot,
+            side:'',
+            amount:0,
+            valueDateNodes: []
+        };
+        ccyNodes.push(ccyNode);
 
-        _.times(_.random(1, MAX_LEG_GROUPS), groupIndex => {
-            const product = parts.getProductType(getExcludedProductTypes(legs, ccyPair));
-            const { valueDate, tenor } = getValueDate(product, getExcludedTenors(legs, ccyPair));
+        _.times(_.random(1, MAX_LEG_GROUPS), () => {
+            const product = parts.getProductType(getExcludedProductTypes(ccyNode.valueDateNodes));
+            const { valueDate, tenor } = getValueDate(product, getExcludedTenors(ccyNode.valueDateNodes));
             const { fwdPoints = 0, fwdPrice = 0 } = isFwd(product) ? prices.getFwdPrice(ccyPair, spot, tenor) : {};
-            const midPrice = prices.getMidPrice(ccyPair, isFwd(product) ? fwdPrice : spot);
 
-            _.times(_.random(1, MAX_LEGS), legIndex => {
+            const valueDateNode = {
+                id:parts.getUniqueId(),
+                legType: product,
+                valueDate,
+                tenor,
+                fwdPoints,
+                fwdPrice,
+                midPrice: prices.getMidPrice(ccyPair, isFwd(product) ? fwdPrice : spot),
+                side:'',
+                amount:0,
+                legs: []
+            };
+            ccyNode.valueDateNodes.push(valueDateNode);
+
+            _.times(_.random(1, MAX_LEGS), () => {
                 const stamm = parts.getStamm();
-                const id = parts.getUniqueId();
-                legs.push({
-                    id,
-                    strategyIndex,
-                    groupIndex,
-                    legIndex,
+                const leg = {
+                    id: parts.getUniqueId(),
+                    fund: parts.getFund(stamm),
                     side: parts.getSide(),
                     amount: parts.getAmount(),
-                    fund: parts.getFund(stamm),
-                    ccyPair,
-                    dealCcy,
                     stamm,
-                    legType: product,
-                    valueDate,
-                    tenor,
-                    spot,
-                    fwdPoints,
-                    fwdPrice,
-                    midPrice,
-                });
+                };
+                valueDateNode.legs.push(leg);
+
+                const valueDateNodeAmount = getAmount(valueDateNode.legs);
+                valueDateNode.side = getSide(valueDateNodeAmount);
+                valueDateNode.amount = Math.abs(valueDateNodeAmount);
+
+                const ccyNodeAmount = getAmount(ccyNode.valueDateNodes);
+                ccyNode.side = getSide(ccyNodeAmount);
+                ccyNode.amount = Math.abs(ccyNodeAmount);
             });
         });
     });
 
-    return legs;
+    return ccyNodes;
 };

@@ -15,5 +15,4 @@ const legsReducer = (state = {}, action) => {
   }
 };
 
-
 export default legsReducer;
