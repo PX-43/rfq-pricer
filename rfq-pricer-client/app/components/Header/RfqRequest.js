@@ -25,6 +25,7 @@ class RfqRequest extends PureComponent {
   };
 
   render(){
+    console.log('rendering HeaderPaneContainer -> RfqRequest');
     return (
       <div className='rfq-request'>
         <button onClick={() => this.props.requestNewRfq(this.state.rfqCounter)}>

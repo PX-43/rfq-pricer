@@ -14,6 +14,7 @@ class HeaderPaneContainer extends PureComponent {
   }
 
   render(){
+    console.log('rendering HeaderPaneContainer');
     return (
       <div>
         <RfqRequest requestNewRfq={this.props.requestNewRfq} />

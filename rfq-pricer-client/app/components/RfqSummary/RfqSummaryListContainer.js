@@ -15,6 +15,8 @@ class RfqSummaryListContainer extends PureComponent {
 
   render(){
 
+    console.log('rendering RfqSummaryListContainer');
+
     const items = this.props.rfqs.map(rfq =>
       <RfqSummary
         key={rfq.id}

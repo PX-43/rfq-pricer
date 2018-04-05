@@ -13,6 +13,7 @@ class RfqGridContainer extends PureComponent {
   }
 
   render(){
+    console.log('rendering RfqGridContainer');
     return(
       <div className='rfq-grid-container'>
         <RfqGrid rfqData={this.props.rfqData} />

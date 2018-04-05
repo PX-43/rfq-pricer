@@ -23,11 +23,11 @@ class RfqGrid extends PureComponent {
   }
 
   static getNodeChildDetails(rowItem) {
-    if (rowItem.details) {
+    if (rowItem.valueDateNodes) {
       return {
         group: true,
         expanded: true,
-        children: rowItem.details,
+        children: rowItem.valueDateNodes,
         key: rowItem.ccyPair,
       };
     }else if (rowItem.legs) {
@@ -43,6 +43,7 @@ class RfqGrid extends PureComponent {
   }
 
   render(){
+    console.log('rendering RfqGrid');
     return(
       <div className='rfq-grid ag-theme-balham-dark'>
         <AgGridReact

@@ -1,15 +1,44 @@
 import { createSelector } from 'reselect';
 
-const getCurrentlySelectedRfqId = state => state.selectedRfq;
 
-export const getSelectedRfqId = createSelector( [getCurrentlySelectedRfqId], rfqId => rfqId );
+const selectedRfqId = state => state.selectedRfq;
+const rfqs = state => state.rfqs;
+const ccyNodes = state => state.ccyNodes;
+const valueDateNodes = state => state.valueDateNodes;
+const legs = state => state.legs;
+
+const getSelectedRfq = createSelector(
+  [selectedRfqId, rfqs, ccyNodes, valueDateNodes],
+  (rfqId, rfqList, ccyNodeList, valueDateNodeList)  => {
+
+    if(!rfqId)
+      return {};
+
+    const rfq = rfqList[rfqId];
+
+    //console.log(rfq.ccyNodeIds);
+    const ccys = rfq.ccyNodeIds.map(id => ccyNodeList[id]);
+    //const valueDates = ccys.ccyNodeIds.map(id => ccyNodeList[id]);
+    return {
+      ...rfq,
+
+    }
+
+
+  });
+
+export const getSelectedRfqId = createSelector( [selectedRfqId], rfqId => rfqId );
 
 export const getRfqData = createSelector(
-  [getCurrentlySelectedRfqId],
-  (rfqId) => {
-     if(!rfqId){
+  [getSelectedRfq],
+  (rfq) => {
+     if(!rfq){
        return [];
      }
+
+
+
+
 
      return [
        {

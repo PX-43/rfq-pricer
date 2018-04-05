@@ -6,6 +6,8 @@ const RfqSummary = props => {
   const className = (props.selectedRfq ===  props.rfq.id) ?
                       'rfq-summary--selected' :
                       'rfq-summary';
+
+  console.log('rendering RfqSummary');
   return (
     <li>
       <div className={className} onClick={() => props.selectedRfqChanged(props.rfq.id)}>

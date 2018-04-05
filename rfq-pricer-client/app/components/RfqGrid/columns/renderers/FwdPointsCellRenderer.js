@@ -11,6 +11,7 @@ const FwdPointsCellRenderer = props =>{
   if(level !== 1)
     return null;
 
+  console.log('rendering FwdPointsCellRenderer');
   return(
     <div className='editable-cell-content'>
       <input type='text' value={fwdPoints} onChange={evt => update(evt, api)} />
