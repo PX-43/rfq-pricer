@@ -8,7 +8,4 @@ export const initState = {
   selectedRfq:'',
   rfqIds: [], //stores rfq IDs in the correct order
   rfqs: {},
-  ccyNodes: {}, //first level group
-  valueDateNodes: {}, //second level group
-  legs: {}
 };
