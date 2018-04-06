@@ -17,12 +17,13 @@ class RfqSummaryListContainer extends PureComponent {
 
     console.log('rendering RfqSummaryListContainer');
 
-    const items = this.props.rfqs.map(rfq =>
+    const items = this.props.rfqInfoList.map(rfqInfo =>
       <RfqSummary
-        key={rfq.id}
-        rfq={rfq}
+        key={rfqInfo.rfq.id}
+        rfq={rfqInfo.rfq}
+        ccyPairs={rfqInfo.ccyPairs}
         selectedRfqChanged={this.props.selectedRfqChanged}
-        selectedRfq={this.props.selectedRfq}/>
+        selectedRfqId={this.props.selectedRfqId}/>
     );
 
     return(
@@ -37,8 +38,8 @@ class RfqSummaryListContainer extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-    rfqs : rfqSummaryListSelector.getRfqSummaryList(state),
-    selectedRfq : rfqSelector.getSelectedRfqId(state),
+    rfqInfoList : rfqSummaryListSelector.getRfqSummaryList(state),
+    selectedRfqId : rfqSelector.getSelectedRfqId(state),
   }
 };
 

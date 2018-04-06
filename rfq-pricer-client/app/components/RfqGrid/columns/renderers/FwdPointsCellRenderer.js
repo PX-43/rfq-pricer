@@ -1,5 +1,8 @@
 import React from 'react';
 
+//todo: check this api thingy what's it's purpose
+//todo: otherwise, convert this into a react component and use state to update text box value - although that is WRONG
+// NO LONGER UNI DIRECTIONAL WORKFLOW AND THERE ISN'T A SINGLE STATE
 const update = (evt, api) =>{
   //api.dispatchEvent()
   console.log(evt.target.value);

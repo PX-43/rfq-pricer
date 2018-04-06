@@ -1,27 +1,47 @@
-import React from 'react';
+import React  from 'react';
 import CcyList from './CcyList';
 
-const RfqSummary = props => {
+//It's not a presentational component because we want to control rendering (see shouldComponentUpdate).
+//There is no point in using PureComponent here as shouldComponentUpdate is overwritten.
+class RfqSummary extends React.Component {
 
-  const className = (props.selectedRfq ===  props.rfq.id) ?
-                      'rfq-summary--selected' :
-                      'rfq-summary';
+  constructor(props){
+    super(props)
+  }
 
-  console.log('rendering RfqSummary');
-  return (
-    <li>
-      <div className={className} onClick={() => props.selectedRfqChanged(props.rfq.id)}>
-        <div className='rfq-summary__top'>
-          <div className='rfq-summary__name'>{props.rfq.client}</div>
-          <div>{props.rfq.status}</div>
+  isSelected = () => this.props.selectedRfqId ===  this.props.rfq.id;
+
+  //improve performance by not rendering component unnecessarily
+  shouldComponentUpdate(nextProps) {
+    if(this.isSelected()){
+      return nextProps.selectedRfqId !== this.props.rfq.id; //being unselected
+    } else {
+      return nextProps.selectedRfqId === this.props.rfq.id  //being selected
+    }
+  }
+
+  onClick = () => this.props.selectedRfqChanged(this.props.rfq.id);
+
+  render(){
+    const className = this.isSelected() ? 'rfq-summary--selected' : 'rfq-summary';
+
+    console.log('rendering RfqSummary');
+    return (
+      <li>
+        <div className={className} onClick={this.onClick}>
+          <div className='rfq-summary__top'>
+            <div className='rfq-summary__name'>{this.props.rfq.client}</div>
+            <div>{this.props.rfq.status}</div>
+          </div>
+          <div className='rfq-summary__bottom'>
+            <div>{this.props.rfq.productType}</div>
+            <CcyList ccyPairs={this.props.ccyPairs} />
+          </div>
         </div>
-        <div className='rfq-summary__bottom'>
-          <div>{props.rfq.productType}</div>
-          <CcyList ccyPairs={props.rfq.ccyPairs} />
-        </div>
-      </div>
-    </li>
-  );
-};
+      </li>
+    );
+  }
+
+}
 
 export default RfqSummary;

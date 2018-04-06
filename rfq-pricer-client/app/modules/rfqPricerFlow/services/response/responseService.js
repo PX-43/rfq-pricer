@@ -1,12 +1,12 @@
 import { topics } from '../../../../constants/index';
-import handleRfqMessage from './rfqResponseHandler';
+import {onRfqReceived} from "../../actions";
 
 const handleResponse = (incomingMsg, dispatch) => {
   try{
     const data = JSON.parse(incomingMsg.data);
     switch (data.topic) {
       case topics.RFQ:
-        handleRfqMessage(data.payload, dispatch);
+        dispatch(onRfqReceived(data.payload.rfq));
         break;
       default:
         console.error('This topic is not recognised: ' + data.topic);

@@ -1,6 +1,6 @@
 import React, {PureComponent}  from 'react';
 import {AgGridReact} from "ag-grid-react";
-import columns, { dummyData } from './columns';
+import columns from './columns';
 
 import 'ag-grid/dist/styles/ag-grid.css';
 import 'ag-grid/dist/styles/ag-theme-balham-dark.css';
@@ -10,10 +10,6 @@ class RfqGrid extends PureComponent {
 
   constructor(props){
     super(props);
-
-    /*this.state = {
-      rowData:dummyData
-    }*/
   }
 
   onGridReady(params) {
