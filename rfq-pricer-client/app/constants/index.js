@@ -12,6 +12,11 @@ export const topics = {
   RFQ: 'rfq',
 };
 
+export const products = {
+  SPOT: 'Spot',
+  FWD: 'Fwd',
+};
+
 export const viewConstants = {
   MAX_CCYS_ON_RFQ_SUMMARY : 3,
 };

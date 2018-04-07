@@ -1,5 +1,7 @@
 import SpotCellRenderer from './renderers/SpotCellRenderer';
 import FwdPointsCellRenderer from './renderers/FwdPointsCellRenderer';
+import AmountRenderer from './renderers/AmountRenderer';
+import FwdPriceRenderer from './renderers/FwdPriceRenderer';
 
 
 const columns = [
@@ -11,18 +13,20 @@ const columns = [
   },
   {
     headerName: "Product",
-    field: "product",
+    field: "legType",
     width: 170
   },
   {
     headerName: "Side",
     field: "side",
-    width: 130
+    width: 150
   },
   {
-    headerName: "Order Amount",
+    headerName: "Amount",
     field: "amount",
-    width: 250
+    width: 200,
+    cellStyle: {'text-align': 'right'},
+    cellRendererFramework: AmountRenderer
   },
   {
     headerName: "Value Date",
@@ -51,7 +55,8 @@ const columns = [
   },
   {
     headerName: "Fws Price",
-    field: "fwdPrice"
+    field: "fwdPrice",
+    cellRendererFramework: FwdPriceRenderer
   },
   {
     headerName: "Mid Price",
