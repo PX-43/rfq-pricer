@@ -48,13 +48,13 @@ const columns = [
     cellRendererFramework: SpotCellRenderer
   },
   {
-    headerName: "Fws Pts",
+    headerName: "Fwd Pts",
     field: "fwdPoints",
     width: 170,
     cellRendererFramework: FwdPointsCellRenderer
   },
   {
-    headerName: "Fws Price",
+    headerName: "Fwd Price",
     field: "fwdPrice",
     cellRendererFramework: FwdPriceRenderer
   },

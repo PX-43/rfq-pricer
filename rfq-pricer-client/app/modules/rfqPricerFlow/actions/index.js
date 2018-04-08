@@ -7,7 +7,8 @@ export const types = {
   ON_MESSAGE_RECEIVED : 'ON_MESSAGE_RECEIVED',
   ON_RFQ_RECEIVED : 'ON_RFQ_RECEIVED',
   ON_SELECTED_RFQ_CHANGED : 'ON_SELECTED_RFQ_CHANGED',
-
+  ON_FWD_POINTS_CHANGED : 'ON_FWD_POINTS_CHANGED',
+  ON_SPOT_CHANGED : 'ON_SPOT_CHANGED',
 };
 
 export const establishConnection = connectionDetails => ({
@@ -39,6 +40,20 @@ export const onSelectedRfqChanged = (newRfqId, oldRfqId) => ({
 export const sendRequest = (topic, payload) => ({
   type: types.SEND_REQUEST,
   data: {topic, payload}
+});
+
+export const onFwdPointsChanged = (id, rfqId, fwdPoints) => ({
+  type: types.ON_FWD_POINTS_CHANGED,
+  id,
+  rfqId,
+  fwdPoints
+});
+
+export const onSpotChanged = (id, rfqId, spot) => ({
+  type: types.ON_SPOT_CHANGED,
+  id,
+  rfqId,
+  spot
 });
 
 export const connectedSuccessfully = () => ({ type: types.CONNECTED_SUCCESSFULLY });

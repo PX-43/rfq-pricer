@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
-const selectedRfqId = state => state.selectedRfq;
-const selectedRfq = state => state.rfqs[state.selectedRfq];
+const selectedRfqId = state => state.selectedRfqId;
+const selectedRfq = state => state.rfqs[state.selectedRfqId];
 
 export const getSelectedRfqId = createSelector( [selectedRfqId], rfqId => rfqId );
 

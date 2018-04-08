@@ -5,6 +5,7 @@ import RfqGrid from './RfqGrid';
 import {rfqSelector} from '../../modules/selectors';
 
 import './RfqGridContainer.less';
+import {rfqPricerFlowActions} from "../../modules/actions";
 
 class RfqGridContainer extends PureComponent {
 
@@ -16,12 +17,14 @@ class RfqGridContainer extends PureComponent {
     console.log('rendering RfqGridContainer');
     return(
       <div className='rfq-grid-container'>
-        <RfqGrid rfqData={this.props.rfqData} />
+        <RfqGrid
+          onFwdPointsChanged={this.props.onFwdPointsChanged}
+          onSpotChanged={this.props.onSpotChanged}
+          rfqData={this.props.rfqData}
+        />
       </div>
     );
   }
-
-
 }
 
 const mapStateToProps = state => {
@@ -30,9 +33,16 @@ const mapStateToProps = state => {
   }
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    onFwdPointsChanged: action => action,
+    onSpotChanged: action => action,
+  }, dispatch);
 
-}, dispatch);
+
+/*const mapDispatchToProps = dispatch => {
+  return bindActionCreators({}, dispatch);
+};*/
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(RfqGridContainer);

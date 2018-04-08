@@ -1,16 +1,28 @@
 import React from 'react';
 import { products } from '../../../../constants';
+import { rfqPricerFlowActions } from "../../../../modules/actions";
 
-//todo: check this api thingy what's it's purpose
-//todo: otherwise, convert this into a react component and use state to update text box value - although that is WRONG
-// NO LONGER UNI DIRECTIONAL WORKFLOW AND THERE ISN'T A SINGLE STATE
-const update = (evt, api) =>{
-  //api.dispatchEvent()
-  console.log(evt.target.value);
+const update = (api, id, rfqId, fwdPoints, originalValue) => {
+  //todo: validate
+  const newFwdPoints = Number.parseFloat(fwdPoints);
+  if(newFwdPoints !== originalValue)
+    api.dispatchEvent(rfqPricerFlowActions.onFwdPointsChanged(id, rfqId, newFwdPoints));
+};
+
+const handleOnBlur = (evt, originalValue, id, rfqId, api) =>{
+  const fwdPoints = evt.target.value;
+  update(api, id, rfqId, fwdPoints, originalValue);
+};
+
+const handleKeyPress = (evt, originalValue, id, rfqId, api) => {
+  if(evt.key === 'Enter'){
+    const fwdPoints = evt.target.value;
+    update(api, id, rfqId, fwdPoints, originalValue);
+  }
 };
 
 const FwdPointsCellRenderer = props =>{
-  const {api, data: {fwdPoints, legType}, node: {level}} = props;
+  const {api, data: {fwdPoints, legType, id, rfqId}, node: {level}} = props;
 
   if(level !== 1)
     return null;
@@ -21,12 +33,14 @@ const FwdPointsCellRenderer = props =>{
     return '-';
   }
 
+  const originalValue = fwdPoints;
   return(
     <div className='editable-cell-content'>
-      <input type='text' value={fwdPoints} onChange={evt => update(evt, api)} />
+      <input type='text' defaultValue={fwdPoints}
+             onBlur={evt => handleOnBlur(evt, originalValue, id, rfqId, api)}
+             onKeyPress={evt => handleKeyPress(evt, originalValue, id, rfqId, api)} />
     </div>
   );
-
 };
 
 

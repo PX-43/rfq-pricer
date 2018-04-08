@@ -5,7 +5,7 @@ export const initState = {
     connectionStatus: connectionStatus.DISCONNECTED,
     connectionError:'',
   },
-  selectedRfq:'',
+  selectedRfqId:'',
   rfqIds: [], //stores rfq IDs in the correct order
   rfqs: {},
 };

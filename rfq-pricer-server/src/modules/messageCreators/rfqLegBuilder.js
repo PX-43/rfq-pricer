@@ -2,6 +2,7 @@ import * as parts from './rfqParts';
 import * as prices from '../pricing/pricingService';
 import {CCY_PAIRS} from "../common/ccys";
 import products from "../common/products";
+import { getPrecision } from '../common/rates';
 import _ from 'lodash';
 
 const MAX_STRATEGIES = CCY_PAIRS.length; //strategies are defined by ccy pairs
@@ -61,6 +62,7 @@ export const createGroupedLegs = () => {
         const ccyNode = {
             id:parts.getUniqueId(),
             dealCcy: parts.getDealCcy(ccyPair),
+            precision:getPrecision(ccyPair),
             ccyPair,
             spot,
             side:'',
