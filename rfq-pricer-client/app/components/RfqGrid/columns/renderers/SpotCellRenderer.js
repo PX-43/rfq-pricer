@@ -21,7 +21,7 @@ const handleKeyPress = (evt, originalValue, id, rfqId, api) => {
   }
 };
 
-const SpotCellRenderer = props =>{
+export default (props) =>{
   const {api, data: {spot, id, rfqId, precision}, node: {level}} = props;
 
   if(level > 0)
@@ -41,6 +41,3 @@ const SpotCellRenderer = props =>{
   );
 
 };
-
-
-export default SpotCellRenderer;

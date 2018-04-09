@@ -1,6 +1,6 @@
 import  { types } from '../actions';
 
-const rfqReducer = (state = {}, action) => {
+export default (state = {}, action) => {
   switch (action.type) {
     case types.ON_RFQ_RECEIVED: {
       //this destructuring removes allocations from rfq
@@ -22,6 +22,7 @@ const rfqReducer = (state = {}, action) => {
                   ccyPair: ccy.ccyPair,
                   precision: ccy.precision,
                   rfqId:rfq.id,
+                  ccyNodeId:ccy.id,
                   legs: [...legs.map(leg => ({...leg}))]
                 }
               })]
@@ -32,9 +33,39 @@ const rfqReducer = (state = {}, action) => {
     }
 
     case types.ON_FWD_POINTS_CHANGED : {
-      //const rfq = state.rfqs[state.selectedRfqId];
-      //console.dir(state);
-      return state;
+      const {ccyNodes, ...rfq} = state[action.rfqId];
+
+      const ccyNodeToUpdate = ccyNodes.find(item => item.id === action.ccyNodeId);
+      if(ccyNodeToUpdate){
+        const valueDateNodeToUpdate = ccyNodeToUpdate.valueDateNodes.find(item => item.id === action.id);
+        if(valueDateNodeToUpdate && valueDateNodeToUpdate.fwdPoints === action.fwdPoints){
+          return state; //don't update state if there is no change
+        }
+      }
+
+      return {
+        ...state,
+        [rfq.id]: {
+          ...rfq,
+          ccyNodes: ccyNodes.map(ccyNode => {
+            if (ccyNode.id === action.ccyNodeId) {
+              const {valueDateNodes, ...ccy} = ccyNode;
+              return {
+                ...ccy,
+                valueDateNodes: valueDateNodes.map(valueDateNode => {
+                  if (valueDateNode.id === action.id) {
+                    return Object.assign({}, valueDateNode, {fwdPoints: action.fwdPoints})
+                  } else {
+                    return valueDateNode;
+                  }
+                })
+              }
+            } else {
+              return ccyNode;
+            }
+          })
+        }
+      };
     }
 
     case types.ON_SPOT_CHANGED : {
@@ -43,7 +74,6 @@ const rfqReducer = (state = {}, action) => {
       if(arrToUpdate && arrToUpdate.spot === action.spot){
         return state; //don't update state if there is no change
       }
-
       return {
         ...state,
         [rfq.id]: {
@@ -62,20 +92,3 @@ const rfqReducer = (state = {}, action) => {
       return state;
   }
 };
-
-
-export default rfqReducer;
-
-/*
-return array.map( (item, index) => {
-  if(index !== action.index) {
-    // This isn't the item we care about - keep it as-is
-    return item;
-  }
-
-  // Otherwise, this is the one we want - return an updated value
-  return {
-    ...item,
-    ...action.item
-  };
-});*/

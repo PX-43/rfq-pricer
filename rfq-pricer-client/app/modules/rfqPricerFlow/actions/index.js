@@ -42,10 +42,11 @@ export const sendRequest = (topic, payload) => ({
   data: {topic, payload}
 });
 
-export const onFwdPointsChanged = (id, rfqId, fwdPoints) => ({
+export const onFwdPointsChanged = (id, rfqId, ccyNodeId, fwdPoints) => ({
   type: types.ON_FWD_POINTS_CHANGED,
   id,
   rfqId,
+  ccyNodeId,
   fwdPoints
 });
 

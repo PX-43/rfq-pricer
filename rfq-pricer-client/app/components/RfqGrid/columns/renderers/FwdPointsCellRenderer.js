@@ -2,27 +2,27 @@ import React from 'react';
 import { products } from '../../../../constants';
 import { rfqPricerFlowActions } from "../../../../modules/actions";
 
-const update = (api, id, rfqId, fwdPoints, originalValue) => {
+const update = (api, id, rfqId, fwdPoints, ccyNodeId, originalValue) => {
   //todo: validate
   const newFwdPoints = Number.parseFloat(fwdPoints);
   if(newFwdPoints !== originalValue)
-    api.dispatchEvent(rfqPricerFlowActions.onFwdPointsChanged(id, rfqId, newFwdPoints));
+    api.dispatchEvent(rfqPricerFlowActions.onFwdPointsChanged(id, rfqId, ccyNodeId, newFwdPoints));
 };
 
-const handleOnBlur = (evt, originalValue, id, rfqId, api) =>{
+const handleOnBlur = (evt, originalValue, id, rfqId, ccyNodeId, api) =>{
   const fwdPoints = evt.target.value;
-  update(api, id, rfqId, fwdPoints, originalValue);
+  update(api, id, rfqId, fwdPoints, ccyNodeId, originalValue);
 };
 
-const handleKeyPress = (evt, originalValue, id, rfqId, api) => {
+const handleKeyPress = (evt, originalValue, id, rfqId, ccyNodeId, api) => {
   if(evt.key === 'Enter'){
     const fwdPoints = evt.target.value;
-    update(api, id, rfqId, fwdPoints, originalValue);
+    update(api, id, rfqId, fwdPoints, ccyNodeId, originalValue);
   }
 };
 
-const FwdPointsCellRenderer = props =>{
-  const {api, data: {fwdPoints, legType, id, rfqId}, node: {level}} = props;
+export default (props) => {
+  const {api, data: {fwdPoints, legType, id, rfqId, ccyNodeId}, node: {level}} = props;
 
   if(level !== 1)
     return null;
@@ -37,11 +37,8 @@ const FwdPointsCellRenderer = props =>{
   return(
     <div className='editable-cell-content'>
       <input type='text' defaultValue={fwdPoints}
-             onBlur={evt => handleOnBlur(evt, originalValue, id, rfqId, api)}
-             onKeyPress={evt => handleKeyPress(evt, originalValue, id, rfqId, api)} />
+             onBlur={evt => handleOnBlur(evt, originalValue, id, rfqId, ccyNodeId, api)}
+             onKeyPress={evt => handleKeyPress(evt, originalValue, id, rfqId, ccyNodeId, api)} />
     </div>
   );
 };
-
-
-export default FwdPointsCellRenderer;
