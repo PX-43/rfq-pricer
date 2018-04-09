@@ -1,17 +1,22 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import './RfqSummaryListContainer.less';
 import { rfqSummaryListSelector, rfqSelector } from '../../modules/selectors';
 import { rfqPricerFlowActions } from './../../modules/actions'
 import RfqSummary from './RfqSummary';
 
-class RfqSummaryListContainer extends PureComponent {
+import './RfqSummaryListContainer.less';
+
+class RfqSummaryListContainer extends React.Component {
 
   constructor(props){
     super(props);
   }
 
+  shouldComponentUpdate(nextProps) {
+    return (this.props.rfqInfoList.length !== nextProps.rfqInfoList.length ||
+            this.props.selectedRfqId !== nextProps.selectedRfqId);
+  }
 
   render(){
 
