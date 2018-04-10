@@ -21,13 +21,13 @@ const handleKeyPress = (evt, originalValue, id, rfqId, api) => {
   }
 };
 
-export default (props) =>{
+export default props =>{
   const {api, data: {spot, id, rfqId, precision}, node: {level}} = props;
 
   if(level > 0)
     return null;
 
-  console.log('rendering SpotCellRenderer');
+  console.log('rendering SpotRenderer');
 
   const formattedSpot = priceUtils.addTrailingZeros(spot, precision);
 

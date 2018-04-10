@@ -1,16 +1,15 @@
 import React from 'react';
 import { products } from '../../../../constants';
+import { priceUtils } from '../../../../utils';
 
-const FwdPriceRenderer = props => {
-  const {data: {fwdPrice, legType}} = props;
+export default props => {
+  const {data: {fwdPrice, precision, legType}} = props;
 
   if(legType === products.SPOT){
     return '-';
   } else if(!fwdPrice) {
     return null;
   } else {
-    return fwdPrice;
+    return priceUtils.addTrailingZeros(fwdPrice, precision);
   }
 };
-
-export default FwdPriceRenderer;

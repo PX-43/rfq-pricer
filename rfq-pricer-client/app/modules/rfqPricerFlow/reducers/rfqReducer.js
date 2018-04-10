@@ -93,7 +93,16 @@ const updateSpot = (state, action) =>{
       ...rfq,
       ccyNodes: ccyNodes.map(ccyNode => {
         if (ccyNode.id === action.id) {
-          return {...ccyNode, ...{spot: action.spot}};
+          const {valueDateNodes, ...ccy} = ccyNode;
+          return {
+            ...{...ccy, ...{spot: action.spot}},
+            valueDateNodes: valueDateNodes.map(valueDateNode => { //update fwd prices
+                const prices = {
+                  fwdPrice: priceUtils.calcFwdPrice(action.spot, valueDateNode.fwdPoints, valueDateNode.precision)
+                };
+                return {...valueDateNode, ...prices};
+            })
+          }
         } else {
           return ccyNode;
         }

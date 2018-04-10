@@ -21,13 +21,13 @@ const handleKeyPress = (evt, originalValue, id, rfqId, ccyNodeId, api) => {
   }
 };
 
-export default (props) => {
+export default props => {
   const {api, data: {fwdPoints, legType, id, rfqId, ccyNodeId}, node: {level}} = props;
 
   if(level !== 1)
     return null;
 
-  console.log('rendering FwdPointsCellRenderer');
+  console.log('rendering FwdPointsRenderer');
 
   if(legType === products.SPOT){
     return '-';

@@ -1,10 +1,11 @@
-import SpotCellRenderer from './renderers/SpotCellRenderer';
-import FwdPointsCellRenderer from './renderers/FwdPointsCellRenderer';
+import SpotRenderer from './renderers/SpotRenderer';
+import FwdPointsRenderer from './renderers/FwdPointsRenderer';
 import AmountRenderer from './renderers/AmountRenderer';
 import FwdPriceRenderer from './renderers/FwdPriceRenderer';
+import MidPriceRenderer from './renderers/MidPriceRenderer';
+import ValueDateRenderer from './renderers/ValueDateRenderer';
 
-
-const columns = [
+export default [
   {
     headerName: "CCY1 CCY2",
     field: "ccyPair",
@@ -31,7 +32,8 @@ const columns = [
   {
     headerName: "Value Date",
     field: "valueDate",
-    width: 250
+    width: 220,
+    cellRendererFramework: ValueDateRenderer
   },
   {
     headerName: "Fund",
@@ -45,24 +47,26 @@ const columns = [
   {
     headerName: "Spot Pirce",
     field: "spot",
-    cellRendererFramework: SpotCellRenderer
+    cellStyle: {'text-align': 'right'},
+    cellRendererFramework: SpotRenderer
   },
   {
     headerName: "Fwd Pts",
     field: "fwdPoints",
     width: 170,
-    cellRendererFramework: FwdPointsCellRenderer
+    cellStyle: {'text-align': 'right'},
+    cellRendererFramework: FwdPointsRenderer
   },
   {
     headerName: "Fwd Price",
     field: "fwdPrice",
+    cellStyle: {'text-align': 'right'},
     cellRendererFramework: FwdPriceRenderer
   },
   {
     headerName: "Mid Price",
-    field: "midPrice"
+    field: "midPrice",
+    cellStyle: {'text-align': 'right'},
+    cellRendererFramework: MidPriceRenderer
   },
 ];
-
-
-export default columns;
