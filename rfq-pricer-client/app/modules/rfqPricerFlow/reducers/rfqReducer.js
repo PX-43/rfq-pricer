@@ -1,4 +1,5 @@
 import  { types } from '../actions';
+import { priceUtils } from '../../../utils';
 
 const isFwdPointsChanged = (ccyNodes, ccyNodeId, valueDateNodeId, fwdPoints) => {
   const ccyNodeToUpdate = ccyNodes.find(item => item.id === ccyNodeId);
@@ -61,7 +62,11 @@ const updateFwdPoints = (state, action) => {
             ...ccy,
             valueDateNodes: valueDateNodes.map(valueDateNode => {
               if (valueDateNode.id === action.id) {
-                return {...valueDateNode, ...{fwdPoints: action.fwdPoints}};
+                const prices = {
+                                  fwdPoints: action.fwdPoints,
+                                  fwdPrice: priceUtils.calcFwdPrice(ccy.spot, action.fwdPoints, valueDateNode.precision)
+                               };
+                return {...valueDateNode, ...prices};
               } else {
                 return valueDateNode;
               }
