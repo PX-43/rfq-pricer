@@ -8,16 +8,18 @@
   & li {
     list-style-type: none;
 
-    &:first-child div {
+    &:first-child div.rfq-summary--rounded {
       border-radius: @corner @corner 0 0;
     }
-    &:last-child div {
+    &:last-child div.rfq-summary--rounded {
       border-radius: 0 0 @corner @corner;
     }
-    &:only-child div {
+    &:only-child div.rfq-summary--rounded {
       border-radius: @corner;
     }
   }
+
+
 }
 
 .rfq-summary {

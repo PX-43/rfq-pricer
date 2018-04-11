@@ -23,12 +23,12 @@ class RfqSummary extends React.Component {
   onClick = () => this.props.selectedRfqChanged(this.props.rfq.id);
 
   render(){
-    const className = this.isSelected() ? 'rfq-summary--selected' : 'rfq-summary';
+    const classNames = (this.isSelected() ? 'rfq-summary--selected' : 'rfq-summary') + ' rfq-summary--rounded';
 
     console.log('rendering RfqSummary');
     return (
       <li>
-        <div className={className} onClick={this.onClick}>
+        <div className={classNames} onClick={this.onClick}>
           <div className='rfq-summary__top'>
             <div className='rfq-summary__name'>{this.props.rfq.client}</div>
             <div>{this.props.rfq.status}</div>

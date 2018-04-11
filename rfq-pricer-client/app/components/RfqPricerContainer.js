@@ -17,7 +17,7 @@ class RfqPricerContainer extends PureComponent {
     console.log('rendering RfqPricerContainer');
     return (
       <div>
-       <HeaderPaneContainer />
+        <HeaderPaneContainer />
         <div className='rfq-container'>
           <RfqSummaryListContainer />
           <RfqGridContainer />

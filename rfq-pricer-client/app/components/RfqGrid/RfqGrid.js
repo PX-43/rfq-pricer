@@ -2,6 +2,7 @@ import React, {PureComponent}  from 'react';
 import { AgGridReact } from "ag-grid-react";
 import columns from './columns';
 import { rfqPricerFlowActions as actions } from "../../modules/actions";
+import { viewConstants as vc } from "../../constants";
 import sumBy from 'lodash/sumBy';
 
 import 'ag-grid/dist/styles/ag-grid.css';
@@ -50,15 +51,16 @@ class RfqGrid extends PureComponent {
 
   calculateHeight = (data) => {
     if(!data || data.length === 0)
-      return '0px';
+      return vc.RFQ_GRID_MIN_HEIGHT + 'px';
 
     const count = data.length + sumBy(data, item => item.valueDateNodes.length);
-    return (count * 50) + 'px';
+    const height = vc.RFQ_GRID_ROW_HEIGHT + (count * vc.RFQ_GRID_ROW_HEIGHT);
+
+    return (height < vc.RFQ_GRID_MIN_HEIGHT  ? vc.RFQ_GRID_MIN_HEIGHT  : height) + 'px';
   };
 
   render(){
     const height = this.calculateHeight(this.props.rfqData);
-    console.log(height);
     console.log('rendering RfqGrid');
     return(
       <div className='rfq-grid ag-theme-balham-dark' style={{height:height}}>
