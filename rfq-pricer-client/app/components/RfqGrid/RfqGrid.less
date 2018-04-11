@@ -1,6 +1,6 @@
 
 .rfq-grid {
-  height:600px;
+
   width: 1250px;
 }
 
@@ -10,6 +10,7 @@
   background-color: transparent;
   background: none !important;
   outline: none;
-  text-align:right;
-  width:100%;
+  text-align:right; /* only displaying numeric values at the moment */
+  padding-right:3px; /* needed as last column content is cut off */
+  width:100%;  /* without setting the width, input box would display incorrectly */
 }

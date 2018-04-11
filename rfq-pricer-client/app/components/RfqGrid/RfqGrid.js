@@ -2,6 +2,7 @@ import React, {PureComponent}  from 'react';
 import { AgGridReact } from "ag-grid-react";
 import columns from './columns';
 import { rfqPricerFlowActions as actions } from "../../modules/actions";
+import sumBy from 'lodash/sumBy';
 
 import 'ag-grid/dist/styles/ag-grid.css';
 import 'ag-grid/dist/styles/ag-theme-balham-dark.css';
@@ -47,10 +48,20 @@ class RfqGrid extends PureComponent {
     }
   }
 
+  calculateHeight = (data) => {
+    if(!data || data.length === 0)
+      return '0px';
+
+    const count = data.length + sumBy(data, item => item.valueDateNodes.length);
+    return (count * 50) + 'px';
+  };
+
   render(){
+    const height = this.calculateHeight(this.props.rfqData);
+    console.log(height);
     console.log('rendering RfqGrid');
     return(
-      <div className='rfq-grid ag-theme-balham-dark'>
+      <div className='rfq-grid ag-theme-balham-dark' style={{height:height}}>
         <AgGridReact
           // properties
           columnDefs={columns}
