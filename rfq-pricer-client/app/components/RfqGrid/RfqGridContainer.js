@@ -2,10 +2,10 @@ import React, {PureComponent}  from 'react';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 import RfqGrid from './RfqGrid';
+import RfqGridHeader from './RfqGridHeader';
 import {rfqSelector} from '../../modules/selectors';
 
 import './RfqGridContainer.less';
-import {rfqPricerFlowActions} from "../../modules/actions";
 
 class RfqGridContainer extends PureComponent {
 
@@ -16,12 +16,15 @@ class RfqGridContainer extends PureComponent {
   render(){
     console.log('rendering RfqGridContainer');
     return(
-      <div className='rfq-grid-container'>
-        <RfqGrid
-          onFwdPointsChanged={this.props.onFwdPointsChanged}
-          onSpotChanged={this.props.onSpotChanged}
-          rfqData={this.props.rfqData}
-        />
+      <div className='rfq-details-container'>
+        <RfqGridHeader />
+        <div className='rfq-grid-container'>
+          <RfqGrid
+            onFwdPointsChanged={this.props.onFwdPointsChanged}
+            onSpotChanged={this.props.onSpotChanged}
+            rfqData={this.props.rfqData}
+          />
+        </div>
       </div>
     );
   }

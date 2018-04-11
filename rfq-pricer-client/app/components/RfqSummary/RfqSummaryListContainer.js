@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { rfqSummaryListSelector, rfqSelector } from '../../modules/selectors';
 import { rfqPricerFlowActions } from './../../modules/actions'
 import RfqSummary from './RfqSummary';
-import RfqSummaryHeader from './RfqSummaryHeader';
+import RfqSummaryHeader from './RfqSummaryListHeader';
 
 import './RfqSummaryListContainer.less';
 
@@ -33,9 +33,9 @@ class RfqSummaryListContainer extends React.Component {
     );
 
     return(
-      <div>
+      <div className='rfq-summary-list-container'>
         <RfqSummaryHeader />
-        <div className='rfq-summary-list-container'>
+        <div className='rfq-summary-list'>
           <ul>
             {items}
           </ul>

@@ -1,12 +1,28 @@
 @corner: 10px;
-@containerWidth: 400px;
+@containerWidth: 320px;
 @selectedRfqColour: #222425;
 
 .rfq-summary-list-container {
+
+  border: 1px solid black;
+
+
+}
+
+.rfq-summary-list {
+
+  border: 1px solid black;
   width: @containerWidth;
+
+  & ul {
+    margin: 0;
+    padding: 0;
+  }
 
   & li {
     list-style-type: none;
+    margin: 0;
+    padding: 0;
 
     &:first-child div.rfq-summary--rounded {
       border-radius: @corner @corner 0 0;
@@ -21,6 +37,7 @@
 
 
 }
+
 
 .rfq-summary {
   border:1px #22242b solid;
