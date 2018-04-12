@@ -20,6 +20,7 @@ class RfqSummary extends React.Component {
     }
   }
 
+
   onClick = () => this.props.selectedRfqChanged(this.props.rfq.id);
 
   render(){
