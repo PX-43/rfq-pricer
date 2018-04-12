@@ -3,15 +3,23 @@
 @selectedRfqColour: #222425;
 
 .rfq-summary-list-container {
+  margin-left: 9px;
 
-  border: 1px solid black;
-
+  &__placeholder{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    color:#fff;
+    font-size: 0.8em;
+    width: 100%;
+    height:298px;
+    border:1px solid black;
+    background-color: #333739;
+  }
 
 }
 
 .rfq-summary-list {
-
-  border: 1px solid black;
   width: @containerWidth;
 
   & ul {
@@ -42,7 +50,6 @@
   border:1px #22242b solid;
   padding:8px;
   margin-bottom: 2px;
-  margin-left: 18px;
   background-color: #333739;
   color: #b9c3c6;
   font-size: .8em;

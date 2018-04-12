@@ -5,6 +5,7 @@ import { rfqSummaryListSelector, rfqSelector } from '../../modules/selectors';
 import { rfqPricerFlowActions } from './../../modules/actions'
 import RfqSummary from './RfqSummary';
 import RfqSummaryHeader from './RfqSummaryListHeader';
+import RfqSummaryListPlaceholder from './RfqSummaryListPlaceholder';
 
 import './RfqSummaryListContainer.less';
 
@@ -32,9 +33,14 @@ class RfqSummaryListContainer extends React.Component {
         selectedRfqId={this.props.selectedRfqId}/>
     );
 
+    const placeholder = this.props.rfqInfoList.length > 0 ?
+                        null :
+                        <RfqSummaryListPlaceholder />;
+
     return(
       <div className='rfq-summary-list-container'>
-        <RfqSummaryHeader />
+        <RfqSummaryHeader numberOfNewRfqs={this.props.numberOfNewRfqs} />
+        {placeholder}
         <div className='rfq-summary-list'>
           <ul>
             {items}
@@ -48,6 +54,7 @@ class RfqSummaryListContainer extends React.Component {
 const mapStateToProps = state => {
   return {
     rfqInfoList : rfqSummaryListSelector.getRfqSummaryList(state),
+    numberOfNewRfqs : rfqSummaryListSelector.getNumberOfNewRfqs(state),
     selectedRfqId : rfqSelector.getSelectedRfqId(state),
   }
 };
