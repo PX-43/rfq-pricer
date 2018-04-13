@@ -5,9 +5,7 @@ import { priceUtils } from '../../../../utils';
 export default props => {
   const {data: {fwdPrice, precision, legType}} = props;
 
-  if(legType === products.SPOT){
-    return '-';
-  } else if(!fwdPrice) {
+  if(legType === products.SPOT || !fwdPrice) {
     return null;
   } else {
     return priceUtils.addTrailingZeros(fwdPrice, precision);

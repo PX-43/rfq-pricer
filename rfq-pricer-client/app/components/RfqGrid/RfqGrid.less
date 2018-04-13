@@ -11,7 +11,6 @@
   background: none !important;
   font-size:1em !important;
   outline: none;
-  font-weight:bold;
   text-align:right; /* only displaying numeric values at the moment */
   padding-right:3px; /* needed as last column content is cut off */
   width:100%;  /* without setting the width, input box would display incorrectly */
@@ -30,3 +29,17 @@
   padding:0 4px !important;
   font-size:@fontSize !important;
 }
+
+.editable-cell-style {
+  background-color: #295329;
+  border:1px solid #172e17 !important;
+}
+
+/* this is pretty handy! */
+.editable-cell-style.ag-cell-focus {
+  background-color: #234623;
+  border:1px solid #68aafd !important;
+}
+
+
+

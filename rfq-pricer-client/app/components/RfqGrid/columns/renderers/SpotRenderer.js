@@ -6,7 +6,6 @@ class SpotRenderer extends PureComponent {
 
   constructor(props){
     super(props);
-    this.editableElementContainer = React.createRef();
   }
 
   update = (updatedValue) => {
@@ -17,26 +16,7 @@ class SpotRenderer extends PureComponent {
       api.dispatchEvent(rfqPricerFlowActions.onSpotChanged(id, rfqId, newSpot));
   };
 
-  handleOnBlur = (evt) => {
-    const spot = evt.target.value;
-    this.update(spot);
-  };
-
-  handleKeyPress = (evt) => {
-    if(evt.key === 'Enter'){
-      const spot = evt.target.value;
-      this.update(spot);
-    }
-  };
-
-  componentDidMount() {
-    const cell = this.editableElementContainer.current.parentElement;
-    console.log(cell);
-  }
-
-
   render(){
-
     const {data: {spot, precision}, node: {level}} = this.props;
 
     if(level > 0)
@@ -47,14 +27,13 @@ class SpotRenderer extends PureComponent {
     const formattedSpot = priceUtils.addTrailingZeros(spot, precision);
 
     return(
-      <div className='editable-cell-content' ref={this.editableElementContainer}>
+      <div className='editable-cell-content'>
         <input type='text' defaultValue={formattedSpot}
-               onBlur={evt => this.handleOnBlur(evt)}
-               onKeyPress={evt => this.handleKeyPress(evt)} />
+               onBlur={evt => this.update(evt.target.value)}
+               onKeyPress={evt => (evt.key === 'Enter') ? this.update(evt.target.value) : null} />
       </div>
     );
   }
-
 }
 
 export default SpotRenderer;

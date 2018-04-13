@@ -4,6 +4,7 @@ import AmountRenderer from './renderers/AmountRenderer';
 import FwdPriceRenderer from './renderers/FwdPriceRenderer';
 import MidPriceRenderer from './renderers/MidPriceRenderer';
 import ValueDateRenderer from './renderers/ValueDateRenderer';
+import {products} from '../../../constants';
 
 export default [
   {
@@ -48,29 +49,34 @@ export default [
   {
     headerName: "Spot",
     field: "spot",
+    width: 68,
     cellStyle: {'text-align': 'right'},
     cellRendererFramework: SpotRenderer,
-    width: 60
+    cellClassRules: {
+      'editable-cell-style' : params => params.node.level === 0
+    }
   },
   {
     headerName: "Fwd Pts",
     field: "fwdPoints",
-    width: 80,
-    cellStyle: {'text-align': 'right'},
-    cellRendererFramework: FwdPointsRenderer
+    width: 68,
+    cellRendererFramework: FwdPointsRenderer,
+    cellClassRules: {
+      'editable-cell-style' : params => params.node.level === 1 && params.data.legType !== products.SPOT
+    }
   },
   {
     headerName: "Fwd Price",
     field: "fwdPrice",
     cellStyle: {'text-align': 'right'},
-    width: 90,
+    width: 80,
     cellRendererFramework: FwdPriceRenderer
   },
   {
     headerName: "Mid Price",
     field: "midPrice",
     cellStyle: {'text-align': 'right'},
-    width: 90,
+    width: 80,
     cellRendererFramework: MidPriceRenderer
   },
 ];
