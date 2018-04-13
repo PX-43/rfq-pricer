@@ -10,50 +10,52 @@ export default [
     headerName: "CCY1 CCY2",
     field: "ccyPair",
     cellRenderer: "agGroupCellRenderer",
-    width: 290
+    width: 150
   },
   {
     headerName: "Product",
     field: "legType",
-    width: 170
+    width: 70
   },
   {
     headerName: "Side",
     field: "side",
-    width: 150
+    width: 50
   },
   {
     headerName: "Amount",
     field: "amount",
-    width: 200,
+    width: 80,
     cellStyle: {'text-align': 'right'},
     cellRendererFramework: AmountRenderer
   },
   {
     headerName: "Value Date",
     field: "valueDate",
-    width: 220,
+    width: 100,
     cellRendererFramework: ValueDateRenderer
   },
   {
     headerName: "Fund",
     field: "fund",
-    width: 220
+    width: 120
   },
   {
     headerName: "Stamm",
-    field: "stamm"
+    field: "stamm",
+    width: 100
   },
   {
-    headerName: "Spot Pirce",
+    headerName: "Spot",
     field: "spot",
     cellStyle: {'text-align': 'right'},
-    cellRendererFramework: SpotRenderer
+    cellRendererFramework: SpotRenderer,
+    width: 60
   },
   {
     headerName: "Fwd Pts",
     field: "fwdPoints",
-    width: 170,
+    width: 80,
     cellStyle: {'text-align': 'right'},
     cellRendererFramework: FwdPointsRenderer
   },
@@ -61,12 +63,14 @@ export default [
     headerName: "Fwd Price",
     field: "fwdPrice",
     cellStyle: {'text-align': 'right'},
+    width: 90,
     cellRendererFramework: FwdPriceRenderer
   },
   {
     headerName: "Mid Price",
     field: "midPrice",
     cellStyle: {'text-align': 'right'},
+    width: 90,
     cellRendererFramework: MidPriceRenderer
   },
 ];
