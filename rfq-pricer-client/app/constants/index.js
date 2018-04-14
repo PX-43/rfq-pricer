@@ -25,5 +25,6 @@ export const viewConstants = {
   MAX_CCYS_ON_RFQ_SUMMARY : 3,
   RFQ_GRID_MIN_HEIGHT : 300,
   RFQ_GRID_ROW_HEIGHT : 38,
+  SPOT_GRID_COLUMN: 'spot',
 };
 

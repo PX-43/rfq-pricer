@@ -24,11 +24,21 @@ class RfqRequest extends PureComponent {
     }
   };
 
+  requestNewRfq = () => this.props.requestNewRfq(this.state.rfqCounter);
+
+  preventDefault = evt => {
+    if(evt.key === 'Enter'){
+      evt.preventDefault();
+      return false;
+    }
+  };
+
   render(){
     console.log('rendering HeaderPaneContainer -> RfqRequest');
     return (
       <div className='rfq-request'>
-        <button onClick={() => this.props.requestNewRfq(this.state.rfqCounter)}>
+        <button onClick={this.requestNewRfq}
+                onKeyPress={this.preventDefault}>
           Request
         </button>
         <input type='text' value={this.state.rfqCounter}

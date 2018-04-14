@@ -18,7 +18,7 @@ export const publishRfq = (numberOfRfqs, send) => {
         if(index === 0){
             publish(send); //send the first one immediately
         } else {
-            wait += _.random(1000, 10000);
+            wait += _.random(0, 1);
             _.delay(() => publish(send), wait);
         }
     });

@@ -4,7 +4,7 @@ import AmountRenderer from './renderers/AmountRenderer';
 import FwdPriceRenderer from './renderers/FwdPriceRenderer';
 import MidPriceRenderer from './renderers/MidPriceRenderer';
 import ValueDateRenderer from './renderers/ValueDateRenderer';
-import {products} from '../../../constants';
+import {products, viewConstants} from '../../../constants';
 
 export default [
   {
@@ -48,7 +48,7 @@ export default [
   },
   {
     headerName: "Spot",
-    field: "spot",
+    field: viewConstants.SPOT_GRID_COLUMN,
     width: 68,
     cellStyle: {'text-align': 'right'},
     cellRendererFramework: SpotRenderer,

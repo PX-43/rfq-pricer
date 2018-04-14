@@ -14,7 +14,9 @@ const CLIENTS = ['International Fund AG',
                  'Greenwich Fund LTD',
                  'Sigma International AG',
                  'Pimlico Savers LTD',
-                 'RedRock Stock Management LTD'];
+                 'RedRock Stock Management LTD',
+                 'Underworld Fund Management AG',
+                 'Coral Beaches Pension Fund'];
 const DEFAULT_DATE_FORMAT = 'DD-MMM-YYYY';
 const FUND_PREFIX = 'BA-';
 const RFQ_TYPES = ['Allocation', 'Portfolio'];
