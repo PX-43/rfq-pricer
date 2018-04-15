@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import { rfqPricerFlowActions } from "../../../../modules/actions";
 import { priceUtils } from '../../../../utils';
+import {viewConstants as vc} from "../../../../constants";
 
 class SpotRenderer extends PureComponent {
 
@@ -30,7 +31,7 @@ class SpotRenderer extends PureComponent {
       <div className='editable-cell-content'>
         <input type='text' defaultValue={formattedSpot}
                onBlur={evt => this.update(evt.target.value)}
-               onKeyPress={evt => (evt.key === 'Enter') ? this.update(evt.target.value) : null} />
+               onKeyPress={evt => (evt.key === vc.KEYS.ENTER) ? this.update(evt.target.value) : null} />
       </div>
     );
   }

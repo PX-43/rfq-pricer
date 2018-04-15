@@ -2,7 +2,7 @@ import React, {PureComponent}  from 'react';
 import { AgGridReact } from "ag-grid-react";
 import columns from './columns';
 import { rfqPricerFlowActions as actions } from "../../modules/actions";
-import { viewConstants as vc, viewConstants } from "../../constants";
+import { viewConstants as vc } from "../../constants";
 import sumBy from 'lodash/sumBy';
 
 import 'ag-grid/dist/styles/ag-grid.css';
@@ -23,37 +23,41 @@ class RfqGrid extends PureComponent {
     this.gridApi.addEventListener(actions.types.ON_SPOT_CHANGED, this.props.onSpotChanged);
     this.columnApi = params.columnApi; //todo: check if we need this
     this.gridApi.sizeColumnsToFit(); //todo: check if we need this
-    this.gridApi.setFocusedCell(0, viewConstants.SPOT_GRID_COLUMN);
+    this.gridApi.setFocusedCell(0, vc.SPOT_GRID_COLUMN);
 
-    this.gridRef.current.eGridDiv.addEventListener("keypress", this.onGridKeypress, false);
+    //this allows us to handle the enter keypress event on the grid
+    this.gridRef.current.eGridDiv.addEventListener(vc.EVENTS.KEY_PRESS, this.onGridKeypress, false);
   }
 
   onGridKeypress = evt =>{
-    if(evt.key === 'Enter'){
-      let el = document.querySelector(".editable-cell-style.ag-cell-focus input[type=text]");
+    //handle keypress event on the grid
+    if(evt.key === vc.KEYS.ENTER){
+      const el = evt.target.querySelector('input[type=text]');
+
       if(el){
         el.focus();
-        el.setSelectionRange(el.value.length-2,el.value.length);
+        const columnId = this.gridApi.getFocusedCell().column.colId;
+        const selectionStart = columnId === vc.SPOT_GRID_COLUMN ? el.value.length-2 : 0;
+        el.setSelectionRange(selectionStart, el.value.length);
       }
     }
-  };
-
-  componentWillUnmount(){
-    this.gridApi.removeEventListener(actions.types.ON_FWD_POINTS_CHANGED, this.props.onFwdPointsChanged);
-    this.gridApi.removeEventListener(actions.types.ON_SPOT_CHANGED, this.props.onSpotChanged);
-    this.gridRef.current.eGridDiv.removeEventListener("keypress", this.onGridKeypress);
   };
 
   componentDidUpdate() {
     // this is required because after updating a value in the grid, the grid loses its focus
     //so re-focus the last edited cell
     if(this.gridRef.current){
-      let el = document.querySelector(".editable-cell-style.ag-cell-focus");
-      if(el) {
+      let el = this.gridRef.current.eGridDiv.querySelector(vc.FOCUSED_CELL_CLASSES);
+      if(el)
         el.focus();
-      }
     }
   }
+
+  componentWillUnmount(){
+    this.gridApi.removeEventListener(actions.types.ON_FWD_POINTS_CHANGED, this.props.onFwdPointsChanged);
+    this.gridApi.removeEventListener(actions.types.ON_SPOT_CHANGED, this.props.onSpotChanged);
+    this.gridRef.current.eGridDiv.removeEventListener(vc.EVENTS.KEY_PRESS, this.onGridKeypress);
+  };
 
   static getNodeChildDetails(rowItem) {
     if (rowItem.valueDateNodes) {
@@ -87,7 +91,6 @@ class RfqGrid extends PureComponent {
 
   render(){
     const height = this.calculateHeight(this.props.rfqData);
-
     console.log('rendering RfqGrid');
     return(
       <div className='rfq-grid ag-theme-balham-dark' style={{height:height}}>

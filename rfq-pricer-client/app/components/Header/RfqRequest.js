@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react';
+import {viewConstants as vc} from "../../constants";
 
 class RfqRequest extends PureComponent {
 
@@ -27,7 +28,7 @@ class RfqRequest extends PureComponent {
   requestNewRfq = () => this.props.requestNewRfq(this.state.rfqCounter);
 
   preventDefault = evt => {
-    if(evt.key === 'Enter'){
+    if(evt.key === vc.KEYS.ENTER){
       evt.preventDefault();
       return false;
     }

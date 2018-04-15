@@ -1,5 +1,5 @@
 import React from 'react';
-import { products } from '../../../../constants';
+import {products, viewConstants as vc} from '../../../../constants';
 import { rfqPricerFlowActions } from "../../../../modules/actions";
 
 const update = (api, id, rfqId, fwdPoints, ccyNodeId, originalValue) => {
@@ -15,7 +15,7 @@ const handleOnBlur = (evt, originalValue, id, rfqId, ccyNodeId, api) =>{
 };
 
 const handleKeyPress = (evt, originalValue, id, rfqId, ccyNodeId, api) => {
-  if(evt.key === 'Enter'){
+  if(evt.key === vc.KEYS.ENTER){
     const fwdPoints = evt.target.value;
     update(api, id, rfqId, fwdPoints, ccyNodeId, originalValue);
   }
