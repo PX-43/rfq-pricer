@@ -18,17 +18,18 @@ class SpotRenderer extends PureComponent {
   };
 
   render(){
-    const {data: {spot, precision}, node: {level}} = this.props;
+    const {data: {spot, systemSpot, precision}, node: {level}} = this.props;
 
     if(level > 0)
       return null;
 
     console.log('rendering SpotRenderer');
 
+    const editableStyle = spot !== systemSpot ? vc.EDITABLE_CELL_STYLE + '--changed' : vc.EDITABLE_CELL_STYLE;
     const formattedSpot = priceUtils.addTrailingZeros(spot, precision);
 
     return(
-      <div className='editable-cell-content'>
+      <div className={editableStyle}>
         <input type='text' defaultValue={formattedSpot}
                onBlur={evt => this.update(evt.target.value)}
                onKeyPress={evt => (evt.key === vc.KEYS.ENTER) ? this.update(evt.target.value) : null} />

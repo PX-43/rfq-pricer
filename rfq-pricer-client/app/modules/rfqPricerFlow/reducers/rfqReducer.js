@@ -26,11 +26,13 @@ const addNewRfq = (state, action) => {
         const {valueDateNodes, ...ccy} = ccyNode;
         return {
           ...ccy,
+          systemSpot:ccy.spot, //store original value, so we no when it's changed
           rfqId:rfq.id,
           valueDateNodes: [...valueDateNodes.map(valueDateNode => {
             const {legs, ...valueDate} = valueDateNode;
             return {
               ...valueDate,
+              systemFwdPoints:valueDate.fwdPoints, //store original value, so we no when it's changed
               ccyPair: ccy.ccyPair,
               precision: ccy.precision,
               rfqId:rfq.id,
