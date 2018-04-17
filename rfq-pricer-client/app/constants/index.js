@@ -27,6 +27,8 @@ export const viewConstants = {
   RFQ_GRID_ROW_HEIGHT : 38,
   SPOT_GRID_COLUMN: 'spot',
   EDITABLE_CELL_STYLE: 'editable-cell-content',
+  EDITABLE_CELL_STYLE_CHANGED: 'editable-cell-content--changed',
+  EDITABLE_CELL_STYLE_CHANGED_LOCK: 'editable-cell-content--changed__lock',
   FOCUSED_CELL_CLASSES: '.editable-cell-style.ag-cell-focus',
   EVENTS: {
     KEY_PRESS:'keypress',

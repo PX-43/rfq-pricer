@@ -20,9 +20,23 @@
   .editable-cell-content-base;
 }
 
-.editable-cell-content--changed input {
-  .editable-cell-content-base;
-  color: #ffb809;
+.editable-cell-content--changed {
+
+  & input {
+    .editable-cell-content-base;
+    color: #ffb809;
+  }
+
+  &__lock {
+    float:left;
+    color:#ffb809;
+    font-size:.9em;
+  }
+
+  &__lock:hover {
+
+  }
+
 }
 
 
