@@ -2,8 +2,7 @@ import React, {PureComponent} from 'react';
 import { rfqPricerFlowActions } from "../../../../modules/actions";
 import { priceUtils } from '../../../../utils';
 import {viewConstants as vc} from "../../../../constants";
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import faKey from '@fortawesome/fontawesome-free-solid/faKey'
+import PriceLock from './PriceLock';
 
 class SpotRenderer extends PureComponent {
 
@@ -27,18 +26,14 @@ class SpotRenderer extends PureComponent {
 
     console.log('rendering SpotRenderer');
 
-    let editableStyle = vc.EDITABLE_CELL_STYLE;
-    let lockedIcon = null;
-    if(spot !== systemSpot ){
-      editableStyle = vc.EDITABLE_CELL_STYLE_CHANGED;
-      lockedIcon = <div className={vc.EDITABLE_CELL_STYLE_CHANGED_LOCK}><FontAwesomeIcon icon={faKey} /></div>;
-    }
+    const hasSpotChanged = spot !== systemSpot;
+    let editableStyle = hasSpotChanged ? vc.EDITABLE_CELL_STYLE_CHANGED : vc.EDITABLE_CELL_STYLE;
 
     const formattedSpot = priceUtils.addTrailingZeros(spot, precision);
 
     return(
       <div className={editableStyle}>
-        {lockedIcon}
+        <PriceLock isVisible={hasSpotChanged}/>
         <input type='text' defaultValue={formattedSpot}
                onBlur={evt => this.update(evt.target.value)}
                onKeyPress={evt => (evt.key === vc.KEYS.ENTER) ? this.update(evt.target.value) : null} />
