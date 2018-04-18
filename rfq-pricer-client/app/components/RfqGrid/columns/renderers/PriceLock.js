@@ -5,8 +5,13 @@ import faKey from '@fortawesome/fontawesome-free-solid/faKey'
 
 export default props => {
 
+
   if(props.isVisible){
-    return <div className={vc.EDITABLE_CELL_STYLE_CHANGED_LOCK}><FontAwesomeIcon icon={faKey} title='Revert change'/></div>;
+    return (
+      <div className={vc.EDITABLE_CELL_STYLE_CHANGED_LOCK} title='Revert change' onClick={props.revert}>
+        <FontAwesomeIcon icon={faKey} />
+      </div>
+    );
   } else {
     return null;
   }

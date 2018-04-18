@@ -46,10 +46,10 @@ const addNewRfq = (state, action) => {
   };
 };
 
-const updateFwdPoints = (state, action) => {
+const updateFwdPoints = (state, action, isReverting) => {
   const {ccyNodes, ...rfq} = state[action.rfqId];
 
-  if(!isFwdPointsChanged(ccyNodes, action.ccyNodeId, action.id, action.fwdPoints)){
+  if(!isReverting && !isFwdPointsChanged(ccyNodes, action.ccyNodeId, action.id, action.fwdPoints)){
     return state; //don't update state if there is no change
   }
 
@@ -64,9 +64,10 @@ const updateFwdPoints = (state, action) => {
             ...ccy,
             valueDateNodes: valueDateNodes.map(valueDateNode => {
               if (valueDateNode.id === action.id) {
+                const fwdPoints = isReverting ? valueDateNode.systemFwdPoints : action.fwdPoints;
                 const prices = {
-                                  fwdPoints: action.fwdPoints,
-                                  fwdPrice: priceUtils.calcFwdPrice(ccy.spot, action.fwdPoints, valueDateNode.precision)
+                                  fwdPoints,
+                                  fwdPrice: priceUtils.calcFwdPrice(ccy.spot, fwdPoints, valueDateNode.precision)
                                };
                 return {...valueDateNode, ...prices};
               } else {
@@ -82,10 +83,10 @@ const updateFwdPoints = (state, action) => {
   };
 };
 
-const updateSpot = (state, action) =>{
+const updateSpot = (state, action, isReverting) =>{
   const {ccyNodes, ...rfq} = state[action.rfqId];
 
-  if(!isSpotChanged(ccyNodes, action.id, action.spot)){
+  if(!isReverting && !isSpotChanged(ccyNodes, action.id, action.spot)){
     return state; //don't update state if there is no change
   }
 
@@ -96,11 +97,12 @@ const updateSpot = (state, action) =>{
       ccyNodes: ccyNodes.map(ccyNode => {
         if (ccyNode.id === action.id) {
           const {valueDateNodes, ...ccy} = ccyNode;
+          const spot = isReverting ? ccy.systemSpot : action.spot;
           return {
-            ...{...ccy, ...{spot: action.spot}},
+            ...{...ccy, ...{spot}},
             valueDateNodes: valueDateNodes.map(valueDateNode => { //update fwd prices
-                const prices = {
-                  fwdPrice: priceUtils.calcFwdPrice(action.spot, valueDateNode.fwdPoints, valueDateNode.precision)
+              const prices = {
+                  fwdPrice: priceUtils.calcFwdPrice(spot, valueDateNode.fwdPoints, valueDateNode.precision)
                 };
                 return {...valueDateNode, ...prices};
             })
@@ -121,10 +123,16 @@ export default (state = {}, action) => {
       return addNewRfq(state, action);
 
     case types.ON_FWD_POINTS_CHANGED :
-      return updateFwdPoints(state, action);
+      return updateFwdPoints(state, action, false);
+
+    case types.ON_REVERTING_FWD_POINTS :
+      return updateFwdPoints(state, action, true);
 
     case types.ON_SPOT_CHANGED :
-      return updateSpot(state, action);
+      return updateSpot(state, action, false);
+
+    case types.ON_REVERTING_SPOT :
+      return updateSpot(state, action, true);
 
     default:
       return state;

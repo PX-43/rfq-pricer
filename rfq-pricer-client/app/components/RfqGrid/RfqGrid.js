@@ -21,6 +21,8 @@ class RfqGrid extends PureComponent {
     this.gridApi = params.api;
     this.gridApi.addEventListener(actions.types.ON_FWD_POINTS_CHANGED, this.props.onFwdPointsChanged);
     this.gridApi.addEventListener(actions.types.ON_SPOT_CHANGED, this.props.onSpotChanged);
+    this.gridApi.addEventListener(actions.types.ON_REVERTING_SPOT, this.props.onRevertingSpot);
+    this.gridApi.addEventListener(actions.types.ON_REVERTING_FWD_POINTS, this.props.onRevertingFwdPoints);
     this.columnApi = params.columnApi; //todo: check if we need this
     this.gridApi.sizeColumnsToFit(); //todo: check if we need this
     this.gridApi.setFocusedCell(0, vc.SPOT_GRID_COLUMN);
@@ -56,6 +58,8 @@ class RfqGrid extends PureComponent {
   componentWillUnmount(){
     this.gridApi.removeEventListener(actions.types.ON_FWD_POINTS_CHANGED, this.props.onFwdPointsChanged);
     this.gridApi.removeEventListener(actions.types.ON_SPOT_CHANGED, this.props.onSpotChanged);
+    this.gridApi.removeEventListener(actions.types.ON_REVERTING_SPOT, this.props.onRevertingSpot);
+    this.gridApi.removeEventListener(actions.types.ON_REVERTING_FWD_POINTS, this.props.onRevertingFwdPoints);
     this.gridRef.current.eGridDiv.removeEventListener(vc.EVENTS.KEY_PRESS, this.onGridKeypress);
   };
 

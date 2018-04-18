@@ -1,45 +1,46 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import {products, viewConstants as vc} from '../../../../constants';
 import { rfqPricerFlowActions } from "../../../../modules/actions";
 import PriceLock from './PriceLock';
 
-const update = (api, id, rfqId, fwdPoints, ccyNodeId, originalValue) => {
-  //todo: validate
-  const newFwdPoints = Number.parseFloat(fwdPoints);
-  if(newFwdPoints !== originalValue)
-    api.dispatchEvent(rfqPricerFlowActions.onFwdPointsChanged(id, rfqId, ccyNodeId, newFwdPoints));
-};
-
-const handleOnBlur = (evt, originalValue, id, rfqId, ccyNodeId, api) =>{
-  const fwdPoints = evt.target.value;
-  update(api, id, rfqId, fwdPoints, ccyNodeId, originalValue);
-};
-
-const handleKeyPress = (evt, originalValue, id, rfqId, ccyNodeId, api) => {
-  if(evt.key === vc.KEYS.ENTER){
-    const fwdPoints = evt.target.value;
-    update(api, id, rfqId, fwdPoints, ccyNodeId, originalValue);
+class FwdPointsRenderer extends PureComponent {
+  constructor(props){
+    super(props);
   }
-};
 
-export default props => {
-  const {api, data: {fwdPoints, systemFwdPoints, legType, id, rfqId, ccyNodeId}, node: {level}} = props;
+  update = (updatedValue) => {
+    const {api, data: {fwdPoints, id, ccyNodeId, rfqId}} = this.props;
+    //todo: validate
+    const newFwdPoints = Number.parseFloat(updatedValue);
+    if(newFwdPoints !== fwdPoints)
+      api.dispatchEvent(rfqPricerFlowActions.onFwdPointsChanged(id, rfqId, ccyNodeId, newFwdPoints));
+  };
 
-  if(level !== 1 || legType === products.SPOT)
-    return null;
+  revertFwdPoints = () => {
+    const {api, data: {id, ccyNodeId, rfqId}} = this.props;
+    api.dispatchEvent(rfqPricerFlowActions.onRevertingFwdPoints(id, rfqId, ccyNodeId));
+  };
 
-  console.log('rendering FwdPointsRenderer');
+  render(){
+    const {data: {fwdPoints, systemFwdPoints, legType}, node: {level}} = this.props;
 
-  const hasFwdPointsChanged = fwdPoints !== systemFwdPoints;
-  let editableStyle = hasFwdPointsChanged ? vc.EDITABLE_CELL_STYLE_CHANGED : vc.EDITABLE_CELL_STYLE;
+    if(level !== 1 || legType === products.SPOT)
+      return null;
 
-  const originalValue = fwdPoints;
-  return(
-    <div className={editableStyle}>
-      <PriceLock isVisible={hasFwdPointsChanged}/>
-      <input type='text' defaultValue={fwdPoints}
-             onBlur={evt => handleOnBlur(evt, originalValue, id, rfqId, ccyNodeId, api)}
-             onKeyPress={evt => handleKeyPress(evt, originalValue, id, rfqId, ccyNodeId, api)} />
-    </div>
-  );
-};
+    console.log('rendering FwdPointsRenderer');
+
+    const hasFwdPointsChanged = fwdPoints !== systemFwdPoints;
+    let editableStyle = hasFwdPointsChanged ? vc.EDITABLE_CELL_STYLE_CHANGED : vc.EDITABLE_CELL_STYLE;
+
+    return(
+      <div className={editableStyle}>
+        <PriceLock isVisible={hasFwdPointsChanged} revert={this.revertFwdPoints}/>
+        <input type='text' defaultValue={fwdPoints}
+               onBlur={evt => this.update(evt.target.value)}
+               onKeyPress={evt => (evt.key === vc.KEYS.ENTER) ? this.update(evt.target.value) : null} />
+      </div>
+    );
+  }
+}
+
+export default FwdPointsRenderer;

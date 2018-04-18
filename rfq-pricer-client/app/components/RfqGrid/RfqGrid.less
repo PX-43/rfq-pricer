@@ -1,4 +1,5 @@
 @fontSize:0.9em;
+@changedValueColour:#ffb809;
 
 .rfq-grid {
   width: 950px;
@@ -24,13 +25,13 @@
 
   & input {
     .editable-cell-content-base;
-    color: #ffb809;
+    color: @changedValueColour;
     width:80%;
   }
 
   &__lock {
     float:left;
-    color:#ffb809;
+    color: @changedValueColour;
     font-size:.9em;
     width:20%;
     transform: rotate(-44deg);
@@ -42,7 +43,6 @@
   }
 
 }
-
 
 
 .ag-header-cell {

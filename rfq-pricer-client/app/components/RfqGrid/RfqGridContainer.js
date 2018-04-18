@@ -22,6 +22,8 @@ class RfqGridContainer extends PureComponent {
           <RfqGrid
             onFwdPointsChanged={this.props.onFwdPointsChanged}
             onSpotChanged={this.props.onSpotChanged}
+            onRevertingSpot={this.props.onRevertingSpot}
+            onRevertingFwdPoints={this.props.onRevertingFwdPoints}
             rfqData={this.props.rfqData}
           />
         </div>
@@ -40,12 +42,10 @@ const mapDispatchToProps = dispatch => bindActionCreators(
   {
     onFwdPointsChanged: action => action,
     onSpotChanged: action => action,
+    onRevertingSpot: action => action,
+    onRevertingFwdPoints: action => action,
   }, dispatch);
 
-
-/*const mapDispatchToProps = dispatch => {
-  return bindActionCreators({}, dispatch);
-};*/
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(RfqGridContainer);

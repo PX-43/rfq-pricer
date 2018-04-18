@@ -9,6 +9,8 @@ export const types = {
   ON_SELECTED_RFQ_CHANGED : 'ON_SELECTED_RFQ_CHANGED',
   ON_FWD_POINTS_CHANGED : 'ON_FWD_POINTS_CHANGED',
   ON_SPOT_CHANGED : 'ON_SPOT_CHANGED',
+  ON_REVERTING_SPOT : 'ON_REVERTING_SPOT',
+  ON_REVERTING_FWD_POINTS : 'ON_REVERTING_FWD_POINTS',
 };
 
 export const establishConnection = connectionDetails => ({
@@ -55,6 +57,19 @@ export const onSpotChanged = (id, rfqId, spot) => ({
   id,
   rfqId,
   spot
+});
+
+export const onRevertingSpot = (id, rfqId) => ({
+  type: types.ON_REVERTING_SPOT,
+  id,
+  rfqId
+});
+
+export const onRevertingFwdPoints = (id, rfqId, ccyNodeId) => ({
+  type: types.ON_REVERTING_FWD_POINTS,
+  id,
+  rfqId,
+  ccyNodeId
 });
 
 export const connectedSuccessfully = () => ({ type: types.CONNECTED_SUCCESSFULLY });

@@ -18,6 +18,11 @@ class SpotRenderer extends PureComponent {
       api.dispatchEvent(rfqPricerFlowActions.onSpotChanged(id, rfqId, newSpot));
   };
 
+  revertSpot = () =>{
+    const {api, data: {id, rfqId}} = this.props;
+    api.dispatchEvent(rfqPricerFlowActions.onRevertingSpot(id, rfqId));
+  };
+
   render(){
     const {data: {spot, systemSpot, precision}, node: {level}} = this.props;
 
@@ -33,7 +38,7 @@ class SpotRenderer extends PureComponent {
 
     return(
       <div className={editableStyle}>
-        <PriceLock isVisible={hasSpotChanged}/>
+        <PriceLock isVisible={hasSpotChanged} revert={this.revertSpot}/>
         <input type='text' defaultValue={formattedSpot}
                onBlur={evt => this.update(evt.target.value)}
                onKeyPress={evt => (evt.key === vc.KEYS.ENTER) ? this.update(evt.target.value) : null} />
