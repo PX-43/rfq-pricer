@@ -1,0 +1,61 @@
+
+.buttonContainer {
+  display: flex;
+}
+
+.actionButtonBase {
+  margin-left:6px;
+  border-radius: 4px;
+  color:white;
+  outline: none;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  padding: 5px;
+}
+
+.refreshButton {
+  .actionButtonBase;
+  background-color: #5756ea;
+  border:1px solid #393880;
+
+  &:hover{
+    background-color: #504fcc;
+    cursor: pointer;
+  }
+
+  &:active{
+    background-color: #5a59ec;
+    cursor: pointer;
+  }
+}
+
+.acceptButton {
+  .actionButtonBase;
+  background-color: #4de445;
+  border:1px solid #3aa433;
+
+  &:hover{
+    background-color: #3cac34;
+    cursor: pointer;
+  }
+
+  &:active{
+    background-color: #4fef47;
+    cursor: pointer;
+  }
+}
+
+.rejectButton {
+  .actionButtonBase;
+  background-color: #ea5733;
+  border:1px solid #b04b2c;
+
+  &:hover{
+    background-color: #bd4a30;
+    cursor: pointer;
+  }
+
+  &:active{
+    background-color: #f25934;
+    cursor: pointer;
+  }
+}
