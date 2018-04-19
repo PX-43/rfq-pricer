@@ -11,6 +11,9 @@ export const types = {
   ON_SPOT_CHANGED : 'ON_SPOT_CHANGED',
   ON_REVERTING_SPOT : 'ON_REVERTING_SPOT',
   ON_REVERTING_FWD_POINTS : 'ON_REVERTING_FWD_POINTS',
+  ON_REJECT : 'ON_REJECT',
+  ON_ACCEPT : 'ON_ACCEPT',
+  ON_REFRESH : 'ON_REFRESH',
 };
 
 export const establishConnection = connectionDetails => ({
@@ -72,4 +75,20 @@ export const onRevertingFwdPoints = (id, rfqId, ccyNodeId) => ({
   ccyNodeId
 });
 
+export const onRefresh = (rfqId) => ({
+  type: types.ON_REFRESH,
+  rfqId,
+});
+
+export const onReject = (rfqId) => ({
+  type: types.ON_REJECT,
+  rfqId
+});
+
+export const onAccept = (rfqId) => ({
+  type: types.ON_ACCEPT,
+  rfqId,
+});
+
 export const connectedSuccessfully = () => ({ type: types.CONNECTED_SUCCESSFULLY });
+

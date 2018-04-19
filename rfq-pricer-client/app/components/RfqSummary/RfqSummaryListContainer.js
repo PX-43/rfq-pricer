@@ -20,6 +20,13 @@ class RfqSummaryListContainer extends React.Component {
             this.props.selectedRfqId !== nextProps.selectedRfqId);
   }
 
+  //todo: wrong solution
+  selectFirstRfq = () =>{
+    if(this.props.selectedRfqId === ''){
+
+    }
+  };
+
   render(){
 
     console.log('rendering RfqSummaryListContainer');

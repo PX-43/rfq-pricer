@@ -7,7 +7,7 @@ export default props => {
 
   return (
     <div>
-      <button className='acceptButton' title='Accept'>
+      <button className='acceptButton' title='Accept' onClick={props.accept}>
         <FontAwesomeIcon icon={faCheckCircle} />
       </button>
     </div>

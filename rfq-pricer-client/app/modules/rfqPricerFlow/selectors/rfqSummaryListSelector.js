@@ -33,3 +33,8 @@ export const getNumberOfNewRfqs = createSelector (
     }, 0);
   }
 );
+
+export const getRfqIdList = createSelector (
+  [getRfqIds],
+  (rfqIds) => rfqIds
+);

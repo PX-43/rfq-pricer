@@ -7,7 +7,7 @@ export default props => {
 
   return (
     <div>
-      <button className='rejectButton' title='Reject'>
+      <button className='rejectButton' title='Reject' onClick={props.reject}>
         <FontAwesomeIcon icon={faTimesCircle} />
       </button>
     </div>

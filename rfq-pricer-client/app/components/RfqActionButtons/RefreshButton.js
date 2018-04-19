@@ -7,7 +7,7 @@ export default props => {
 
   return (
     <div>
-      <button className='refreshButton' title='Refresh'>
+      <button className='refreshButton' title='Refresh' onClick={props.refresh}>
         <FontAwesomeIcon icon={faSyncAlt} />
       </button>
     </div>
