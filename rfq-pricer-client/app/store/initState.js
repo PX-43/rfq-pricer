@@ -14,8 +14,8 @@ export const initState = {
 
     //Add an rfq id when an rfq is sent to the server for processing (e.g. reject, accept, etc.).
     //It should be removed from the rfqIdList immediately to follow the principle of optimistic updates of the GUI.
-    //When a failure occurs or on timeout, remove the id and put it back into rfqIdList,
-    // otherwise delete it when operation is confirmed by server.
+    //When a failure or timeout occur, remove the id and put it back into rfqIdList, so the user can decide what to do
+    // with it, otherwise delete it when operation is confirmed by server.
     processingList: [],
   },
 

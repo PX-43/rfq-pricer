@@ -1,29 +1,35 @@
 import  { types } from '../actions';
-import { stringUtils } from '../../../utils';
+import { stringUtils as utils } from '../../../utils';
 
 const rfqIdsReducer = (state = {}, action) => {
   switch (action.type) {
+
     case types.ON_RFQ_RECEIVED:
-      const selectedRfqId = state.selectedRfqId ? state.selectedRfqId : stringUtils.copy(action.rfq.id);
+      const selectedRfqId = state.selectedRfqId ? state.selectedRfqId : utils.copy(action.rfq.id);
       return {
+        ...state,
         selectedRfqId,
         rfqIdList:[
-          stringUtils.copy(action.rfq.id),
+          utils.copy(action.rfq.id),
           ...state.rfqIdList,
         ]
       };
+
     case types.ON_SELECTED_RFQ_CHANGED :
       return {
         ...state,
-        selectedRfqId: stringUtils.copy(action.newRfqId),
+        selectedRfqId: utils.copy(action.newRfqId),
       };
+
     case types.ON_REJECT :
       const rfqIdList = state.rfqIdList.filter(id => id !== action.rfqId);
       const newSelectedRfqId = rfqIdList.length > 0 ?  rfqIdList[0] : '';
       return {
-        selectedRfqId : stringUtils.copy(newSelectedRfqId),
-        rfqIdList:[ ...rfqIdList ]
+        selectedRfqId : utils.copy(newSelectedRfqId),
+        rfqIdList:[ ...rfqIdList ],
+        processingList: [utils.copy(action.rfqId), ...state.processingList],
       };
+
     default:
       return state;
   }

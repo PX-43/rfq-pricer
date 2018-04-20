@@ -16,11 +16,7 @@ class RfqActionButtonsContainer extends PureComponent {
     super(props);
   }
 
-  rejectRfq = () => {
-    //const newSelectedRfqId = this.props.rfqIdList.length ? '' : this.props.rfqIdList[0];
-    this.props.reject(this.props.selectedRfqId);
-  };
-
+  rejectRfq = () => this.props.reject(this.props.selectedRfqId);
 
   render(){
     return (
@@ -37,8 +33,9 @@ class RfqActionButtonsContainer extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-    selectedRfqId : rfqSelector.getSelectedRfqId(state),
-    rfqIdList : rfqSummaryListSelector.getRfqIdList(state),
+    //we don't need to send the selected rfq id, as it is
+    //available in the sate, but it makes the intention cleaner
+    selectedRfqId : rfqSelector.getSelectedRfqId(state)
   }
 };
 
