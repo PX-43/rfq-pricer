@@ -1,7 +1,6 @@
 import { createSelector } from 'reselect';
 import orderBy from "lodash/orderBy";
 import uniq from "lodash/uniq";
-import sumBy from "lodash/sumBy";
 import { status } from "../../../constants";
 
 const getRfqList = state => state.rfqs;

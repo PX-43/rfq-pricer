@@ -17,6 +17,13 @@ const rfqIdsReducer = (state = {}, action) => {
         ...state,
         selectedRfqId: stringUtils.copy(action.newRfqId),
       };
+    case types.ON_REJECT :
+      const rfqIdList = state.rfqIdList.filter(id => id !== action.rfqId);
+      const newSelectedRfqId = rfqIdList.length > 0 ?  rfqIdList[0] : '';
+      return {
+        selectedRfqId : stringUtils.copy(newSelectedRfqId),
+        rfqIdList:[ ...rfqIdList ]
+      };
     default:
       return state;
   }
