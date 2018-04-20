@@ -21,11 +21,11 @@ class RfqSummaryListContainer extends React.Component {
   }
 
   //todo: wrong solution
-  selectFirstRfq = () =>{
+ /* selectFirstRfq = () =>{
     if(this.props.selectedRfqId === ''){
 
     }
-  };
+  };*/
 
   render(){
 

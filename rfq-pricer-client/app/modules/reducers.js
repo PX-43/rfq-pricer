@@ -8,7 +8,6 @@ import selectedRfqReducer from './rfqPricerFlow/reducers/selectedRfqIdReducer';
 //It is delegating the work of updating each slice of state to a specific slice reducer.
 export default combineReducers({
   connectionInfo: connectionReducer,
-  selectedRfqId: selectedRfqReducer,
   rfqIds: rfqIdsReducer,
   rfqs: rfqReducer,
 });

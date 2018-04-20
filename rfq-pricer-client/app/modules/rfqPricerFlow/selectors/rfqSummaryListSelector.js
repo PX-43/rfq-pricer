@@ -5,7 +5,7 @@ import sumBy from "lodash/sumBy";
 import { status } from "../../../constants";
 
 const getRfqList = state => state.rfqs;
-const getRfqIds = state => state.rfqIds;
+const getRfqIds = state => state.rfqIds.rfqIdList;
 
 export const getRfqSummaryList = createSelector(
   [getRfqList, getRfqIds],

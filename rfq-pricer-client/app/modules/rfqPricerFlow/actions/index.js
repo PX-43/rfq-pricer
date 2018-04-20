@@ -36,10 +36,9 @@ export const requestNewRfq = rfqCount => ({
   rfqCount,
 });
 
-export const onSelectedRfqChanged = (newRfqId, oldRfqId) => ({
+export const onSelectedRfqChanged = (newRfqId) => ({
   type: types.ON_SELECTED_RFQ_CHANGED,
   newRfqId,
-  oldRfqId,
 });
 
 export const sendRequest = (topic, payload) => ({
