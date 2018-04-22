@@ -5,6 +5,10 @@ export const initState = {
     connectionStatus: connectionStatus.DISCONNECTED,
     connectionError:'',
   },
+  //parameters to send to the server to create test scenarios (e.g. delays or errors, etc)
+  testParameters:{
+
+  },
   rfqIds:{
     //currently selected rfq
     selectedRfqId:'',
