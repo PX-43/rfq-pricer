@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import RfqRequest from './RfqRequest';
 import { rfqPricerFlowActions } from './../../modules/actions'
+import ScenarioTesting from './ScenarioTesting';
 import './HeaderPaneContainer.less';
 
 class HeaderPaneContainer extends PureComponent {
@@ -16,8 +17,9 @@ class HeaderPaneContainer extends PureComponent {
   render(){
     console.log('rendering HeaderPaneContainer');
     return (
-      <div>
+      <div className='controlContainer'>
         <RfqRequest requestNewRfq={this.props.requestNewRfq} />
+        <ScenarioTesting />
       </div>
     );
   }

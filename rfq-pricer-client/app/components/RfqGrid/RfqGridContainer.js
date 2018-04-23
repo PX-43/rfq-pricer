@@ -34,7 +34,7 @@ class RfqGridContainer extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-    rfqData : rfqSelector.getRfqData(state),
+    rfqData : rfqSelector.getSelectedRfqData(state),
   }
 };
 

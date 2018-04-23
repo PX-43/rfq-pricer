@@ -1,6 +1,7 @@
-import { takeEvery, put } from "redux-saga/effects";
+import { takeEvery, put, select } from "redux-saga/effects";
 import { types, sendRequest } from "../actions";
 import { topics } from '../../../constants/index';
+import { rfqSelector } from '../../selectors';
 
 
 function* createRequest(dispatch, action) {
@@ -10,7 +11,9 @@ function* createRequest(dispatch, action) {
       yield put(sendRequest(topics.SUBSCRIBE_RFQ, {rfqCount}));
       break;
     case types.ON_REJECT :
-      yield put(sendRequest(topics.SUBSCRIBE_RFQ, {rfqCount}));
+      const rfqId = action.rfqId;
+      //const rfq = yield select(rfqSelector.getRfqData, action.rfqId); //works!
+      yield put(sendRequest(topics.REJECT_RFQ, {rfqId}));
       break;
     default:
       throw new Error('This action type is not supported for sending requests: ' + action.type);

@@ -1,4 +1,5 @@
 import {publishRfq} from './rfqPublisher'
+import { handleReject } from './rfqRejectHandler';
 import topics from './../common/topics';
 
 export const handleRequest = (msg, send) => {
@@ -13,6 +14,9 @@ export const handleRequest = (msg, send) => {
 
         case topics.SUBSCRIBE_RFQ :
             publishRfq(msg.payload.rfqCount, send);
+            break;
+        case topics.REJECT_RFQ :
+            handleReject(msg.payload, send);
             break;
         case topics.GET_PRICE :
             break;

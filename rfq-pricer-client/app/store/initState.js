@@ -6,8 +6,10 @@ export const initState = {
     connectionError:'',
   },
   //parameters to send to the server to create test scenarios (e.g. delays or errors, etc)
-  testParameters:{
-
+  scenarioTesting:{
+    hasError: false,
+    delayBy:0,
+    noResponse: false,
   },
   rfqIds:{
     //currently selected rfq

@@ -1,12 +1,55 @@
+.controlContainer {
+  display: inline-flex;
+  justify-content: space-between;
+  width:450px;
+}
+
 .rfq-request label {
   color: #ffffff;
-  font-size:0.85em;
+  font-size:0.8em;
 }
 
 .rfq-request input {
   width: 70px;
+  text-align:right;
 }
 
 .rfq-request *{
   margin-right:3px;
 }
+
+
+.scenario-testing {
+  margin-left:30px;
+
+  &__delayBy {
+    display:flex;
+    justify-content: flex-start;
+  }
+
+  &__delayBy input[type='text'] {
+    width:40px;
+    margin-left:8px;
+    text-align: right;
+    height:9px;
+    font-size:0.8em;
+  }
+
+  & input[type="radio"] {
+    margin-top: -1px;
+    vertical-align: middle;
+  }
+
+  & label {
+    color:#fff;
+    font-size:0.8em;
+  }
+
+  &__delayBy--ms {
+    margin-left:4px;
+    font-size: 0.8em;
+    color:#fff;
+  }
+}
+
+
