@@ -12,8 +12,11 @@ export const types = {
   ON_REVERTING_SPOT : 'ON_REVERTING_SPOT',
   ON_REVERTING_FWD_POINTS : 'ON_REVERTING_FWD_POINTS',
   ON_REJECT : 'ON_REJECT',
+  ON_REJECT_RESPONSE : 'ON_REJECT_RESPONSE',
   ON_ACCEPT : 'ON_ACCEPT',
+  ON_ACCEPT_RESPONSE : 'ON_ACCEPT_RESPONSE',
   ON_REFRESH : 'ON_REFRESH',
+  ON_REFRESH_RESPONSE : 'ON_REFRESH_RESPONSE',
 
   SCENARIO_DELAYED_BY_PARAM_CHANGED : 'SCENARIO_DELAYED_BY_PARAM_CHANGED',
   SERVER_RESPONSE_SCENARIO_CHANGED : 'SERVER_RESPONSE_SCENARIO_CHANGED',
@@ -82,14 +85,32 @@ export const onRefresh = (rfqId) => ({
   rfqId,
 });
 
+export const onRefreshResponse = (rfq, serverError) => ({
+  type: types.ON_REFRESH,
+  rfq,
+  serverError
+});
+
 export const onReject = (rfqId) => ({
   type: types.ON_REJECT,
   rfqId
 });
 
+export const onRejectResponse = (rfqId, serverError) => ({
+  type: types.ON_REJECT_RESPONSE,
+  rfqId,
+  serverError,
+});
+
 export const onAccept = (rfqId) => ({
   type: types.ON_ACCEPT,
   rfqId,
+});
+
+export const onAcceptResponse = (rfqId, serverError) => ({
+  type: types.ON_ACCEPT_RESPONSE,
+  rfqId,
+  serverError,
 });
 
 export const connectedSuccessfully = () => ({ type: types.CONNECTED_SUCCESSFULLY });

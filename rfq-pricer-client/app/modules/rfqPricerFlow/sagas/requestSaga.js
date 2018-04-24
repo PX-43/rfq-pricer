@@ -3,12 +3,16 @@ import { types, sendRequest } from "../actions";
 import { topics } from '../../../constants/index';
 import { rfqSelector, scenarioSelector } from '../../selectors';
 
-function* createRequest(dispatch, serverResponseParams, action) {
+function* createRequest(dispatch, action) {
+
+  const serverResponseParams = yield select(scenarioSelector.getAllServerResponseParams);
 
   const serverResponseScenario = {
     scenario: serverResponseParams.scenario,
     delayLength: serverResponseParams.delayLength,
   };
+
+  console.log(serverResponseScenario);
 
   switch (action.type){
     case types.SEND_NEW_RFQ_REQUEST:
@@ -26,10 +30,9 @@ function* createRequest(dispatch, serverResponseParams, action) {
 }
 
 export default function* requestSaga(dispatch) {
-  const serverResponseParams = yield select(scenarioSelector.getAllServerResponseParams);
   yield takeEvery([
     types.SEND_NEW_RFQ_REQUEST, types.ON_REJECT
-  ], createRequest, dispatch, serverResponseParams);
+  ], createRequest, dispatch);
   // note: takeEvery will add the incoming action to the argument list
   // (i.e. the action will be the last argument provided to saga)
 }

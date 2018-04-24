@@ -115,6 +115,12 @@ const updateSpot = (state, action, isReverting) =>{
   };
 };
 
+const removeRfq = (state, action) => {
+
+  //todo
+  return state;
+};
+
 export default (state = {}, action) => {
 
   switch (action.type) {
@@ -133,6 +139,10 @@ export default (state = {}, action) => {
 
     case types.ON_REVERTING_SPOT :
       return updateSpot(state, action, true);
+
+    case types.ON_REJECT_RESPONSE : //todo: should we update state if there is a server error?
+    case types.ON_ACCEPT_RESPONSE:
+      return removeRfq(state, action);
 
     default:
       return state;

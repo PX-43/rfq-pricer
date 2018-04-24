@@ -30,6 +30,14 @@ const rfqIdsReducer = (state = {}, action) => {
         processingList: [utils.copy(action.rfqId), ...state.processingList],
       };
 
+    case types.ON_REJECT_RESPONSE : //todo: should we update state if there is a server error?
+    case types.ON_ACCEPT_RESPONSE:
+      return {
+        ...state,
+        rfqIdList:[ ...state.rfqIdList.filter(id => id !== action.rfqId) ]
+      };
+
+
     default:
       return state;
   }
