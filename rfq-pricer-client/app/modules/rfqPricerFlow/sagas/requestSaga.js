@@ -12,8 +12,6 @@ function* createRequest(dispatch, action) {
     delayLength: serverResponseParams.delayLength,
   };
 
-  console.log(serverResponseScenario);
-
   switch (action.type){
     case types.SEND_NEW_RFQ_REQUEST:
       const rfqCount = action.rfqCount;
