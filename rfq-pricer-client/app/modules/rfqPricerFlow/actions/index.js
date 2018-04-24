@@ -15,10 +15,8 @@ export const types = {
   ON_ACCEPT : 'ON_ACCEPT',
   ON_REFRESH : 'ON_REFRESH',
 
-  SCENARIO_ERROR_PARAM_CHANGED : 'SCENARIO_ERROR_PARAM_CHANGED',
-  SCENARIO_DELAY_PARAM_CHANGED : 'SCENARIO_DELAY_PARAM_CHANGED',
-  SCENARIO_NORESPONSE_PARAM_CHANGED : 'SCENARIO_NORESPONSE_PARAM_CHANGED',
-  SCENARIO_RESET_TO_NORMAL : 'SCENARIO_RESET_TO_NORMAL',
+  SCENARIO_DELAYED_BY_PARAM_CHANGED : 'SCENARIO_DELAYED_BY_PARAM_CHANGED',
+  SERVER_RESPONSE_SCENARIO_CHANGED : 'SERVER_RESPONSE_SCENARIO_CHANGED',
 };
 
 export const establishConnection = connectionDetails => ({
@@ -97,22 +95,14 @@ export const onAccept = (rfqId) => ({
 export const connectedSuccessfully = () => ({ type: types.CONNECTED_SUCCESSFULLY });
 
 
-export const scenarioErrorParamChanged  = hasError => ({
-  type: types.SCENARIO_ERROR_PARAM_CHANGED,
-  hasError
+export const serverResponseScenarioChanged  = newScenario => ({
+  type: types.SERVER_RESPONSE_SCENARIO_CHANGED,
+  newScenario
 });
 
-export const scenarioDelayParamChanged   = delayBy => ({
-  type: types.SCENARIO_DELAY_PARAM_CHANGED,
+export const scenarioDelayedByParamChanged = delayBy => ({
+  type: types.SCENARIO_DELAYED_BY_PARAM_CHANGED,
   delayBy
 });
 
-export const scenarioNoresponseParamChanged   = noResponse => ({
-  type: types.SCENARIO_NORESPONSE_PARAM_CHANGED,
-  noResponse
-});
-
-export const scenarioResetToNormal = () => ({
-  type: types.SCENARIO_RESET_TO_NORMAL,
-});
 

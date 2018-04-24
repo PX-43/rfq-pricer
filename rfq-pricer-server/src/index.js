@@ -16,13 +16,13 @@ wss.on('connection', (ws, req) => {
 
     ws.on('message', incomingMsg => {
         console.log('received: %s', incomingMsg);
-        handleRequest(JSON.parse(incomingMsg), (topic, outgoingMsg) => {
+        handleRequest(JSON.parse(incomingMsg), (topic, outgoingMsg, err = null) => {
             try{
-                const data = JSON.stringify({ topic, payload: outgoingMsg });
+                const data = JSON.stringify({ topic, payload: outgoingMsg, err });
                 console.info('SENDING: ' + data);
                 ws.send(data);
-            } catch (err){
-                console.log('ERROR while sending response to client : ' + err);
+            } catch (exception){
+                console.log('ERROR while sending response to client : ' + exception);
             }
 
 

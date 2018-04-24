@@ -1,4 +1,4 @@
-import { connectionStatus } from '../constants';
+import { connectionStatus, serverResponseTestScenario as scenarios } from '../constants';
 
 export const initState = {
   connectionInfo: {
@@ -7,9 +7,8 @@ export const initState = {
   },
   //parameters to send to the server to create test scenarios (e.g. delays or errors, etc)
   scenarioTesting:{
-    hasError: false,
-    delayBy:0,
-    noResponse: false,
+    serverResponseScenario: scenarios.NORMAL,
+    delayBy:1000, //1 second
   },
   rfqIds:{
     //currently selected rfq

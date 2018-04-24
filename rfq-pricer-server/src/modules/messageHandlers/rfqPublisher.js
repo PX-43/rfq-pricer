@@ -12,7 +12,8 @@ const publish = send => {
 };
 
 
-export const publishRfq = (numberOfRfqs, send) => {
+export const publishRfq = (payload, send) => {
+    const numberOfRfqs = payload.rfqCount;
     let wait = 0;
     _.times(numberOfRfqs, index => {
         if(index === 0){

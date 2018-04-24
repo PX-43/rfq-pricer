@@ -22,6 +22,13 @@ export const status = {
   NEW: 'New',
 };
 
+export const serverResponseTestScenario  = {
+  ERROR: 'error',
+  DELAY: 'delay',
+  NO_RESPONSE: 'noResponse',
+  NORMAL: 'normal',
+};
+
 export const viewConstants = {
   MAX_CCYS_ON_RFQ_SUMMARY : 3,
   RFQ_GRID_MIN_HEIGHT : 300,
