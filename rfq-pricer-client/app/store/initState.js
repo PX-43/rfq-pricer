@@ -1,4 +1,7 @@
-import { connectionStatus, serverResponseTestScenario as scenarios } from '../constants';
+import {
+  connectionStatus,
+  viewConstants as vc,
+  serverResponseTestScenario as scenarios } from '../constants';
 
 export const initState = {
   connectionInfo: {
@@ -12,7 +15,7 @@ export const initState = {
   },
   rfqIds:{
     //currently selected rfq
-    selectedRfqId:'',
+    selectedRfqId: vc.NO_SELECTED_RFQ,
 
     //stores rfq IDs in the correct order, displayed in the gui
     rfqIdList: [],

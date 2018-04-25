@@ -8,6 +8,8 @@ export const connectionStatus = {
 export const topics = {
   SUBSCRIBE_RFQ : 'subscribe_to_rfq',
   REJECT_RFQ : 'reject_rfq',
+  ACCEPT_RFQ : 'accept_rfq',
+  REFRESH_RFQ : 'refresh_rfq',
   SUBSCRIBE_PRICE : 'subscribe_to_prices',
   GET_PRICE : 'get_price',
   RFQ: 'rfq',
@@ -38,6 +40,7 @@ export const viewConstants = {
   EDITABLE_CELL_STYLE_CHANGED: 'editable-cell-content--changed',
   EDITABLE_CELL_STYLE_CHANGED_LOCK: 'editable-cell-content--changed__lock',
   FOCUSED_CELL_CLASSES: '.editable-cell-style.ag-cell-focus',
+  NO_SELECTED_RFQ : '',
   EVENTS: {
     KEY_PRESS:'keypress',
   },

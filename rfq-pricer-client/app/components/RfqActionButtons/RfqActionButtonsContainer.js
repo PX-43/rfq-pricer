@@ -2,7 +2,8 @@ import React, {PureComponent} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import { rfqPricerFlowActions } from './../../modules/actions';
-import {rfqSelector, rfqSummaryListSelector} from '../../modules/selectors';
+import { rfqSelector } from '../../modules/selectors';
+import { viewConstants as vc } from '../../constants';
 import RefreshButton from './RefreshButton';
 import RejectButton from './RejectButton';
 import AcceptButton from './AcceptButton';
@@ -17,13 +18,18 @@ class RfqActionButtonsContainer extends PureComponent {
   }
 
   rejectRfq = () => this.props.reject(this.props.selectedRfqId);
+  acceptRfq = () => this.props.accept(this.props.selectedRfqId);
 
   render(){
+
+    const noRfqSelected = this.props.selectedRfqId === vc.NO_SELECTED_RFQ;
+    const buttonContainerStyle = noRfqSelected ? 'buttonContainer-disabled' : 'buttonContainer';
+
     return (
-      <div className='buttonContainer'>
+      <div className={buttonContainerStyle}>
         <RejectButton reject={this.rejectRfq}/>
         <RefreshButton refresh={this.props.refresh} />
-        <AcceptButton accept={this.props.accept}/>
+        <AcceptButton accept={this.acceptRfq}/>
       </div>
     );
   }

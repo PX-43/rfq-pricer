@@ -1,5 +1,5 @@
 import { topics } from '../../../../constants/index';
-import {onRfqReceived, onRejectResponse} from "../../actions";
+import {onRfqReceived, onRejectResponse, onAcceptResponse} from "../../actions";
 
 const handleResponse = (incomingMsg, dispatch) => {
   try{
@@ -9,7 +9,10 @@ const handleResponse = (incomingMsg, dispatch) => {
         dispatch(onRfqReceived(data.payload.rfq));
         break;
       case topics.REJECT_RFQ:
-        dispatch(onRejectResponse(data.payload.rfqId, data.err));
+        dispatch(onRejectResponse(data.payload, data.err));
+        break;
+      case topics.ACCEPT_RFQ:
+        dispatch(onAcceptResponse(data.payload, data.err));
         break;
       default:
         console.error('This topic is not recognised: ' + data.topic);

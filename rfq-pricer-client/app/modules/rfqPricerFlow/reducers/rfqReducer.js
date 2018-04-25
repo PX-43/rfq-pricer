@@ -115,10 +115,19 @@ const updateSpot = (state, action, isReverting) =>{
   };
 };
 
-const removeRfq = (state, action) => {
+const removeRfq = (state, action) => { //todo: should we update state if there is a server error?
 
-  //todo
-  return state;
+  if(action.rfqId == null)
+    return state;
+
+  return Object.keys(state).reduce((result, key) => {
+    if(key !== action.rfqId) {
+      result[key] = state[key];
+    }
+
+    return result;
+  }, {});
+
 };
 
 export default (state = {}, action) => {

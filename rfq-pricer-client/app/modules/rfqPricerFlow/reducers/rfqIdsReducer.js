@@ -1,5 +1,6 @@
 import  { types } from '../actions';
 import { stringUtils as utils } from '../../../utils';
+import { viewConstants as vc } from '../../../constants';
 
 const rfqIdsReducer = (state = {}, action) => {
   switch (action.type) {
@@ -22,8 +23,9 @@ const rfqIdsReducer = (state = {}, action) => {
       };
 
     case types.ON_REJECT :
+    case types.ON_ACCEPT :
       const rfqIdList = state.rfqIdList.filter(id => id !== action.rfqId);
-      const newSelectedRfqId = rfqIdList.length > 0 ?  rfqIdList[0] : '';
+      const newSelectedRfqId = rfqIdList.length > 0 ?  rfqIdList[0] : vc.NO_SELECTED_RFQ;
       return {
         selectedRfqId : utils.copy(newSelectedRfqId),
         rfqIdList:[ ...rfqIdList ],
@@ -31,10 +33,10 @@ const rfqIdsReducer = (state = {}, action) => {
       };
 
     case types.ON_REJECT_RESPONSE : //todo: should we update state if there is a server error?
-    case types.ON_ACCEPT_RESPONSE:
+    case types.ON_ACCEPT_RESPONSE :
       return {
         ...state,
-        rfqIdList:[ ...state.rfqIdList.filter(id => id !== action.rfqId) ]
+        processingList: [ ...state.processingList.filter(id => id !== action.rfqId)  ],
       };
 
 

@@ -18,9 +18,11 @@ function* createRequest(dispatch, action) {
       yield put(sendRequest(topics.SUBSCRIBE_RFQ, {rfqCount}));
       break;
     case types.ON_REJECT :
-      const rfqId = action.rfqId;
       //const rfq = yield select(rfqSelector.getRfqData, action.rfqId); //works!
-      yield put(sendRequest(topics.REJECT_RFQ, {rfqId, serverResponseScenario}));
+      yield put(sendRequest(topics.REJECT_RFQ, {rfqId: action.rfqId, serverResponseScenario}));
+      break;
+    case types.ON_ACCEPT :
+      yield put(sendRequest(topics.ACCEPT_RFQ, {rfqId: action.rfqId, serverResponseScenario}));
       break;
     default:
       throw new Error('This action type is not supported for sending requests: ' + action.type);
@@ -29,7 +31,7 @@ function* createRequest(dispatch, action) {
 
 export default function* requestSaga(dispatch) {
   yield takeEvery([
-    types.SEND_NEW_RFQ_REQUEST, types.ON_REJECT
+    types.SEND_NEW_RFQ_REQUEST, types.ON_REJECT, types.ON_ACCEPT,
   ], createRequest, dispatch);
   // note: takeEvery will add the incoming action to the argument list
   // (i.e. the action will be the last argument provided to saga)

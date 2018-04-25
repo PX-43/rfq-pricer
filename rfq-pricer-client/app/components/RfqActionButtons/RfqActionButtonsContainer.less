@@ -3,6 +3,16 @@
   display: flex;
 }
 
+.buttonContainer-disabled {
+  .buttonContainer;
+  pointer-events:none;
+
+  & button {
+    background-color: #6A666E;
+    border-color: #56525a;
+  }
+}
+
 .actionButtonBase {
   margin-left:6px;
   border-radius: 4px;

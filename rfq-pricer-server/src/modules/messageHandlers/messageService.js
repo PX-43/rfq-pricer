@@ -1,5 +1,6 @@
 import {publishRfq} from './rfqPublisher'
 import { handleReject } from './rfqRejectHandler';
+import { handleAccept } from './rfqAcceptHandler';
 import topics from './../common/topics';
 
 export const handleRequest = (msg, send) => {
@@ -16,6 +17,9 @@ export const handleRequest = (msg, send) => {
             break;
         case topics.REJECT_RFQ :
             handleReject(msg.payload, send);
+            break;
+        case topics.ACCEPT_RFQ :
+            handleAccept(msg.payload, send);
             break;
         case topics.GET_PRICE :
             break;
