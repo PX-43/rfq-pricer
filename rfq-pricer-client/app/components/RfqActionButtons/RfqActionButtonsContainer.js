@@ -19,6 +19,7 @@ class RfqActionButtonsContainer extends PureComponent {
 
   rejectRfq = () => this.props.reject(this.props.selectedRfqId);
   acceptRfq = () => this.props.accept(this.props.selectedRfqId);
+  refreshRfq = () => this.props.refresh(this.props.selectedRfqId);
 
   render(){
 
@@ -28,7 +29,7 @@ class RfqActionButtonsContainer extends PureComponent {
     return (
       <div className={buttonContainerStyle}>
         <RejectButton reject={this.rejectRfq}/>
-        <RefreshButton refresh={this.props.refresh} />
+        <RefreshButton refresh={this.refreshRfq} />
         <AcceptButton accept={this.acceptRfq}/>
       </div>
     );

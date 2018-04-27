@@ -23,7 +23,7 @@ export const getFwdPrice =  (ccy, spot, tenor) => {
     const precision = rates.getPrecision(ccy);
     const fwdPoints = tenors.getSpread(tenor);
     return {
-        fwdPoints,
+        fwdPoints, //todo: add some randomness to fwd points
         fwdPrice: roundBy(precision, spot + (fwdPoints / precision)),
     };
 };

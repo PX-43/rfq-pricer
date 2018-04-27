@@ -22,19 +22,19 @@ class FwdPointsRenderer extends PureComponent {
   };
 
   render(){
-    const {data: {fwdPoints, systemFwdPoints, legType}, node: {level}} = this.props;
+    const {data: {fwdPoints, fwdPointsLocked, legType}, node: {level}} = this.props;
 
     if(level !== 1 || legType === products.SPOT)
       return null;
 
     console.log('rendering FwdPointsRenderer');
 
-    const hasFwdPointsChanged = fwdPoints !== systemFwdPoints;
-    let editableStyle = hasFwdPointsChanged ? vc.EDITABLE_CELL_STYLE_CHANGED : vc.EDITABLE_CELL_STYLE;
+    //const hasFwdPointsChanged = fwdPoints !== systemFwdPoints;
+    let editableStyle = fwdPointsLocked ? vc.EDITABLE_CELL_STYLE_CHANGED : vc.EDITABLE_CELL_STYLE;
 
     return(
       <div className={editableStyle}>
-        <PriceLock isVisible={hasFwdPointsChanged} revert={this.revertFwdPoints}/>
+        <PriceLock isVisible={fwdPointsLocked} revert={this.revertFwdPoints}/>
         <input type='text' defaultValue={fwdPoints}
                onBlur={evt => this.update(evt.target.value)}
                onKeyPress={evt => (evt.key === vc.KEYS.ENTER) ? this.update(evt.target.value) : null} />

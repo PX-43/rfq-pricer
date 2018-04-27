@@ -86,7 +86,7 @@ export const onRefresh = (rfqId) => ({
 });
 
 export const onRefreshResponse = (rfq, serverError) => ({
-  type: types.ON_REFRESH,
+  type: types.ON_REFRESH_RESPONSE,
   rfq,
   serverError
 });

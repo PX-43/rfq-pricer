@@ -24,21 +24,20 @@ class SpotRenderer extends PureComponent {
   };
 
   render(){
-    const {data: {spot, systemSpot, precision}, node: {level}} = this.props;
+    const {data: {spot, spotLocked, precision}, node: {level}} = this.props;
 
     if(level > 0)
       return null;
 
     console.log('rendering SpotRenderer');
 
-    const hasSpotChanged = spot !== systemSpot;
-    let editableStyle = hasSpotChanged ? vc.EDITABLE_CELL_STYLE_CHANGED : vc.EDITABLE_CELL_STYLE;
+    let editableStyle = spotLocked ? vc.EDITABLE_CELL_STYLE_CHANGED : vc.EDITABLE_CELL_STYLE;
 
     const formattedSpot = priceUtils.addTrailingZeros(spot, precision);
 
     return(
       <div className={editableStyle}>
-        <PriceLock isVisible={hasSpotChanged} revert={this.revertSpot}/>
+        <PriceLock isVisible={spotLocked} revert={this.revertSpot}/>
         <input type='text' defaultValue={formattedSpot}
                onBlur={evt => this.update(evt.target.value)}
                onKeyPress={evt => (evt.key === vc.KEYS.ENTER) ? this.update(evt.target.value) : null} />

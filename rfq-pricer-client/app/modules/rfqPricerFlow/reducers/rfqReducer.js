@@ -26,13 +26,15 @@ const addNewRfq = (state, action) => {
         const {valueDateNodes, ...ccy} = ccyNode;
         return {
           ...ccy,
-          systemSpot:ccy.spot, //store original value, so we no when it's changed
+          systemSpot:ccy.spot, //store original value
+          spotLocked:false, //set to true once value has changed by user
           rfqId:rfq.id,
           valueDateNodes: [...valueDateNodes.map(valueDateNode => {
             const {legs, ...valueDate} = valueDateNode;
             return {
               ...valueDate,
-              systemFwdPoints:valueDate.fwdPoints, //store original value, so we no when it's changed
+              systemFwdPoints:valueDate.fwdPoints, //store original value
+              fwdPointsLocked:false, //set to true once value has changed by user
               ccyPair: ccy.ccyPair,
               precision: ccy.precision,
               rfqId:rfq.id,
@@ -46,10 +48,10 @@ const addNewRfq = (state, action) => {
   };
 };
 
-const updateFwdPoints = (state, action, isReverting) => {
+const updateFwdPoints = (state, action, isUnlocking) => {
   const {ccyNodes, ...rfq} = state[action.rfqId];
 
-  if(!isReverting && !isFwdPointsChanged(ccyNodes, action.ccyNodeId, action.id, action.fwdPoints)){
+  if(!isUnlocking && !isFwdPointsChanged(ccyNodes, action.ccyNodeId, action.id, action.fwdPoints)){
     return state; //don't update state if there is no change
   }
 
@@ -64,12 +66,12 @@ const updateFwdPoints = (state, action, isReverting) => {
             ...ccy,
             valueDateNodes: valueDateNodes.map(valueDateNode => {
               if (valueDateNode.id === action.id) {
-                const fwdPoints = isReverting ? valueDateNode.systemFwdPoints : action.fwdPoints;
+                const fwdPoints = isUnlocking ? valueDateNode.systemFwdPoints : action.fwdPoints;
                 const prices = {
                                   fwdPoints,
                                   fwdPrice: priceUtils.calcFwdPrice(ccy.spot, fwdPoints, valueDateNode.precision)
                                };
-                return {...valueDateNode, ...prices};
+                return {...valueDateNode, ...prices, fwdPointsLocked:!isUnlocking};
               } else {
                 return valueDateNode;
               }
@@ -83,10 +85,10 @@ const updateFwdPoints = (state, action, isReverting) => {
   };
 };
 
-const updateSpot = (state, action, isReverting) =>{
+const updateSpot = (state, action, isUnlocking) =>{
   const {ccyNodes, ...rfq} = state[action.rfqId];
 
-  if(!isReverting && !isSpotChanged(ccyNodes, action.id, action.spot)){
+  if(!isUnlocking && !isSpotChanged(ccyNodes, action.id, action.spot)){
     return state; //don't update state if there is no change
   }
 
@@ -97,9 +99,9 @@ const updateSpot = (state, action, isReverting) =>{
       ccyNodes: ccyNodes.map(ccyNode => {
         if (ccyNode.id === action.id) {
           const {valueDateNodes, ...ccy} = ccyNode;
-          const spot = isReverting ? ccy.systemSpot : action.spot;
+          const spot = isUnlocking ? ccy.systemSpot : action.spot;
           return {
-            ...{...ccy, ...{spot}},
+            ...{...ccy, ...{spot}, spotLocked:!isUnlocking},
             valueDateNodes: valueDateNodes.map(valueDateNode => { //update fwd prices
               const prices = {
                   fwdPrice: priceUtils.calcFwdPrice(spot, valueDateNode.fwdPoints, valueDateNode.precision)
@@ -130,6 +132,40 @@ const removeRfq = (state, action) => { //todo: should we update state if there i
 
 };
 
+const refreshRfqPrices = (state, action) => {
+  const {ccyNodes:newCcyNodes, ...rfq} = action.rfq;
+  return {
+    ...state,
+    [rfq.id]: {
+      ...state[rfq.id],
+      ccyNodes: state[rfq.id].ccyNodes.map(ccyNode => {
+        const {valueDateNodes:newValueDateNodes, ...newCcyNode} = newCcyNodes.find(i => i.id === ccyNode.id);
+        const {valueDateNodes:currentValueDateNodes, ...currentCcyNode} = ccyNode;
+        const spot = currentCcyNode.spotLocked ? currentCcyNode.spot : newCcyNode.spot;
+        return {
+          ...currentCcyNode,
+          spot,
+          systemSpot:newCcyNode.spot,
+          valueDateNodes: currentValueDateNodes.map(currentValueDateNode => {
+            const newValueDateNode = newValueDateNodes.find(i => i.id === currentValueDateNode.id);
+            const fwdPoints = currentValueDateNode.fwdPointsLocked ? currentValueDateNode.fwdPoints : newValueDateNode.fwdPoints;
+            console.log('locked : ' + currentValueDateNode.fwdPointsLocked);
+            console.log('current: ' + currentValueDateNode.fwdPoints);
+            console.log('new    : ' + newValueDateNode.fwdPoints);
+            const prices = {
+              fwdPoints,
+              fwdPrice: priceUtils.calcFwdPrice(spot, fwdPoints, currentValueDateNode.precision),
+              midPrice: newValueDateNode.midPrice,
+            };
+
+            return {...currentValueDateNode, ...prices}
+          })
+        }
+      })
+    }
+  };
+};
+
 export default (state = {}, action) => {
 
   switch (action.type) {
@@ -152,6 +188,9 @@ export default (state = {}, action) => {
     case types.ON_REJECT_RESPONSE : //todo: should we update state if there is a server error?
     case types.ON_ACCEPT_RESPONSE:
       return removeRfq(state, action);
+
+    case types.ON_REFRESH_RESPONSE:
+      return refreshRfqPrices(state, action);
 
     default:
       return state;
