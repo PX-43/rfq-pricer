@@ -13,22 +13,26 @@ const getRandomChange = (ccy) => {
 };
 
 //+ or -
-const randomiseOp = (val, change, ccy) => {
+const randomiseOp = (val, change) => {
+    return  (random(1, 100) % 2 === 0) ? val - change : val + change;
+};
+
+const randomiseOpWithPrecision = (val, change, ccy) => {
     const precision = rates.getPrecision(ccy);
-    const result =  (random(1, 100) % 2 === 0) ? val - change : val + change;
+    const result = randomiseOp(val, change);
     return roundBy(precision, result);
 };
 
 export const getFwdPrice =  (ccy, spot, tenor) => {
     const precision = rates.getPrecision(ccy);
-    const fwdPoints = tenors.getSpread(tenor);
+    const fwdPoints = randomiseOp(tenors.getSpread(tenor), random(1, 3));
     return {
-        fwdPoints, //todo: add some randomness to fwd points
+        fwdPoints,
         fwdPrice: roundBy(precision, spot + (fwdPoints / precision)),
     };
 };
 
-export const getMidPrice = (ccy, price) => randomiseOp(price, getRandomChange(ccy), ccy);
+export const getMidPrice = (ccy, price) => randomiseOpWithPrecision(price, getRandomChange(ccy), ccy);
 
 export const getSpot = (ccy, currentSpot) => {
     const { baseSpot, deviation, precision } = rates.get(ccy);
@@ -40,6 +44,6 @@ export const getSpot = (ccy, currentSpot) => {
     } else if((spot - change) < (baseSpot - deviation)){
         return roundBy(precision, spot + change);
     } else {
-        return randomiseOp(spot, change, ccy);
+        return randomiseOpWithPrecision(spot, change, ccy);
     }
 };

@@ -7,25 +7,41 @@ import RfqRequest from './RfqRequest';
 import { rfqPricerFlowActions } from './../../modules/actions'
 import { scenarioSelector } from '../../modules/selectors';
 import ScenarioTesting from './ScenarioTesting';
+import MenuButton from './MenuButton';
 import './HeaderPaneContainer.less';
 
 class HeaderPaneContainer extends PureComponent {
 
   constructor(props) {
     super(props);
+    this.state = {
+      isOpen:false,
+    }
   }
+
+  toggle = () =>{
+    if(this.state.isOpen){
+      this.setState({ isOpen: false });
+    } else {
+      this.setState({ isOpen: true });
+    }
+  };
 
   render(){
     console.log('rendering HeaderPaneContainer');
+    const containerClassName = this.state.isOpen ? 'control-container' : 'control-container--closed';
     return (
-      <div className='controlContainer'>
-        <RfqRequest requestNewRfq={this.props.requestNewRfq} />
-        <ScenarioTesting
-          serverResponseScenario={this.props.serverResponseScenario}
-          delayBy={this.props.delayBy}
-          serverResponseScenarioChanged={this.props.serverResponseScenarioChanged}
-          scenarioDelayedByParamChanged={this.props.scenarioDelayedByParamChanged}
-        />
+      <div>
+        <MenuButton isOpen={this.state.isOpen} toggle={this.toggle} />
+        <div className={containerClassName}>
+          <RfqRequest requestNewRfq={this.props.requestNewRfq} />
+          <ScenarioTesting
+            serverResponseScenario={this.props.serverResponseScenario}
+            delayBy={this.props.delayBy}
+            serverResponseScenarioChanged={this.props.serverResponseScenarioChanged}
+            scenarioDelayedByParamChanged={this.props.scenarioDelayedByParamChanged}
+          />
+        </div>
       </div>
     );
   }

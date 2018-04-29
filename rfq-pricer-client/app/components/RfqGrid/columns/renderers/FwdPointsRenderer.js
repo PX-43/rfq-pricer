@@ -27,9 +27,6 @@ class FwdPointsRenderer extends PureComponent {
     if(level !== 1 || legType === products.SPOT)
       return null;
 
-    console.log('rendering FwdPointsRenderer');
-
-    //const hasFwdPointsChanged = fwdPoints !== systemFwdPoints;
     let editableStyle = fwdPointsLocked ? vc.EDITABLE_CELL_STYLE_CHANGED : vc.EDITABLE_CELL_STYLE;
 
     return(

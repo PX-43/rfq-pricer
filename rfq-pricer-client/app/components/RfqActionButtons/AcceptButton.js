@@ -3,8 +3,6 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import faCheckCircle from '@fortawesome/fontawesome-free-solid/faCheckCircle'
 
 export default props => {
-
-
   return (
     <div>
       <button className='acceptButton' title='Accept' onClick={props.accept}>

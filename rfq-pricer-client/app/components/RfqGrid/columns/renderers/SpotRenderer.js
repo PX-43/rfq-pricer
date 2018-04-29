@@ -29,8 +29,6 @@ class SpotRenderer extends PureComponent {
     if(level > 0)
       return null;
 
-    console.log('rendering SpotRenderer');
-
     let editableStyle = spotLocked ? vc.EDITABLE_CELL_STYLE_CHANGED : vc.EDITABLE_CELL_STYLE;
 
     const formattedSpot = priceUtils.addTrailingZeros(spot, precision);

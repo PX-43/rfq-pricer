@@ -149,9 +149,6 @@ const refreshRfqPrices = (state, action) => {
           valueDateNodes: currentValueDateNodes.map(currentValueDateNode => {
             const newValueDateNode = newValueDateNodes.find(i => i.id === currentValueDateNode.id);
             const fwdPoints = currentValueDateNode.fwdPointsLocked ? currentValueDateNode.fwdPoints : newValueDateNode.fwdPoints;
-            console.log('locked : ' + currentValueDateNode.fwdPointsLocked);
-            console.log('current: ' + currentValueDateNode.fwdPoints);
-            console.log('new    : ' + newValueDateNode.fwdPoints);
             const prices = {
               fwdPoints,
               fwdPrice: priceUtils.calcFwdPrice(spot, fwdPoints, currentValueDateNode.precision),

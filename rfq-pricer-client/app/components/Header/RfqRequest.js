@@ -38,7 +38,8 @@ class RfqRequest extends PureComponent {
     console.log('rendering HeaderPaneContainer -> RfqRequest');
     return (
       <div className='rfq-request'>
-        <button onClick={this.requestNewRfq}
+        <button className='rfq-request__button'
+                onClick={this.requestNewRfq}
                 onKeyPress={this.preventDefault}>
           Request
         </button>

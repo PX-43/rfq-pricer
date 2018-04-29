@@ -11,11 +11,9 @@ const getRfqWithNewPrices = rfq => {
         const newSpot = prices.getSpot(ccyNode.ccyPair, ccyNode.spot);
         ccyNode.spot = newSpot;
         ccyNode.valueDateNodes.forEach(valueDateNode => {
-            console.log('OLD FWD POINTS: ' + valueDateNode.fwdPoints);
             const isFwd = valueDateNode.legType === products.FWD;
             const tenor = valueDateNode.tenor;
             const { fwdPoints = 0, fwdPrice = 0 } = isFwd ? prices.getFwdPrice(ccyPair, newSpot, tenor) : {};
-            console.log('NEW FWD POINTS: ' + fwdPoints);
             const midPrice = prices.getMidPrice(ccyPair, isFwd ? fwdPrice : newSpot);
             valueDateNode.fwdPoints = fwdPoints;
             valueDateNode.fwdPrice = fwdPrice;
