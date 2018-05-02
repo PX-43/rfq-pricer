@@ -6,8 +6,10 @@ import {
 export const initState = {
   connectionInfo: {
     connectionStatus: connectionStatus.DISCONNECTED,
-    connectionError:'',
+    connectionError:vc.NO_ERROR,
   },
+  serverError:vc.NO_ERROR, //server may send an error back
+
   //parameters to send to the server to create test scenarios (e.g. delays or errors, etc)
   scenarioTesting:{
     serverResponseScenario: scenarios.NORMAL,

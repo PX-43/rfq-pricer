@@ -2,6 +2,7 @@ export const types = {
   ESTABLISH_CONNECTION : 'ESTABLISH_CONNECTION',
   CONNECTED_SUCCESSFULLY : 'CONNECTED_SUCCESSFULLY',
   ON_CONNECTION_ERROR : 'ON_CONNECTION_ERROR',
+  ON_SERVER_ERROR : 'ON_SERVER_ERROR',
   SEND_REQUEST : 'SEND_REQUEST',
   SEND_NEW_RFQ_REQUEST : 'SEND_NEW_RFQ_REQUEST',
   ON_MESSAGE_RECEIVED : 'ON_MESSAGE_RECEIVED',
@@ -29,6 +30,11 @@ export const establishConnection = connectionDetails => ({
 
 export const onConnectionError = err => ({
   type: types.ON_CONNECTION_ERROR,
+  err
+});
+
+export const onServerError = err => ({
+  type: types.ON_SERVER_ERROR,
   err
 });
 

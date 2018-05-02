@@ -41,6 +41,7 @@ export const viewConstants = {
   EDITABLE_CELL_STYLE_CHANGED_LOCK: 'editable-cell-content--changed__lock',
   FOCUSED_CELL_CLASSES: '.editable-cell-style.ag-cell-focus',
   NO_SELECTED_RFQ : '',
+  NO_ERROR : '',
   EVENTS: {
     KEY_PRESS:'keypress',
   },

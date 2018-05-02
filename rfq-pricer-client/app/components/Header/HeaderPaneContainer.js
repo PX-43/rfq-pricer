@@ -31,9 +31,9 @@ class HeaderPaneContainer extends PureComponent {
     console.log('rendering HeaderPaneContainer');
     const containerClassName = this.state.isOpen ? 'control-container' : 'control-container--closed';
     return (
-      <div>
+      <div className='header-container'>
         <MenuButton isOpen={this.state.isOpen} toggle={this.toggle} />
-        <div className={containerClassName}>
+        <div className={containerClassName} >
           <RfqRequest requestNewRfq={this.props.requestNewRfq} />
           <ScenarioTesting
             serverResponseScenario={this.props.serverResponseScenario}

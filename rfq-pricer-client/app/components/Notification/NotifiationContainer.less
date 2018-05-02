@@ -1,0 +1,62 @@
+.notification {
+  display: inline-flex;
+  background-color: #519c84;
+  width: 400px;
+  height: 40px;
+  border-radius: 0 0 5px 5px;
+  padding: 2px;
+  top: -46px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  /*z-index: -1;*/
+
+  &__error-message {
+    color: #fff;
+    font-size: 0.8em;
+    padding: 0 5px;
+  }
+
+  &__close-button {
+    border-radius: 4px;
+    color: white;
+    outline: none;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    padding: 1px;
+    background-color: #3068cd;
+    border: 1px solid #393880;
+    font-size: 0.8em;
+    align-self: flex-end;
+
+  }
+
+  &__close-button:hover {
+    background-color: #25478f;
+    cursor: pointer;
+  }
+
+  &__close-button:active {
+    background-color: #4b69eb;
+    cursor: pointer;
+  }
+
+}
+
+.notification--show {
+  animation-duration: 0.6s;
+  animation-name: slide-down;
+  animation-fill-mode:forwards;
+  animation-delay:0.2s;
+  animation-timing-function: ease-in-out; /* or: ease, ease-in, ease-in-out, linear, cubic-bezier(x1, y1, x2, y2) */
+}
+
+@keyframes slide-down {
+  from {
+    top:-46px;
+  }
+  to {
+    top:0;
+  }
+}

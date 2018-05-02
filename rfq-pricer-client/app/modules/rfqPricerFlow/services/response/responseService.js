@@ -1,9 +1,20 @@
 import { topics } from '../../../../constants/index';
-import {onRfqReceived, onRejectResponse, onAcceptResponse, onRefreshResponse} from "../../actions";
+import {
+  onRfqReceived,
+  onRejectResponse,
+  onAcceptResponse,
+  onRefreshResponse,
+  onServerError,
+} from "../../actions";
 
 const handleResponse = (incomingMsg, dispatch) => {
   try{
     const data = JSON.parse(incomingMsg.data);
+
+    if(data.err) {
+      dispatch(onServerError(data.err));
+    }
+
     switch (data.topic) {
       case topics.RFQ:
         dispatch(onRfqReceived(data.payload.rfq));
