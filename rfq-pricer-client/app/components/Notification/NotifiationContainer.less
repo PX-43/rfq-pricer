@@ -1,7 +1,7 @@
 .notification {
   display: inline-flex;
   flex-direction: column;
-  background-color: #519c84;
+  background-color: rgba(26,25,30, 0.8);
   width: 400px;
   min-height: 40px;
   border-radius: 0 0 5px 5px;
@@ -11,11 +11,11 @@
   margin-left: auto;
   margin-right: auto;
   position: absolute;
-  opacity:0.6;
+  z-index: 100;
   /*z-index: -1;*/
 
 
-  &__close-button {
+ /* &__close-button {
     border-radius: 4px;
     color: white;
     outline: none;
@@ -37,7 +37,7 @@
   &__close-button:active {
     background-color: #4b69eb;
     cursor: pointer;
-  }
+  }*/
 
 }
 
@@ -64,14 +64,15 @@
   color:#fff;
   margin-bottom:1px;
   font-size: 0.8em;
-  opacity:0.6;
+  padding:4px;
+
 
   &__icon {
-
+    color: #ffcdb9;
   }
 
   &__text{
-
+    padding:3px;
   }
 
   &__count{

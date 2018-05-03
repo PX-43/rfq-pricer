@@ -30,7 +30,7 @@ class NotificationContainer extends PureComponent {
     return (
       <div className={className} >
           {errorItems}
-        <button className='notification__close-button' onClick={this.dismiss}>Dismiss all</button>
+        {/*<button className='notification__close-button' onClick={this.dismiss}>Dismiss all</button>*/}
       </div>
     );
   }
