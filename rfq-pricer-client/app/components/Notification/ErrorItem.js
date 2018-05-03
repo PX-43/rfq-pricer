@@ -9,6 +9,10 @@ class ErrorItem extends React.PureComponent {
     super(props);
   }
 
+//todo: start two timers on render
+   //  1. should slowly reduce opacity
+   //  2. should send message to parent to remove errors
+
 
 
   render() {
