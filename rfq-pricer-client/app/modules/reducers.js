@@ -9,7 +9,7 @@ import serverErrorReducer from './rfqPricerFlow/reducers/serverErrorReducer';
 //It is delegating the work of updating each slice of state to a specific slice reducer.
 export default combineReducers({
   connectionInfo: connectionReducer,
-  serverError: serverErrorReducer,
+  serverErrors: serverErrorReducer,
   scenarioTesting: scenarioTestingReducer,
   rfqIds: rfqIdsReducer,
   rfqs: rfqReducer,

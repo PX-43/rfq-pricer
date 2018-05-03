@@ -1,7 +1,8 @@
 import React, {PureComponent} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import { errorSelector } from '../../modules/selectors';
+import { errorListSelector } from '../../modules/selectors';
+import ErrorItem from './ErrorItem';
 import { viewConstants as vc } from "../../constants";
 
 import './NotifiationContainer.less';
@@ -10,9 +11,7 @@ class NotificationContainer extends PureComponent {
 
   constructor(props){
     super(props);
-    this.notificationDivRef = React.createRef();
   }
-
 
   dismiss = () =>{
     console.log('dismissed');
@@ -20,20 +19,18 @@ class NotificationContainer extends PureComponent {
 
   render(){
 
-    if(this.notificationDivRef &&
-      this.notificationDivRef.current &&
-      this.notificationDivRef.current.classList.contains('notification--show')){
-      this.notificationDivRef.current.classList.remove('notification--show');
+    let className = 'notification';
+    let errorItems = null;
+
+    if(this.props.errorList.length > 0){
+      className = className + ' ' + 'notification--show';
+      errorItems = this.props.errorList.map((e, i) => <ErrorItem key={i} error={e.error} count={e.count} />)
     }
 
-    const className = this.props.error !== vc.NO_ERROR ? 'notification notification--show' : 'notification';
-
     return (
-      <div className={className} ref={this.notificationDivRef}>
-        <p className='notification__error-message'>
-          {this.props.error}
-        </p>
-        <button className='notification__close-button' onClick={this.dismiss}>dismiss</button>
+      <div className={className} >
+          {errorItems}
+        <button className='notification__close-button' onClick={this.dismiss}>Dismiss all</button>
       </div>
     );
   }
@@ -41,7 +38,7 @@ class NotificationContainer extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-    error: errorSelector.getError(state)
+    errorList: errorListSelector.getErrors(state)
   };
 };
 
