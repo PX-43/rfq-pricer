@@ -7,7 +7,7 @@ export const handleReject = (payload, send) => {
         topics.REJECT_RFQ,
         payload.rfqId,
         payload.serverResponseScenario,
-        'An error has occurred. RFQ could not be rejected.',
+        'RFQ could not be rejected. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         send
     );
 

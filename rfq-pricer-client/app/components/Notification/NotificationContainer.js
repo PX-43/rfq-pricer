@@ -3,9 +3,11 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import { errorListSelector } from '../../modules/selectors';
 import ErrorItem from './ErrorItem';
-import { viewConstants as vc } from "../../constants";
+import {rfqPricerFlowActions} from '../../modules/actions';
+import { viewConstants as vc } from '../../constants';
 
 import './NotifiationContainer.less';
+
 
 class NotificationContainer extends PureComponent {
 
@@ -23,14 +25,19 @@ class NotificationContainer extends PureComponent {
     let errorItems = null;
 
     if(this.props.errorList.length > 0){
-      className = className + ' ' + 'notification--show';
-      errorItems = this.props.errorList.map((e, i) => <ErrorItem key={i} error={e.error} count={e.count} />)
+      /*className += ' notification--show';*/
+      errorItems = this.props.errorList.map((e, i) =>
+          <ErrorItem
+            key={i}
+            error={e.error}
+            count={e.count}
+            deleteError={this.props.deleteError}
+          />)
     }
 
     return (
       <div className={className} >
           {errorItems}
-        {/*<button className='notification__close-button' onClick={this.dismiss}>Dismiss all</button>*/}
       </div>
     );
   }
@@ -43,7 +50,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch =>  bindActionCreators({
-
+  deleteError: rfqPricerFlowActions.onDeleteServerError
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(NotificationContainer);

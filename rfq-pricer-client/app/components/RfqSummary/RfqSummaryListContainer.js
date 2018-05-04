@@ -37,6 +37,8 @@ class RfqSummaryListContainer extends React.Component {
                         null :
                         <RfqSummaryListPlaceholder />;
 
+                        
+
     return(
       <div className='rfq-summary-list-container'>
         <RfqSummaryHeader numberOfNewRfqs={this.props.numberOfNewRfqs} />

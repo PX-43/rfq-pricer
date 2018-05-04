@@ -7,7 +7,7 @@ export const handleAccept = (payload, send) => {
         topics.ACCEPT_RFQ,
         payload.rfqId,
         payload.serverResponseScenario,
-        'An error has occurred. RFQ could not be accepted.',
+        'RFQ could not be accepted.',
         send
     );
 

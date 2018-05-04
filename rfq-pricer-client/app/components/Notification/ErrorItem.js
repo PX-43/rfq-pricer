@@ -1,5 +1,4 @@
 import React from 'react';
-//fa-exclamation-circle
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faExclamationCircle from '@fortawesome/fontawesome-free-solid/faExclamationCircle';
 
@@ -13,7 +12,9 @@ class ErrorItem extends React.PureComponent {
    //  1. should slowly reduce opacity
    //  2. should send message to parent to remove errors
 
-
+  deleteError = () => {
+    this.props.deleteError(this.props.error);
+  };
 
   render() {
     console.log('ERROR ITEM LOADING...');
@@ -27,7 +28,12 @@ class ErrorItem extends React.PureComponent {
           <FontAwesomeIcon icon={faExclamationCircle} />
         </div>
         <div className='error-item__text' >{this.props.error}</div>
-        <div className='error-item__count' >{this.props.count}</div>
+        <div className='error-item__count-container'>
+          {
+            this.props.count > 1 && <div className='error-item__count' >{this.props.count}</div>
+          }
+        </div>
+        <button className='error-item__close-button' onClick={this.deleteError}>x</button>
       </div>
     )
   }

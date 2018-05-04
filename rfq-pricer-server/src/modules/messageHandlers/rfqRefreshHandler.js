@@ -32,7 +32,7 @@ export const handleRefresh = (payload, send) => {
         topics.REFRESH_RFQ,
         rfqWithNewPrices,
         payload.serverResponseScenario,
-        'An error has occurred. RFQ prices could not be refreshed.',
+        'RFQ prices could not be refreshed.',
         send
     );
 };
