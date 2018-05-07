@@ -1,6 +1,7 @@
 @corner: 10px;
 @containerWidth: 290px;
 @selectedRfqColour: #222425;
+@rfqErrorColour: #8f1410;
 
 .rfq-summary-list-container {
   margin-left: 9px;
@@ -76,6 +77,26 @@
 .rfq-summary--selected {
   .rfq-summary;
   background-color: @selectedRfqColour;
+}
+
+.rfq-summary--withError{
+  .rfq-summary;
+  background-color:@rfqErrorColour;
+
+  &:hover {
+    background-color: #b41410;
+    cursor: pointer;
+  }
+}
+
+.rfq-summary--withError--selected {
+  .rfq-summary;
+  background-color: #63130f;
+
+  &:hover {
+    background-color: #801410;
+    cursor: pointer;
+  }
 }
 
 .currency-list {

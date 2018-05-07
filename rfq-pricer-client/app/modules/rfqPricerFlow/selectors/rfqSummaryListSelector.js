@@ -15,6 +15,7 @@ export const getRfqSummaryList = createSelector(
       result.push(
         {
           rfq:rfqs[id],
+          hasError: rfqs[id].hasError,
           ccyPairs
         }
       );

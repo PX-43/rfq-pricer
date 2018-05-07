@@ -29,6 +29,7 @@ class RfqSummaryListContainer extends React.Component {
         key={rfqInfo.rfq.id}
         rfq={rfqInfo.rfq}
         ccyPairs={rfqInfo.ccyPairs}
+        hasError={rfqInfo.hasError}
         selectedRfqChanged={this.props.selectedRfqChanged}
         selectedRfqId={this.props.selectedRfqId}/>
     );
@@ -37,7 +38,7 @@ class RfqSummaryListContainer extends React.Component {
                         null :
                         <RfqSummaryListPlaceholder />;
 
-                        
+
 
     return(
       <div className='rfq-summary-list-container'>

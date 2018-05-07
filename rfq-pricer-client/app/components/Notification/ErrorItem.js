@@ -17,7 +17,6 @@ class ErrorItem extends React.PureComponent {
   };
 
   render() {
-    console.log('ERROR ITEM LOADING...');
 
     if(!this.props.count)
       return null;

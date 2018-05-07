@@ -23,7 +23,14 @@ class RfqSummary extends React.Component {
   onClick = () => this.props.selectedRfqChanged(this.props.rfq.id);
 
   render(){
-    const classNames = (this.isSelected() ? 'rfq-summary--selected' : 'rfq-summary') + ' rfq-summary--rounded';
+    let classNames;
+    if (this.props.hasError) {
+      classNames = this.isSelected() ? 'rfq-summary--withError--selected' : 'rfq-summary--withError';
+    } else {
+      classNames = this.isSelected() ? 'rfq-summary--selected' : 'rfq-summary';
+    }
+
+    classNames += ' rfq-summary--rounded';
 
     console.log('rendering RfqSummary');
     return (

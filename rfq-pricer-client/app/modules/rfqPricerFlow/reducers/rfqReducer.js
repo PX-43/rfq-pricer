@@ -22,6 +22,7 @@ const addNewRfq = (state, action) => {
     ...state,
     [rfq.id]: {
       ...rfq,
+      hasError:false,
       ccyNodes: [...allocations.map(ccyNode => {
         const {valueDateNodes, ...ccy} = ccyNode;
         return {
@@ -117,10 +118,20 @@ const updateSpot = (state, action, isUnlocking) =>{
   };
 };
 
-const removeRfq = (state, action) => { //todo: should we update state if there is a server error?
+const handleActionResponse = (state, action) => { //todo: should we update state if there is a server error?
 
   if(action.rfqId == null)
     return state;
+
+  if(action.serverError){
+    return {
+      ...state,
+      [action.rfqId]: {
+        ...state[action.rfqId],
+        hasError: true,
+      }
+    }
+  }
 
   return Object.keys(state).reduce((result, key) => {
     if(key !== action.rfqId) {
@@ -184,7 +195,7 @@ export default (state = {}, action) => {
 
     case types.ON_REJECT_RESPONSE : //todo: should we update state if there is a server error?
     case types.ON_ACCEPT_RESPONSE:
-      return removeRfq(state, action);
+      return handleActionResponse(state, action);
 
     case types.ON_REFRESH_RESPONSE:
       return refreshRfqPrices(state, action);
