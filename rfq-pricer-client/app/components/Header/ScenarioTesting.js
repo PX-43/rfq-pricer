@@ -35,17 +35,6 @@ class ScenarioTesting extends PureComponent {
             Normal response
           </label>
         </div>
-        <div className='scenario-testing__delayBy'>
-          <label>
-            <input type='radio' value={scenarios.DELAY}
-                   checked={this.props.serverResponseScenario === scenarios.DELAY}
-                   onChange={this.handleScenarioChange}/>
-            Delay response by
-          </label>
-          <input type='text' value={this.props.delayBy}
-                 onChange={this.delayByValueChanged} />
-          <span className='scenario-testing__delayBy--ms'>ms</span>
-        </div>
         <div>
           <label>
             <input type='radio' value={scenarios.ERROR}
@@ -60,6 +49,14 @@ class ScenarioTesting extends PureComponent {
                    checked={this.props.serverResponseScenario === scenarios.NO_RESPONSE}
                    onChange={this.handleScenarioChange}/>
             No response
+          </label>
+        </div>
+        <div className='scenario-testing__delayBy'>
+          <label>
+            Delay response by
+            <input type='text' value={this.props.delayBy}
+                   onChange={this.delayByValueChanged} />
+            <span className='scenario-testing__delayBy--ms'>ms</span>
           </label>
         </div>
       </div>

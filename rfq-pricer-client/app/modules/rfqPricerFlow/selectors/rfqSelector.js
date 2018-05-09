@@ -21,4 +21,16 @@ export const getSelectedRfqData = createSelector(
 );
 
 
+export const getSelectedRfqHasError = createSelector(
+  [selectedRfq],
+  (rfq) => {
+    if(!rfq){
+      return false;
+    } else {
+      return rfq.hasError;
+    }
+  }
+);
+
+
 

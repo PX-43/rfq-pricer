@@ -44,6 +44,16 @@ const rfqIdsReducer = (state = {}, action) => {
       };
     }
 
+    case types.ON_REMOVE:{
+      const rfqIdList = state.rfqIdList.filter(id => id !== action.rfqId);
+      const newSelectedRfqId = rfqIdList.length > 0 ?  rfqIdList[0] : vc.NO_SELECTED_RFQ;
+      return {
+        selectedRfqId : utils.copy(newSelectedRfqId),
+        rfqIdList : [...rfqIdList],
+        processingList: [ ...state.processingList.filter(id => id !== action.rfqId)  ],
+      };
+    }
+
 
 
     default:

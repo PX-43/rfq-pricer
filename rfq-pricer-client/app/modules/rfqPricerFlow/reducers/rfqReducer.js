@@ -118,7 +118,17 @@ const updateSpot = (state, action, isUnlocking) =>{
   };
 };
 
-const handleActionResponse = (state, action) => { //todo: should we update state if there is a server error?
+const removeRfq = (state, action) => {
+  return Object.keys(state).reduce((result, key) => {
+    if(key !== action.rfqId) {
+      result[key] = state[key];
+    }
+
+    return result;
+  }, {});
+};
+
+const handleActionResponse = (state, action) => {
 
   if(action.rfqId == null)
     return state;
@@ -133,14 +143,7 @@ const handleActionResponse = (state, action) => { //todo: should we update state
     }
   }
 
-  return Object.keys(state).reduce((result, key) => {
-    if(key !== action.rfqId) {
-      result[key] = state[key];
-    }
-
-    return result;
-  }, {});
-
+  return removeRfq(state, action);
 };
 
 const refreshRfqPrices = (state, action) => {
@@ -174,6 +177,8 @@ const refreshRfqPrices = (state, action) => {
   };
 };
 
+
+
 export default (state = {}, action) => {
 
   switch (action.type) {
@@ -199,6 +204,9 @@ export default (state = {}, action) => {
 
     case types.ON_REFRESH_RESPONSE:
       return refreshRfqPrices(state, action);
+
+    case types.ON_REMOVE:
+      return removeRfq(state, action);
 
     default:
       return state;

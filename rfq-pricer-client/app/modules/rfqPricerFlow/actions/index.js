@@ -19,6 +19,7 @@ export const types = {
   ON_ACCEPT_RESPONSE : 'ON_ACCEPT_RESPONSE',
   ON_REFRESH : 'ON_REFRESH',
   ON_REFRESH_RESPONSE : 'ON_REFRESH_RESPONSE',
+  ON_REMOVE : 'ON_REMOVE',
 
   SCENARIO_DELAYED_BY_PARAM_CHANGED : 'SCENARIO_DELAYED_BY_PARAM_CHANGED',
   SERVER_RESPONSE_SCENARIO_CHANGED : 'SERVER_RESPONSE_SCENARIO_CHANGED',
@@ -94,6 +95,11 @@ export const onRevertingFwdPoints = (id, rfqId, ccyNodeId) => ({
 
 export const onRefresh = (rfqId) => ({
   type: types.ON_REFRESH,
+  rfqId,
+});
+
+export const onRemove = (rfqId) => ({
+  type: types.ON_REMOVE,
   rfqId,
 });
 
