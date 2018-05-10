@@ -3,11 +3,11 @@ import { func } from 'prop-types';
 import noop from 'lodash/noop';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import RfqRequest from './RfqRequest';
 import { rfqPricerFlowActions } from './../../modules/actions'
 import { scenarioSelector } from '../../modules/selectors';
-import ScenarioTesting from './ScenarioTesting';
 import MenuButton from './MenuButton';
+import HeaderPane from './HeaderPane';
+import Transition from 'react-transition-group/Transition';
 import './HeaderPaneContainer.less';
 
 class HeaderPaneContainer extends PureComponent {
@@ -33,19 +33,12 @@ class HeaderPaneContainer extends PureComponent {
     return (
       <div className='header-container'>
         <MenuButton isOpen={this.state.isOpen} toggle={this.toggle} />
-        <div className={containerClassName} >
-          <RfqRequest requestNewRfq={this.props.requestNewRfq} />
-          <ScenarioTesting
-            serverResponseScenario={this.props.serverResponseScenario}
-            delayBy={this.props.delayBy}
-            serverResponseScenarioChanged={this.props.serverResponseScenarioChanged}
-            scenarioDelayedByParamChanged={this.props.scenarioDelayedByParamChanged}
-          />
-        </div>
+        <Transition>
+          <HeaderPane {...this.props} {/*className={containerClassName}*/}  />
+        </Transition>
       </div>
     );
   }
-
 }
 
 HeaderPaneContainer.propTypes = {
