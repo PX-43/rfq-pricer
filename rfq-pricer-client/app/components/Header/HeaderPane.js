@@ -6,17 +6,14 @@ export default props => {
 
 
   return (
-
-    <div className={props.className} >
-      <RfqRequest requestNewRfq={props.requestNewRfq} />
-      <ScenarioTesting
-        serverResponseScenario={props.serverResponseScenario}
-        delayBy={props.delayBy}
-        serverResponseScenarioChanged={props.serverResponseScenarioChanged}
-        scenarioDelayedByParamChanged={props.scenarioDelayedByParamChanged}
-      />
-    </div>
-
+      <div className='control-container' >
+        <RfqRequest requestNewRfq={props.requestNewRfq} />
+        <ScenarioTesting
+          serverResponseScenario={props.serverResponseScenario}
+          delayBy={props.delayBy}
+          serverResponseScenarioChanged={props.serverResponseScenarioChanged}
+          scenarioDelayedByParamChanged={props.scenarioDelayedByParamChanged} />
+      </div>
   );
 
 }

@@ -7,7 +7,9 @@ import { rfqPricerFlowActions } from './../../modules/actions'
 import { scenarioSelector } from '../../modules/selectors';
 import MenuButton from './MenuButton';
 import HeaderPane from './HeaderPane';
-import Transition from 'react-transition-group/Transition';
+import TransitionGroup from 'react-transition-group/TransitionGroup';
+import CSSTransition from 'react-transition-group/CSSTransition';
+
 import './HeaderPaneContainer.less';
 
 class HeaderPaneContainer extends PureComponent {
@@ -30,12 +32,21 @@ class HeaderPaneContainer extends PureComponent {
   render(){
     console.log('rendering HeaderPaneContainer');
     const containerClassName = this.state.isOpen ? 'control-container' : 'control-container--closed';
+    //className={containerClassName}
+
+    const pane = <CSSTransition
+      key={1}
+      classNames="example"
+      timeout={{ enter: 500, exit: 300 }}>
+      <HeaderPane {...this.props}  />
+    </CSSTransition>
+
     return (
       <div className='header-container'>
         <MenuButton isOpen={this.state.isOpen} toggle={this.toggle} />
-        <Transition>
-          <HeaderPane {...this.props} {/*className={containerClassName}*/}  />
-        </Transition>
+        <TransitionGroup>
+          {pane}
+        </TransitionGroup>
       </div>
     );
   }
