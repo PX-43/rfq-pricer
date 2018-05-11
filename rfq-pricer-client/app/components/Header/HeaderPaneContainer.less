@@ -1,3 +1,6 @@
+@containerHeight: 76px;
+@timeout: 200ms;
+
 .header-container{
 }
 
@@ -7,40 +10,30 @@
   box-shadow: 0 3px 8px #1e1e1e;
   border-bottom: 1px solid #171717;
   padding: 10px;
+  overflow:hidden;
+
+  &-enter {
+    opacity: 0.01;
+    height:0;
+  }
+
+  &-enter&-enter-active {
+    opacity: 1;
+    height:@containerHeight;
+    transition: all @timeout ease-in;
+  }
+
+  &-exit {
+    opacity: 1;
+    height:@containerHeight;
+  }
+
+  &-exit&-exit-active {
+    opacity: 0.01;
+    height:0;
+    transition: all @timeout ease-in;
+  }
 }
-
-.control-container--closed {
-  opacity: 0;
-  height:0;
-  z-index:-1;
-  pointer-events: none;
-}
-
-
-.example-enter {
-  opacity: 0.01;
-}
-
-.example-enter.example-enter-active {
-  opacity: 1;
-  transition: opacity 500ms ease-in;
-}
-
-.example-exit {
-  opacity: 1;
-}
-
-.example-exit.example-exit-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
-}
-
-
-
-
-
-
-
 
 .rfq-request label {
   color: #ffffff;

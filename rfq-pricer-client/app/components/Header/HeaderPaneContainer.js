@@ -31,21 +31,17 @@ class HeaderPaneContainer extends PureComponent {
 
   render(){
     console.log('rendering HeaderPaneContainer');
-    const containerClassName = this.state.isOpen ? 'control-container' : 'control-container--closed';
-    //className={containerClassName}
-
-    const pane = <CSSTransition
-      key={1}
-      classNames="example"
-      timeout={{ enter: 500, exit: 300 }}>
-      <HeaderPane {...this.props}  />
-    </CSSTransition>
 
     return (
       <div className='header-container'>
         <MenuButton isOpen={this.state.isOpen} toggle={this.toggle} />
         <TransitionGroup>
-          {pane}
+          {this.state.isOpen &&
+            <CSSTransition
+              classNames="control-container"
+              timeout={{ enter: 200, exit: 200 }}>
+              <HeaderPane {...this.props}  />
+            </CSSTransition>}
         </TransitionGroup>
       </div>
     );
