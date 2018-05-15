@@ -13,7 +13,7 @@ export const initState = {
   //parameters to send to the server to create test scenarios (e.g. delays or errors, etc)
   scenarioTesting:{
     serverResponseScenario: scenarios.NORMAL,
-    delayBy:1000, //1 second
+    delayBy:200, //millisecond
   },
   rfqIds:{
     //currently selected rfq

@@ -32,7 +32,6 @@ class RfqSummary extends React.Component {
 
     classNames += ' rfq-summary--rounded';
 
-    console.log('rendering RfqSummary');
     return (
       <li>
         <div className={classNames} onClick={this.onClick}>

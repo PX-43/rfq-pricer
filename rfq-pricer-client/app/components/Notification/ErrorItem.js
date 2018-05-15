@@ -2,15 +2,33 @@ import React from 'react';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import faExclamationCircle from '@fortawesome/fontawesome-free-solid/faExclamationCircle';
 
-class ErrorItem extends React.PureComponent {
+const TIME_OUT = 4000;
+
+class ErrorItem extends React.Component {
 
   constructor(props){
     super(props);
+
+    this.timeoutId = null;
   }
 
-//todo: start two timers on render
-   //  1. should slowly reduce opacity
-   //  2. should send message to parent to remove errors
+  componentDidUpdate() {
+    if(this.timeoutId){
+      clearTimeout(this.timeoutId);
+      this.timeoutId = setTimeout(() => this.deleteError(), TIME_OUT);
+    }
+  }
+
+  componentDidMount() {
+    this.timeoutId = setTimeout(() => this.deleteError(), TIME_OUT);
+  }
+
+  componentWillUnmount(){
+    if(this.timeoutId){
+      clearTimeout(this.timeoutId);
+      this.timeoutId = null;
+    }
+  }
 
   deleteError = () => {
     this.props.deleteError(this.props.error);

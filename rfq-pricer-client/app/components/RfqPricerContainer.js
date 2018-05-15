@@ -14,7 +14,6 @@ class RfqPricerContainer extends PureComponent {
   }
 
   render(){
-    console.log('rendering RfqPricerContainer');
     return (
       <div>
         <HeaderPaneContainer />

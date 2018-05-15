@@ -35,7 +35,6 @@ class RfqRequest extends PureComponent {
   };
 
   render(){
-    console.log('rendering HeaderPaneContainer -> RfqRequest');
     return (
       <div className='rfq-request'>
         <button className='rfq-request__button'

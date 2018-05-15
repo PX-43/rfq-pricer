@@ -95,7 +95,6 @@ class RfqGrid extends PureComponent {
 
   render(){
     const height = this.calculateHeight(this.props.rfqData);
-    console.log('rendering RfqGrid');
     return(
       <div className='rfq-grid ag-theme-balham-dark' style={{height:height}}>
         <AgGridReact

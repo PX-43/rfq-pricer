@@ -30,7 +30,6 @@ class HeaderPaneContainer extends PureComponent {
   };
 
   render(){
-    console.log('rendering HeaderPaneContainer');
 
     return (
       <div className='header-container'>

@@ -34,7 +34,6 @@ const rfqIdsReducer = (state = {}, action) => {
 
     case types.ON_REJECT_RESPONSE :
     case types.ON_ACCEPT_RESPONSE :{
-      console.log(state.rfqIdList);
       const rfqIdList = (action.serverError && !state.rfqIdList.includes(action.rfqId))
                           ? [...state.rfqIdList, action.rfqId] : state.rfqIdList;
       return {

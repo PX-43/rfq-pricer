@@ -22,8 +22,6 @@ class RfqSummaryListContainer extends React.Component {
 
   render(){
 
-    console.log('rendering RfqSummaryListContainer');
-
     const items = this.props.rfqInfoList.map(rfqInfo =>
       <RfqSummary
         key={rfqInfo.rfq.id}

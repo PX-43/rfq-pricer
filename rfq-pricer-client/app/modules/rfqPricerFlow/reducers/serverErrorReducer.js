@@ -21,6 +21,7 @@ export default (state=[], action) => {
       }
 
     case types.ON_DELETE_SERVER_ERROR :
+      console.log('DELETING ERROR: ' + action.err);
       return state.filter(err => err !== action.err);
 
     default :
