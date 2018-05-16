@@ -1,3 +1,6 @@
+@notificationHeight: 25px;
+@timeout: 300ms;
+
 .notification {
   display: inline-flex;
   flex-direction: column;
@@ -10,6 +13,31 @@
   margin-right: auto;
   position: absolute;
   z-index: 100;
+  overflow:hidden;
+
+
+  &-enter {
+    opacity: 0.01;
+    height:0;
+  }
+
+  &-enter&-enter-active {
+    opacity: 1;
+    height:@notificationHeight;
+    transition: all @timeout ease-in;
+  }
+
+  &-exit {
+    opacity: 1;
+    height:@notificationHeight;
+  }
+
+  &-exit&-exit-active {
+    opacity: 0.01;
+    height:0;
+    transition: all @timeout ease-in;
+  }
+
 }
 
 /*.notification--show {

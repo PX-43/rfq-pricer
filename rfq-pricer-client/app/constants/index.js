@@ -26,7 +26,6 @@ export const status = {
 
 export const serverResponseTestScenario  = {
   ERROR: 'error',
-  NO_RESPONSE: 'noResponse',
   NORMAL: 'normal',
 };
 

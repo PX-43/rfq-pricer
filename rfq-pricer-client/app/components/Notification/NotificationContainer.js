@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import { errorListSelector } from '../../modules/selectors';
 import ErrorItem from './ErrorItem';
 import {rfqPricerFlowActions} from '../../modules/actions';
+import TransitionGroup from 'react-transition-group/TransitionGroup';
+import CSSTransition from 'react-transition-group/CSSTransition';
 
 import './NotifiationContainer.less';
 
@@ -21,18 +23,31 @@ class NotificationContainer extends PureComponent {
     if(this.props.errorList.length > 0){
 
       errorItems = this.props.errorList.map((e, i) =>
-          <ErrorItem
-            key={i}
-            error={e.error}
-            count={e.count}
-            deleteError={this.props.deleteError}
-          />)
+        <CSSTransition
+          key={i}
+          classNames={className}
+          timeout={{ enter: 300, exit: 300 }}>
+
+            <ErrorItem
+              error={e.error}
+              count={e.count}
+              deleteError={this.props.deleteError}
+            />
+
+        </CSSTransition>)
     }
 
     return (
-      <div className={className} >
-          {errorItems}
-      </div>
+        <div className={className}>
+          <TransitionGroup>
+            { errorItems }
+          </TransitionGroup>
+        </div>
+
+      /*<div className={className} >
+      {errorItems}*/
+
+
     );
   }
 }
