@@ -19,5 +19,9 @@ ReactDOM.render(
   document.getElementById('main')
 );
 
-store.dispatch(establishConnection({server:'127.0.0.1', port:1337}));
+store.dispatch(establishConnection({
+  protocol: process.env.WS_PROTOCOL,
+  server: process.env.WS_URL,
+  port:process.env.PORT
+}));
 

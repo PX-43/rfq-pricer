@@ -42,7 +42,7 @@ export default [
     width: 120
   },
   {
-    headerName: "Stamm",
+    headerName: "Client",
     field: "stamm",
     width: 100
   },

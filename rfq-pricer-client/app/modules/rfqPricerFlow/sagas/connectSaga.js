@@ -21,7 +21,10 @@ function createEventChannel(socket) {
 
 function* initializeWebSocketsChannel(dispatch, action) {
   try{
-    const socket = new WebSocket(`ws://${action.connectionDetails.server}:${action.connectionDetails.port}`);
+    const {protocol, server, port} = action.connectionDetails;
+    console.log(protocol, server, port);
+    const url = `${protocol}://${server}:${port}`;
+    const socket = new WebSocket(url);
     const channel = yield call(createEventChannel, socket);
     yield all([
       call(listenForServerResponse, channel, dispatch),
