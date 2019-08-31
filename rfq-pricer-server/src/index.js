@@ -1,21 +1,23 @@
 import express from 'express';
+import path from 'path';
 import http from 'http';
 import websocket from 'ws';
 import {handleRequest} from './modules/messageHandlers/messageService'
 import * as errors from './modules/utils/errorHelper'
 
-const PORT = 1337;
 const app = express();
 
 const server = http.createServer(app);
-const wss = new websocket.Server({ server });
+app.use('/', express.static(path.resolve(path.join(__dirname, '../public'))));
+app.get('/', (req, res) => {
+    console.log('sending index.html');
+    res.sendFile('/index.html');
+});
 
-wss.on('connection', (ws, req) => {
-
+const wss = new websocket.Server({ port: 443 });
+wss.on('connection', ws => {
     console.log('client connected');
-
     ws.on('message', incomingMsg => {
-        //console.log('received: %s', incomingMsg);
         handleRequest(JSON.parse(incomingMsg), (topic, outgoingMsg, err = null) => {
             try{
                 const data = JSON.stringify({ topic, payload: outgoingMsg, err });
@@ -24,15 +26,12 @@ wss.on('connection', (ws, req) => {
             } catch (exception){
                 console.log('ERROR while sending response to client : ' + exception);
             }
-
-
         });
     });
 
     ws.on('error', err => errors.hasClientDisconnected(err) ?
                                     console.log('Client has disconnected.') :
                                     console.log(err));
-
 });
 
 wss.on('close', function close() {
@@ -40,6 +39,6 @@ wss.on('close', function close() {
 });
 
 
-server.listen(PORT, () => {
+server.listen(80, () => {
     console.log('Listening on %d', server.address().port);
 });

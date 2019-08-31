@@ -5,6 +5,7 @@ node_modules
 # IDEs and editors
 .idea
 /.idea
+.vscode
 .project
 .classpath
 .c9/
@@ -22,4 +23,5 @@ Thumbs.db
 /connect.lock
 /coverage
 /libpeerconnection.log
+public
 npm-debug.log
