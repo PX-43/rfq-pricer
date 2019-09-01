@@ -22,6 +22,5 @@ ReactDOM.render(
 store.dispatch(establishConnection({
   protocol: process.env.WS_PROTOCOL,
   server: process.env.WS_URL,
-  port:process.env.PORT
 }));
 

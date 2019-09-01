@@ -22,6 +22,7 @@ Thumbs.db
 /.sass-cache
 /connect.lock
 /coverage
+deployment
+/deployment
 /libpeerconnection.log
-public
 npm-debug.log

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node src/index.js node %NODE_DEBUG_OPTION% "
+    "start": "babel-node src/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +16,7 @@
   "dependencies": {
     "express": "^4.16.2",
     "lodash": "^4.17.5",
+    "log4js": "^5.1.0",
     "moment": "^2.21.0",
     "numeral": "^2.0.6",
     "ws": "^4.1.0"
