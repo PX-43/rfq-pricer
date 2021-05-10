@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "express": "^4.16.2",
-    "lodash": "^4.17.5",
+    "lodash": "^4.17.21",
     "log4js": "^5.1.0",
     "moment": "^2.21.0",
     "numeral": "^2.0.6",
